@@ -1,4 +1,4 @@
-.btn{
+.btn {
     position: absolute;
     font-family: Arial, Helvetica, sans-serif;
     font-style: normal;
@@ -12,13 +12,17 @@
     border-radius: 10px;
     color: white;
 }
-.largeButton{
+.largeButton {
    width: 520px;
    height: 110px; 
 }
-.logo{
+.logo {
     position: absolute;
     width: 410px;
-    height: 220px;
-    
+    height: 220px;   
+}
+.MainBox {
+   height: 700px;
+   align-items: center;
+   align-content: center;
 }
