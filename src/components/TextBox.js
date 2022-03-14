@@ -3,9 +3,7 @@ import React from 'react'
 
 const TextBox = ({text, required, type}) => {
   return (
-    <Box sx={{m:3}}>
-      <TextField fullWidth id="outlined-basic" label={text} variant="outlined" required = {required} type = {type}/>
-    </Box>
+      <TextField margin="normal" fullWidth id="outlined-basic" label={text} variant="outlined" required = {required} type = {type}/>
   )
 }
 

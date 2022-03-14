@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
 
-const Btn = ({color, text}) => {
+const Btn = ({color, text,size}) => {
     return (
-        <Button variant = "contained" color={color}>{text}</Button>
+        <Button variant = "contained" color={color} size={size} style={{width:'100%'}}>{text}</Button>
       )
 }
 
