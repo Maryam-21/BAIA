@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextBox from './TextBox'
 
-import React , {useState} from 'react'
+import { useEffect, useState } from 'react';
 
 export const RegisterForm = ({Transition, handleClose, open}) => {
     const [name, setName] = useState('')
@@ -18,6 +18,27 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
     const [password_error, setPassword_error] = useState('')
     const [companyName_error, setCompanyName_error] = useState('')
     const [phoneNumber_error, setPhoneNumber_error] = useState('')
+
+    const makeAPICall = async (user) => {
+            console.log(user)
+        try {
+          const response = await fetch("https://localhost:44304/api/Users",{
+            method: 'POST',
+            mode: 'cors',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type' : 'application/json; charset=UTF-8',
+            },
+            body:JSON.stringify(user)
+            
+        });
+          const data = await response.json();
+          console.log({ data })
+        }
+        catch (e) {
+          console.log(e)
+        }
+      }
 
     const validate =() => {
         let c = 0
@@ -56,7 +77,15 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
         else{
             setPhoneNumber_error((''))
         }
-        if (c==0){
+        if (c===0){
+            var user = {
+                "Name":name,
+                "Email":email,
+                "Password":password,
+                "PhoneNumber":phoneNumber,
+                "CompanyName":companyName
+                }
+            makeAPICall(user)
             return true
         }
         return false
