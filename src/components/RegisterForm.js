@@ -3,11 +3,16 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Snackbar from '@mui/material/Snackbar';
+import { Fragment } from 'react';
+import { IconButton } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 import TextBox from './TextBox'
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export const RegisterForm = ({Transition, handleClose, open}) => {
+    const [openSB, setOpenSB] = useState(false);
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -18,6 +23,31 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
     const [password_error, setPassword_error] = useState('')
     const [companyName_error, setCompanyName_error] = useState('')
     const [phoneNumber_error, setPhoneNumber_error] = useState('')
+
+    const handleClickSnackbar = () => {
+        setOpenSB(true);
+    };
+    
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenSB(false);
+    };
+
+    const action = (
+        <Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
+            <Close fontSize="small" />
+          </IconButton>
+        </Fragment>
+      );
 
     const makeAPICall = async (user) => {
             console.log(user)
@@ -93,7 +123,8 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
 
     const onSubmit =() =>{ 
         if(validate())
-            handleClose()
+            handleClickSnackbar()
+            handleClose()   
         return
     }
     const onCancel =() =>{ 
@@ -107,6 +138,7 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
     }
 
   return (
+    <div>
     <Dialog 
         open={open}
         TransitionComponent={Transition}
@@ -134,6 +166,14 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
           <Button onClick={onCancel}>Cancel</Button>
         </DialogActions>
     </Dialog>
+        <Snackbar
+            open={openSB}
+            autoHideDuration={6000}
+            onClose={handleCloseSnackbar}
+            message="Successfully Registered!"
+            action={action}
+        />
+    </div>
   )
 }
 export default RegisterForm

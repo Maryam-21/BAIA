@@ -1,4 +1,4 @@
-import { Box,Grid, Link } from '@material-ui/core'
+import { Box,Grid } from '@material-ui/core'
 import Slide from '@mui/material/Slide';
 import React, {useState} from 'react'
 import TextBox from './TextBox'
@@ -58,7 +58,6 @@ const LoginForm = () => {
                     <Grid item style={{width:'75%'}}>
                         <Btn color="primary" text="Login" onclick={validate} ></Btn>
                     </Grid>
-                    <Link href="#" underline="always">Reset Password?</Link>
                     <hr style={{width:'80%', backgroundColor:'black', height:'1px', border:0}}/>
                     <Grid item>
                         <Btn color="" text="Register" size='large' onclick={handleClickOpen}></Btn>
