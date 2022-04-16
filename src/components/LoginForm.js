@@ -1,6 +1,5 @@
 import { Box,Grid } from '@material-ui/core'
-import Slide from '@mui/material/Slide';
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import TextBox from './TextBox'
 import Btn from './Btn'
 import RegisterForm from './RegisterForm'
@@ -12,6 +11,41 @@ const LoginForm = () => {
     const [password_error, setPassword_error] = useState('')
     const [openRegister, setOpenRegister] = React.useState(false);
 
+    const makeAPICall = async (user) => {
+        var user = {
+            "Name":Email,
+            "Password":Password
+        }
+        try {
+          const response = await fetch("https://localhost:44304/api/Users/Login",{
+            method: 'POST',
+            mode: 'cors',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type' : 'application/json; charset=UTF-8',
+            },
+            body:JSON.stringify(user)
+            
+            }).then(res =>  {
+                if(res.status == 200){
+                    console.log('ok')
+                }
+                else{
+                    console.log('not ok')
+                    setEmail_error('Wrong Email or Password')
+                    setPassword_error('Wrong Email or Password')
+                }
+            });
+        }
+        catch (e) {
+          console.log(e)
+        }
+    }
+
+    const onLogin = () => {
+        validate()
+    }
+
     const handleClickOpen = () => {
         setOpenRegister(true);
     };
@@ -20,11 +54,9 @@ const LoginForm = () => {
         setOpenRegister(false);
     };
 
-    const Transition = React.forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} />;
-    });
 
-    const validate =() => {
+
+    const validate =  () => {
         if(Email==''){
             setEmail_error(('Enter email'))
         }
@@ -36,7 +68,10 @@ const LoginForm = () => {
         else
             setPassword_error('')
 
+        makeAPICall()
+
     }
+
 
 
 
@@ -56,7 +91,7 @@ const LoginForm = () => {
                 </Grid>
                 <Grid container item  xs={12} direction="column"  spacing={2} alignItems='center'>
                     <Grid item style={{width:'75%'}}>
-                        <Btn color="primary" text="Login" onclick={validate} ></Btn>
+                        <Btn color="primary" text="Login" onclick={onLogin} ></Btn>
                     </Grid>
                     <hr style={{width:'80%', backgroundColor:'black', height:'1px', border:0}}/>
                     <Grid item>
