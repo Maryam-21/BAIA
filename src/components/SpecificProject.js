@@ -6,9 +6,9 @@ const SpecificProject = ({user}) => {
     return (
       <Box>
         <h2>{"Project ID: " + user.projects[0].projectID}</h2>
-        <Grid container spacing={2} style={{width:'100%'}}>
+        <Grid container style={{width:'100%', display:'flex'}}>
           
-          <Grid container item direction='column' xs={6} spacing={2} style={{width:'100%', padding: '2% 10%'}}>
+          <Grid container direction='column' xs={6} sm={6} spacing={2} style={{padding: '2% 3% 2% 7%'}}>
             <Grid item style={{backgroundColor:'#E9E9E9', borderRadius:10}}>
               <p class='textTitle'>Project Name</p>
               <p>{user.projects[0].projectName}</p>
@@ -24,14 +24,19 @@ const SpecificProject = ({user}) => {
               <p>{user.projects[0].projectName}</p>
             </Grid>
           </Grid>
-          <Grid container item direction='column' xs={6} spacing={2} style={{width:'100%', padding: '2% 10%'}}>
-            <Grid item style={{backgroundColor:'#E9E9E9', borderRadius:10}}>
+          <Grid container direction='column' xs={6} sm={6} spacing={2} style={{padding: '2% 7% 2% 3%'}}>
+            <Grid item style={{height:'100%', backgroundColor:'#E9E9E9', borderRadius:10}}>
               <p class='textTitle'>Description</p>
               <p>{user.projects[0].projectName}</p>
             </Grid>
           </Grid>
         </Grid>
-        </Box>
+
+        <Grid>
+          
+          
+        </Grid>
+      </Box>
   )
 }
 

@@ -1,8 +1,9 @@
-import { Box,Grid } from '@material-ui/core'
+import { Box,Grid, Link } from '@material-ui/core'
 import React, { useState } from 'react'
 import TextBox from './TextBox'
 import Btn from './Btn'
 import RegisterForm from './RegisterForm'
+import HomePage from './HomePage'
 
 const LoginForm = () => {
     const [Email, setEmail] = useState('')
@@ -29,6 +30,9 @@ const LoginForm = () => {
             }).then(res =>  {
                 if(res.status == 200){
                     console.log('ok')
+                    
+                    //TODO: Open Home page and
+                        // Fetch user info including (UserName, CompanyName, Projects(IDs, Names))
                 }
                 else{
                     console.log('not ok')

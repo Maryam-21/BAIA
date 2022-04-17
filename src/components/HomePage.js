@@ -12,6 +12,16 @@ const HomePage = () => {
               projectID: 1,
               projectName: 'Spotify',
               Meetings: [ 1, 2 ]
+            },
+            {
+              projectID: 2,
+              projectName: 'Project 2',
+              Meetings: [ 1, 2 ]
+            },
+            {
+              projectID: 3,
+              projectName: 'Project 3',
+              Meetings: [ 1, 2 ]
             }
         ]
     }
@@ -24,12 +34,10 @@ const HomePage = () => {
         </Grid>
         
         <Grid item xs={12} sm={10} style={{alignContent:'center',height:'100%'}}>
-          <Box sx={{border:1}}>
               <SpecificProject user = {UserInfo}/>
-          </Box>
         </Grid>
-      </Grid>
-    
+
+      </Grid>    
     </Box>
   )
 }

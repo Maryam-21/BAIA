@@ -8,6 +8,8 @@
 h2{
     text-align: center;
     margin-top: 0px;
+    width: 100%;
+    align-self: center;
 }
 .textTitle{
     font-size: x-small;
