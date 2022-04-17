@@ -6,7 +6,6 @@ const TextBox = ({text, required, type, onchange, errormsg}) => {
   const changeState =(e)=>{
     const val = e.target.value
     onchange(val)
-    console.log(val)
   }
   return (
       <TextField 

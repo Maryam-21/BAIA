@@ -32,7 +32,6 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
         if (reason === 'clickaway') {
           return;
         }
-    
         setOpenSB(false);
     };
 
@@ -42,7 +41,7 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
             size="small"
             aria-label="close"
             color="inherit"
-            onClick={handleClose}
+            onClick={handleCloseSnackbar}
           >
             <Close fontSize="small" />
           </IconButton>
@@ -50,7 +49,6 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
       );
 
     const makeAPICall = async (user) => {
-            console.log(user)
         try {
           const response = await fetch("https://localhost:44304/api/Users",{
             method: 'POST',
@@ -61,9 +59,14 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
             },
             body:JSON.stringify(user)
             
-        });
-          const data = await response.json();
-          console.log({ data })
+        }).then(res =>  {
+            if(res.ok){
+                console.log('ok')
+            }
+            else
+                setEmail_error('User already exists')
+            }
+        );
         }
         catch (e) {
           console.log(e)
@@ -122,9 +125,10 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
     }
 
     const onSubmit =() =>{ 
-        if(validate())
-            handleClickSnackbar()
-            handleClose()   
+        if(validate()){
+            handleClickSnackbar() 
+            handleClose() 
+        }
         return
     }
     const onCancel =() =>{ 
