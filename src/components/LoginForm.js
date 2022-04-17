@@ -1,5 +1,5 @@
 import { Box,Grid } from '@material-ui/core'
-import React, {useState,useEffect} from 'react'
+import React, { useState } from 'react'
 import TextBox from './TextBox'
 import Btn from './Btn'
 import RegisterForm from './RegisterForm'
@@ -57,21 +57,18 @@ const LoginForm = () => {
 
 
     const validate =  () => {
-        if(Email==''){
-            setEmail_error(('Enter email'))
-        }
+        if(Email == '' || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(Email))
+            setEmail_error(('Please Enter an Email Address'))
         else
             setEmail_error((''))
 
-        if(Password=='')
+        if(Password == '')
             setPassword_error('Enter password')
         else
             setPassword_error('')
 
         makeAPICall()
-
     }
-
 
 
 
@@ -79,7 +76,7 @@ const LoginForm = () => {
         <Box sx={{bgcolor:'text.disabled', display:"flex", width:"70%",height:'100%',p:'20px', borderRadius:5,
          border:'5px'}}>
             <Grid container spacing={2} style={{height:'100%'}} alignContent='center'>
-                <Grid container direction="column"  item xs={12} spacing={2} style={{width:'100%'}} 
+                <Grid container direction="column" item xs={12} spacing={2} style={{width:'100%'}} 
                 alignItems='center'>
                     <Grid item style={{width:'75%'}}>
                         <TextBox text="Email" required="true" type="email" onchange={setEmail} 
@@ -89,13 +86,13 @@ const LoginForm = () => {
                         <RegisterForm handleClose={handleClose} open={openRegister}></RegisterForm>
                     </Grid>
                 </Grid>
-                <Grid container item  xs={12} direction="column"  spacing={2} alignItems='center'>
+                <Grid container item xs={12} direction="column" spacing={2} alignItems='center'>
                     <Grid item style={{width:'75%'}}>
-                        <Btn color="primary" text="Login" onclick={onLogin} ></Btn>
+                        <Btn color="primary" text="LOGIN" variant="contained" onclick={onLogin} ></Btn>
                     </Grid>
                     <hr style={{width:'80%', backgroundColor:'black', height:'1px', border:0}}/>
                     <Grid item>
-                        <Btn color="" text="Register" size='large' onclick={handleClickOpen}></Btn>
+                        <Btn text="REGISTER" size='large' onclick={handleClickOpen}></Btn>
                     </Grid>
                 </Grid>
             </Grid>

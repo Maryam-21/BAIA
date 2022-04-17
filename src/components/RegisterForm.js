@@ -86,6 +86,10 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
             setEmail_error(('Email is Required'))
             c++
         }
+        else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+            setEmail_error(('Please Enter a Valid Email Address'))
+            c++
+        }
         else{
             setEmail_error((''))
         }
@@ -105,6 +109,10 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
         }
         if(phoneNumber==''){
             setPhoneNumber_error(('Phone Number is Required'))
+            c++
+        }
+        else if(phoneNumber.length == 11 && phoneNumber.substring(0, 2) == '01') {
+            setPhoneNumber_error(('Please Enter a Valid Phone Number'))
             c++
         }
         else{
