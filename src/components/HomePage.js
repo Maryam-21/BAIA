@@ -1,9 +1,11 @@
 import { Box, Grid } from '@material-ui/core'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import NavigationPanel from './NavigationPanel'
 import SpecificProject from './SpecificProject'
 
 const HomePage = () => {
+  let { userid } = useParams();
     const UserInfo = {
         userName: 'Batoul Loulah',
         companyName: 'Dell',

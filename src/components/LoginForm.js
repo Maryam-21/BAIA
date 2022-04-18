@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import TextBox from './TextBox'
 import Btn from './Btn'
 import RegisterForm from './RegisterForm'
-import HomePage from './HomePage'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
     const [Email, setEmail] = useState('')
@@ -11,6 +11,7 @@ const LoginForm = () => {
     const [email_error, setEmail_error] = useState('')
     const [password_error, setPassword_error] = useState('')
     const [openRegister, setOpenRegister] = React.useState(false);
+    const navigate = useNavigate()
 
     const makeAPICall = async (user) => {
         var user = {
@@ -27,18 +28,18 @@ const LoginForm = () => {
             },
             body:JSON.stringify(user)
             
-            }).then(res =>  {
-                if(res.status == 200){
-                    console.log('ok')
-                    //TODO: Open Home page and
-                        // Fetch user info including (UserName, CompanyName, Projects(IDs, Names))
-                }
-                else{
-                    console.log('not ok')
-                    setEmail_error('Wrong Email or Password')
-                    setPassword_error('Wrong Email or Password')
-                }
-            });
+            })
+            if (response.status == 200) {
+                console.log('ok')
+                const userData = await response.json()
+                const userrID = await userData.userID
+                navigate("/HomePage/"+ userrID)
+            }
+            else {
+                console.log('not ok')
+                setEmail_error('Wrong Email or Password')
+                setPassword_error('Wrong Email or Password')
+            }
         }
         catch (e) {
           console.log(e)
