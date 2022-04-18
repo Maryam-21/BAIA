@@ -18,7 +18,7 @@ const LoginForm = () => {
             "Password":Password
         }
         try {
-          const response = await fetch("https://localhost:44304/api/Users/Login",{
+          const response = await fetch("https://localhost:44304/api/Users/Login", {
             method: 'POST',
             mode: 'cors',
             headers:{
@@ -30,7 +30,6 @@ const LoginForm = () => {
             }).then(res =>  {
                 if(res.status == 200){
                     console.log('ok')
-                    
                     //TODO: Open Home page and
                         // Fetch user info including (UserName, CompanyName, Projects(IDs, Names))
                 }
@@ -45,6 +44,7 @@ const LoginForm = () => {
           console.log(e)
         }
     }
+
 
     const onLogin = () => {
         validate()
