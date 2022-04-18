@@ -33,7 +33,9 @@ const LoginForm = () => {
                 console.log('ok')
                 const userData = await response.json()
                 const userrID = await userData.userID
-                navigate("/HomePage/"+ userrID)
+                const userrName = await userData.name
+                const userrComp = await userData.companyName
+                navigate("/HomePage/"+ userrName + '/' + userrComp + '/' + userrID)        
             }
             else {
                 console.log('not ok')

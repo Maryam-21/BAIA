@@ -4,6 +4,32 @@ import Btn from './Btn'
 import './components.css'
 
 const MyProjects = ({user}) => {
+    let projectsNames = []
+    const GetProjectsNamesAPI = async (id) => {
+        try {
+          const response = await fetch("https://localhost:44304/api/Projects", {
+            method: 'POST',
+            mode: 'cors',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type' : 'application/json; charset=UTF-8',
+            },
+            body:JSON.stringify(id)          
+            })
+            if (response.status == 200) {
+                console.log('ok')
+                const projectDate = await response.json()
+                projectsNames = await projectDate.projectTitle
+                console.log(projectsNames)
+            }
+            else {
+                console.log('not ok')
+            }
+        }
+        catch (e) {
+          console.log(e)
+        }
+    }
 
     const DisplayDetails =() => {
         console.log("Hello!!! ►")

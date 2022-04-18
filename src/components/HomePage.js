@@ -5,8 +5,9 @@ import NavigationPanel from './NavigationPanel'
 import SpecificProject from './SpecificProject'
 
 const HomePage = () => {
-  let { userid } = useParams();
-    const UserInfo = {
+  const { userName, companyName, userID } = useParams();
+
+    const User = {
         userName: 'Batoul Loulah',
         companyName: 'Dell',
         projects: [
@@ -28,15 +29,22 @@ const HomePage = () => {
         ]
     }
 
+    let userInfo = {
+      userID: {userID},
+      userName: {userName},
+      companyName: {companyName},
+    }
+
+
   return (
     <Box position="absolute" sx={{top:0, bottom:0, left:0, right:0, alignItems:'center'}}>
         <Grid container spacing={1} style={{height:'100%'}}>
           <Grid item xs={0} sm={2} style={{minHeight:'100%', backgroundColor:'#E5E5E5'}}>
-            <NavigationPanel user = {UserInfo}/>
+            <NavigationPanel user = {userInfo}/>
           </Grid>
         
           <Grid item xs={12} sm={10} style={{alignContent:'center',height:'100%'}}>
-            <SpecificProject user = {UserInfo}/>
+            <SpecificProject user = {userInfo}/>
           </Grid>
       </Grid>    
     </Box>
