@@ -30,7 +30,6 @@ const LoginForm = () => {
             }).then(res =>  {
                 if(res.status == 200){
                     console.log('ok')
-                    
                     //TODO: Open Home page and
                         // Fetch user info including (UserName, CompanyName, Projects(IDs, Names))
                 }
@@ -40,6 +39,9 @@ const LoginForm = () => {
                     setPassword_error('Wrong Email or Password')
                 }
             });
+            //console.log(response.JSON())
+            //const data = await response.json();
+            //console.log(data)
         }
         catch (e) {
           console.log(e)
