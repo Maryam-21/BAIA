@@ -23,7 +23,7 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
     const [password_error, setPassword_error] = useState('')
     const [companyName_error, setCompanyName_error] = useState('')
     const [phoneNumber_error, setPhoneNumber_error] = useState('')
-
+    
     const handleClickSnackbar = () => {
         setOpenSB(true);
     };

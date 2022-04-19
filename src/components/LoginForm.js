@@ -74,7 +74,12 @@ const LoginForm = () => {
         else
             setPassword_error('')
 
-        makeAPICall()
+            const userrID = 1
+            const userrName = 'Batoul'
+            const userrComp = 'delol'
+            navigate("/HomePage/"+ userrName + '/' + userrComp + '/' + userrID)        
+  
+            //makeAPICall()
     }
 
 
