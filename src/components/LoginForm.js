@@ -32,6 +32,7 @@ const LoginForm = () => {
             if (response.status == 200) {
                 console.log('ok')
                 const userData = await response.json()
+                console.log(userData)
                 const userrID = await userData.userID
                 const userrName = await userData.name
                 const userrComp = await userData.companyName
@@ -74,12 +75,7 @@ const LoginForm = () => {
         else
             setPassword_error('')
 
-            const userrID = 1
-            const userrName = 'Batoul'
-            const userrComp = 'delol'
-            navigate("/HomePage/"+ userrName + '/' + userrComp + '/' + userrID)        
-  
-            //makeAPICall()
+            makeAPICall()
     }
 
 

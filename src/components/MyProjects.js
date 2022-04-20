@@ -1,6 +1,5 @@
-import { Box, Grid } from '@material-ui/core'
-import { InsertChart } from '@material-ui/icons'
-import React from 'react'
+import { Box } from '@material-ui/core'
+import React, { useEffect } from 'react'
 import Btn from './Btn'
 import './components.css'
 import SpecificProject from './SpecificProject'
@@ -9,25 +8,29 @@ const MyProjects = ({user}) => {
     let projects = []
     let meetings = []
     let compBool = false
+    let nodes = []
     
+    useEffect(() => {
+        GetProjectsNamesAPI()
+    }, []);
+
     const GetProjectsNamesAPI = async () => {
         try {
-          const response = await fetch("https://localhost:44304/api/Projects", {
-            method: 'POST',
+          const response = await fetch("https://localhost:44304/api/Users/GetProjectNames/"+ user.userID, {
+            method: 'GET',
             mode: 'cors',
             headers:{
                 'Accept': 'application/json',
                 'Content-Type' : 'application/json; charset=UTF-8',
             },
-            body:JSON.stringify(user.userID)          
             })
             if (response.status == 200) {
                 console.log('ok')
                 const projectDate = await response.json()
-                const projsNames = await projectDate.projectTitle
-                for(var i = 0; i < projsNames.length; i++){
+                const vals = await projectDate["$values"]
+                for(var i = 0; i < vals.length; i++){
                     projects.push({
-                        "projectName": projsNames[i]
+                        "projectName": vals[i]
                     })
                 }
             }
@@ -50,15 +53,24 @@ const MyProjects = ({user}) => {
         if (compBool) {
             compBool = false;
             for(var i = 0; i < tmp.length; i++)
-                tmp[i].style.display = 'none'
+                continue
+               // tmp[i].style.display = 'none'
         }
         else {
             compBool = true;
             for(var i = 0; i < tmp.length; i++)
-                tmp[i].style.display = 'flex'
+            {    tmp[i].style.display = 'flex'
+            }
+            
+            for(var i = 0; i < projects.length; i++)
+            {
+                nodes.push(projects[i]['projectName']);
+            }
+            
+          console.log(nodes)
+
         }
-    }
-    
+    }   
     const AddMeeting = (projID) => {
         //TODO:
         //Pop up Meeting input
@@ -73,28 +85,12 @@ const MyProjects = ({user}) => {
   return (
       <Box sx={{bgColor:'#B4B4B4', minHeight:'100%',
       p:'5px', borderRadius:5, alignItems:'left'}}>
-        {GetProjectsNamesAPI}
         <Btn color="" text={user.companyName} variant="text" onclick={ToggleProjects} />
-
-        {projects.map(function(proj, i) {
-           return (
-               <div>
-                    <div class='projsDiv' style={{display:'none'}}>
-                        <Btn id={i} text={proj.projectName} size='small' variant="text" onclick={DisplayDetails}/>
-                    </div>
-                    {meetings.map(function(meeting, j){
-                        return (
-                            <div class='meetDiv' style={{display:'none'}}>
-                                <Btn text={meeting} size='small' variant="text" onclick={DisplayDetails}/>
-                            </div>
-                        )
-                    })}
-                    <div class='projsDiv' style={{display:'none'}}>
-                        <Btn text="Add New Meeting" size='small' variant="text" onclick={AddMeeting}/>
-                    </div>
-            </div>
-            )
-        })}
+        <div id='projsDiv'>
+            {projects.map(node => (
+            <Btn text={projects[0]['projectName']} size='small' variant="text" onclick={AddProject}></Btn>
+            ))}
+        </div>
                        
         <Btn text="Add New Project" size='small' variant="text" onclick={AddProject}></Btn>
     </Box>
