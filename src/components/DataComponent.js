@@ -1,25 +1,32 @@
 import React, {useEffect,useState} from 'react'
 import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { getProjectsTitles, getFullProjects } from '../redux/slices/projects'
 import HomePage from './HomePage';
 
 export default function () {
     const { name, compName, id } = useParams();
-    const [projectsTitles, setProjectsTitles] = useState([]);
-    const [fullProjects, setFullProjects] = React.useState([]);
+    //const [projectsTitles, setProjectsTitles] = useState([]);
+    //const [fullProjects, setFullProjects] = React.useState([]);
     const [services, setServices] = React.useState([]);
 
-    
+    const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
+  
+    const dispatch = useDispatch()
     const userInfo = {
         userID: id,
         userName: name,
         companyName: compName
     }
     useEffect(() => {
-        GetProjectsNamesAPI()
-        GetProjectsMeetingsAPI()
+        //GetProjectsNamesAPI()
+        //GetProjectsMeetingsAPI()
+        dispatch(getProjectsTitles());
+        dispatch(getFullProjects())
         GetServices()
-      },[]);
+      },[dispatch]);
   
+
       const GetServices = async () => {
         try {
           const response = await fetch("http://127.0.0.1:5000/services", {
@@ -47,7 +54,7 @@ export default function () {
           console.log(e)
         }
     }
-      const GetProjectsNamesAPI = async () => {
+      /*const GetProjectsNamesAPI = async () => {
         try {
           const response = await fetch("https://localhost:44304/api/Users/GetProjectNames/"+ userInfo.userID, {
             method: 'GET',
@@ -74,9 +81,9 @@ export default function () {
         catch (e) {
           console.log(e)
         }
-    }
+    }*/
 
-    const GetProjectsMeetingsAPI = async () => {
+   /* const GetProjectsMeetingsAPI = async () => {
       try {
         const response = await fetch("https://localhost:44304/api/Projects/GetProject/Conference Room Reservation System", {
           method: 'GET',
@@ -101,7 +108,7 @@ export default function () {
       catch (e) {
         console.log(e)  
       }
-    }
+    }*/
   return (
     <HomePage userInfo={userInfo} projectsTitles={projectsTitles} fullProjects={fullProjects} services = {services}/>
   )

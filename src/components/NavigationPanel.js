@@ -46,10 +46,10 @@ const NavigationPanel = ({user, projectsTitles,projects, meetings, handleMeeting
                 {open? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit style={{padding: '0% 0% 0% 4%'}}>
-          {projectsTitles.map(project => (
+          {projectsTitles? projectsTitles.map(project => (
               <NestedList project = {project?project:p} meetings = {meetings} handleMeetingClick={handleMeetingClick}
               handleOpenProject={handleOpenProject}/>
-          ))}
+          )):'loading'}
          </Collapse>
          <ListItemButton >
             <ListItemIcon>
