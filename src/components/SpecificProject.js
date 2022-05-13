@@ -1,9 +1,13 @@
 import { Box, Grid } from '@material-ui/core';
 import React, { useState,useEffect } from 'react'
-import './components.css';
+import { useSelector } from 'react-redux';
+import  '../CSS/components.css';
 
-const SpecificProject = ({user,projectTitle,fullProject,meetings,services,openMeeting,openProject}) => {  
+const SpecificProject = ({projectTitle,fullProject,meetings,openMeeting,openProject}) => {  
   const [test, setTest] = useState("loading");
+  const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
+  const {services} = useSelector((state)=>state.services)
+
   useEffect(async() => {
     setTest(await meetings)
   });
@@ -37,11 +41,10 @@ const SpecificProject = ({user,projectTitle,fullProject,meetings,services,openMe
           <Grid item style={{height:'100%', backgroundColor:'#E9E9E9', borderRadius:10}}>
             <p className='textTitle'></p>
             <p>{test!="loading"?test[0]["meetingTitle"]:"loading test"}</p>
-            {services.map(service => (
-             <p>{"Service: "+service}</p>
-              ))
-          }
-            
+            {services?Array.from(services).forEach(service => {
+              <p>{"Service: "+service}</p>
+            })
+            :"loading"}
           </Grid>
         </Grid>
       </Grid>:

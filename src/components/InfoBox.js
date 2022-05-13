@@ -1,7 +1,7 @@
 import { Box, Typography } from '@material-ui/core'
 import { padding, spacing } from '@mui/system'
 import React from 'react'
-import './components.css';
+import '../CSS/components.css';
 
 const InfoBox = ({user}) => {
   return (

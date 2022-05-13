@@ -6,11 +6,13 @@ import {
 import createSagaMiddleware from "redux-saga";
 import { watcherSaga } from "./sagas/rootsaga";
 import projectsReducer from "./slices/projects";
+import servicesReducer from "./slices/services"
 
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = combineReducers({
-  projects: projectsReducer
+  projects: projectsReducer,
+  services: servicesReducer
 });
 
 const store = configureStore({

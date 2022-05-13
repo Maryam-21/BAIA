@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  projectsTitles: [],
-  fullProjects:[]
+  projectsTitles: undefined,
+  fullProjects:undefined
 }
 
 export const projectsSlice = createSlice({
@@ -12,7 +12,6 @@ export const projectsSlice = createSlice({
     getProjectsTitles: () => {},
     getFullProjects: () => {},
     setProjectsTitles(state, action) {
-        //console.log("set titles")
         const projectsTitlesData = action.payload;
         return { ...state, 
           projectsTitles:{...projectsTitlesData} };
