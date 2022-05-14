@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import  '../CSS/components.css';
 
-const SpecificProject = ({projectTitle,fullProject,meetings,openMeeting,openProject}) => {  
+const SpecificProject = ({meetings,openMeeting,openProject}) => {  
   const [test, setTest] = useState("loading");
   const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
   const {services} = useSelector((state)=>state.services)
@@ -15,22 +15,21 @@ const SpecificProject = ({projectTitle,fullProject,meetings,openMeeting,openProj
       <Box>
         {openProject?
           <Grid container style={{width:'100%', display:'flex'}}>
-          
           <Grid container direction='column' xs={6} sm={6} spacing={2} style={{padding: '2% 3% 2% 7%'}}>
             <Grid item style={{backgroundColor:'#E9E9E9', borderRadius:10}}>
               <p className='textTitle'>Project</p>
-              <p>{projectTitle}</p>
+              <p>{projectsTitles?projectsTitles['$values']:"loading"}</p>
             </Grid>
             <br/>
             <Grid item style={{backgroundColor:'#E9E9E9', borderRadius:10}}>
               <p className='textTitle'>System Actors</p>
-              <p>{fullProject["systemActors"]}</p>
+              <p>{fullProjects?fullProjects["systemActors"]:"loading"}</p>
             </Grid>
           </Grid>
           <Grid container direction='column' xs={6} sm={6} spacing={2} style={{padding: '2% 7% 2% 3%'}}>
             <Grid item style={{height:'100%', backgroundColor:'#E9E9E9', borderRadius:10}}>
               <p className='textTitle'>Description</p>
-              <p>{fullProject["projectDescription"]}</p>
+              <p>{fullProjects?fullProjects["projectDescription"]:"loading"}</p>
             </Grid>
           </Grid>
         </Grid>:<div></div>

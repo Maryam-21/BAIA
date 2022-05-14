@@ -13,7 +13,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 
-const NavigationPanel = ({user, handleMeetingClick,handleOpenProject}) => {
+const NavigationPanel = ({ handleMeetingClick,handleOpenProject}) => {
   const [open, setOpen] = useState(false);
   const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
 
@@ -29,7 +29,7 @@ const NavigationPanel = ({user, handleMeetingClick,handleOpenProject}) => {
             <Logo/>
         </Grid>
         <Grid item xs={0} sm={12} style={{width:'100%', height:'15%'}}>
-            <InfoBox user= {user}/>
+            <InfoBox/>
         </Grid>
         <hr style={{width:'100%', backgroundColor:'black', height:'1px', border:0}}/>
         

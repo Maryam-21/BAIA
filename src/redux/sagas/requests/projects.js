@@ -1,5 +1,4 @@
 export function requestGetProjectsTitles(){
-    console.log('projects request')
     const response = fetch("https://localhost:44304/api/Users/GetProjectNames/1", {
         method: 'GET',
         mode: 'cors',
