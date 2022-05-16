@@ -1,7 +1,18 @@
 .user {
     text-align: left;
     font-weight: bold;
+    margin-left: 20%;
+    font-family: sans-serif;
+    font-size: 18px;
 }
+
+.userCompany {
+    text-align: left;
+    margin-left: 20%;
+    font-family: sans-serif;
+    font-size: 17px;
+}
+
 .try {
     color:#a1a8d3
 }
@@ -10,9 +21,11 @@ h2{
     margin-top: 0px;
     width: 100%;
     align-self: center;
+    font-family: sans-serif;
 }
 .textTitle{
-    font-size: x-small;
+    font-size: 30px;
+    font-family: sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -26,9 +39,32 @@ h2{
     font-size: 14px;
     margin: 2%;
     cursor: pointer;
+    font-family: sans-serif;
 }
 
 .button:hover {
     background-color: #898989;
     border-radius: 5px;
 }
+
+.i{
+    width:90px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: sans-serif;
+}
+
+.content{
+    display: inline-block;
+    vertical-align: middle;
+    width: 150px;
+}
+
+.center {
+    margin: auto;
+    width: 118%;
+    padding: 13px 42px ;
+    }
+
+    

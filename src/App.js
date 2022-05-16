@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 import DataComponent from './components/DataComponent';
+import React, { Component }  from 'react';
 
 function App() {
   return (

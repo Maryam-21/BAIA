@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 import { IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import TextBox from './TextBox'
+import React, { Component }  from 'react';
 
 import { useState } from 'react';
 

@@ -12,7 +12,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 
-const NavigationPanel = ({user, projectsTitles,projects, meetings, handleMeetingClick,handleOpenProject}) => {
+const NavigationPanel = ({user, projectsTitles, projects, meetings, handleMeetingClick, handleOpenUS}) => {
   const [test, setTest] = useState("loading");
   const [open, setOpen] = React.useState(false);
   
@@ -35,7 +35,7 @@ const NavigationPanel = ({user, projectsTitles,projects, meetings, handleMeeting
             <InfoBox user= {user}/>
         </Grid>
         <hr style={{width:'100%', backgroundColor:'black', height:'1px', border:0}}/>
-        
+          
         <Grid item xs={0} sm={12} style={{width:'100%', alignItems:'left',
          height: '100%', backgroundColor:'#B4B4B4', padding:'5px', borderRadius:5}}>
         <ListItemButton onClick={handleClick}>
@@ -48,7 +48,7 @@ const NavigationPanel = ({user, projectsTitles,projects, meetings, handleMeeting
         <Collapse in={open} timeout="auto" unmountOnExit style={{padding: '0% 0% 0% 4%'}}>
           {projectsTitles.map(project => (
               <NestedList project = {project?project:p} meetings = {meetings} handleMeetingClick={handleMeetingClick}
-              handleOpenProject={handleOpenProject}/>
+              handleOpenUS={handleOpenUS}/>
           ))}
          </Collapse>
          <ListItemButton >
