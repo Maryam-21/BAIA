@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route path="/">
         <Route index path='/' element={<LoginPage />} />
-        <Route path="/HomePage/:name/:compName/:id" element={<DataComponent />} />
+        <Route path="/HomePage/:name" element={<DataComponent />} />
       </Route>
     </Routes>
   </BrowserRouter>

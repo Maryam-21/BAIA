@@ -11,15 +11,16 @@ import {
   Button,
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import "./components.css";
+import { useSelector } from 'react-redux';
+import  '../CSS/components.css';
 
-const SpecificProject = ({
-  user, projectTitle, fullProject, meetings, services,
-  openMeeting, openProject, openUS,
-}) => {
+const SpecificProject = ({meetings,openMeeting,openProject, openUS}) => {
   const [test, setTest] = useState("loading");
-  useEffect(async () => {
-    setTest(await meetings);
+  const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
+  const {services} = useSelector((state)=>state.services)
+
+  useEffect(async() => {
+    setTest(await meetings)
   });
   return (
     <Box>
@@ -28,12 +29,11 @@ const SpecificProject = ({
           <Grid container style={{ width: "100%", display: "flex" }}>
           <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
               <Grid item style={{ marginTop: "5%" }}>
-                <p className="textTitle"> {projectTitle} </p>
+                <p className="textTitle"> {projectsTitles} </p>
               </Grid>
               <br />
             </Grid>
           </Grid>
-
           <Grid container style={{ width: "100%", display: "flex" }}>
           <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
               <Grid item style={{ marginTop: "5%" }}>

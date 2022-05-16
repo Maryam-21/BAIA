@@ -11,8 +11,9 @@ export default function NestedList({project,meetings,handleMeetingClick,handleOp
       component="nav"
       aria-labelledby="nested-list-subheader"
     >
-      <CollabsableListItem title = {project} list = {meetings}
+      <CollabsableListItem title = {project} list = {meetings?meetings:'loading'}
        handleMeetingClick={handleMeetingClick} handleOpenUS={handleOpenUS}>
+
          </CollabsableListItem>                     
      
     </List>

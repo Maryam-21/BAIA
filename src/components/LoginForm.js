@@ -1,54 +1,34 @@
-import { Box,Grid, Link } from '@material-ui/core'
-import React, { useState } from 'react'
+import { Box,Grid } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
 import TextBox from './TextBox'
 import Btn from './Btn'
 import RegisterForm from './RegisterForm'
+import { useDispatch } from 'react-redux';
+import { getUser } from '../redux/slices/user'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+
 
 const LoginForm = () => {
     const [Email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
     const [email_error, setEmail_error] = useState('')
     const [password_error, setPassword_error] = useState('')
-    const [openRegister, setOpenRegister] = React.useState(false);
+    const [openRegister, setOpenRegister] = useState(false);
+    const {user, success} = useSelector((state)=>state.user)
     const navigate = useNavigate()
 
-    const makeAPICall = async (user) => {
-        var user = {
-            "Name":Email,
-            "Password":Password
-        }
-        try {
-          const response = await fetch("https://localhost:44304/api/Users/Login", {
-            method: 'POST',
-            mode: 'cors',
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type' : 'application/json; charset=UTF-8',
-            },
-            body:JSON.stringify(user)
-            
-            })
-            if (response.status == 200) {
-                console.log('ok')
-                const userData = await response.json()
-                console.log(userData)
-                const userrID = await userData.userID
-                const userrName = await userData.name
-                const userrComp = await userData.companyName
-                navigate("/HomePage/"+ userrName + '/' + userrComp + '/' + userrID)        
-            }
-            else {
-                console.log('not ok')
-                setEmail_error('Wrong Email or Password')
-                setPassword_error('Wrong Email or Password')
-            }
-        }
-        catch (e) {
-          console.log(e)
-        }
-    }
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        if(success){
+            navigate("/HomePage/"+ user.name) 
+        }
+        else if (success==0){
+            setEmail_error('Wrong Email or Password')
+            setPassword_error('Wrong Email or Password') 
+        }
+      },[success]);
 
     const onLogin = () => {
         validate()
@@ -62,9 +42,7 @@ const LoginForm = () => {
         setOpenRegister(false);
     };
 
-
-
-    const validate =  () => {
+    const validate = async () => {
         if(Email == '' || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(Email))
             setEmail_error(('Please Enter an Email Address'))
         else
@@ -75,7 +53,12 @@ const LoginForm = () => {
         else
             setPassword_error('')
 
-            makeAPICall()
+        var cred = {
+            "Name":Email,
+            "Password":Password
+        }
+        
+        dispatch(getUser(cred))
     }
 
 
