@@ -29,7 +29,7 @@ const SpecificProject = ({meetings,openMeeting,openProject, openUS}) => {
           <Grid container style={{ width: "100%", display: "flex" }}>
           <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
               <Grid item style={{ marginTop: "5%" }}>
-                <p className="textTitle"> {projectsTitles} </p>
+                <p className="textTitle"> projectsTitles </p>
               </Grid>
               <br />
             </Grid>
@@ -52,7 +52,7 @@ const SpecificProject = ({meetings,openMeeting,openProject, openUS}) => {
           <Grid container style={{ width: "100%", display: "flex" }}>
             <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
               <Grid item style={{ marginTop: "5%" }}>
-                <p className="textTitle"> {projectTitle} </p>
+                <p className="textTitle"> projectsTitles </p>
               </Grid>
               <br />
             </Grid>

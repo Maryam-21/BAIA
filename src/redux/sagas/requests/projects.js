@@ -10,7 +10,7 @@ export function requestGetProjectsTitles(){
     return response
 }
 
-export function requestGetFullProjects(projectTitle = 'Conference Room Reservation System'){
+export function requestGetFullProjects(projectTitle = 'Spotify Music Player'){
     return fetch("https://localhost:44304/api/Projects/GetProject/" + projectTitle, {
           method: 'GET',
           mode: 'cors',

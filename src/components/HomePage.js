@@ -8,7 +8,7 @@ import { FamilyRestroomRounded } from '@mui/icons-material'
 
 const HomePage = () => {
   const [openMeeting, setOpenMeeting] = useState(false);
-  const [openProject, setOpenProject] = useState(false);
+
   const [openUS, setOpenUS] = React.useState(false);
   const { fullProjects } = useSelector((state)=>state.projects)
 
@@ -23,6 +23,7 @@ const handleOpenUS = () => {
   setOpenUS(!openUS);
 };
   
+console.log(fullProjects)
   return (
     <Box position="absolute" sx={{top:0, bottom:0, left:0, right:0, alignItems:'center'}}>
         <Grid container spacing={1} style={{height:'100%'}}>
@@ -30,7 +31,6 @@ const handleOpenUS = () => {
             boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
             <NavigationPanel
               handleMeetingClick={handleMeetingClick}
-              handleOpenProject={handleOpenProject}
               handleOpenUS={handleOpenUS}/>
           </Grid>
         
