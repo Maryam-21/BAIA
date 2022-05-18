@@ -67,4 +67,22 @@ h2{
     padding: 13px 42px ;
     }
 
-    
+.LogoutBtn {
+    text-transform: none;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    color: white;
+    font-size: 18px;
+    background-color: #3f51b5;
+    width: 100%;
+    border: none;
+    padding: 1%;
+    border-radius: 4px;
+}
+
+.Grid1 {
+    min-height:125%; 
+    background-color: #E5E5E5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 20%;
+}
