@@ -19,7 +19,7 @@ const MyProfile = () => {
   return (
     <Grid xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
             <Grid style={{ padding: "1% 3% 0% 0%",marginLeft: "15%" ,marginTop: "5%"  }}>
-                <p className="textTitle"> Edit My Profile </p> <hr style={{width:"122%"}}/>
+                <p className="textTitle"> Edit My Profile </p> <hr style={{width:"126%" }}/>
             </Grid>
         <Card style ={{ width: "70%", backgroundColor:"#E9E9E9", margin:"2% 15%", padding: "7% 17%"}}>
              <PersonIcon class="icons"/>
@@ -44,3 +44,4 @@ const MyProfile = () => {
 }
 
 export default MyProfile
+

@@ -79,11 +79,11 @@ const LoginForm = () => {
                 </Grid>
                 <Grid container item xs={12} direction="column" spacing={2} alignItems='center'>
                     <Grid item style={{width:'75%'}}>
-                        <Btn color="primary" text="LOGIN" variant="contained" onclick={onLogin} ></Btn>
+                        <Btn color="primary" text="LOGIN" width="100%" variant="contained" onclick={onLogin} ></Btn>
                     </Grid>
                     <hr style={{width:'80%', backgroundColor:'black', height:'1px', border:0}}/>
                     <Grid item>
-                        <Btn text="REGISTER" size='large' onclick={handleClickOpen}></Btn>
+                        <Btn fontColor="white" color2="#00A800" text="REGISTER" size='large' width='100%' onclick={handleClickOpen}></Btn>
                     </Grid>
                 </Grid>
             </Grid>
