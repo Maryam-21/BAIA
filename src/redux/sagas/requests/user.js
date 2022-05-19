@@ -12,3 +12,18 @@ export function requestGetUser(action){
     });
     return response
 }
+
+export function requestUpdateUser(action){
+    const id = action.payload.id
+    const response = fetch("https://localhost:44304/api/Users/"+id, {
+        method: 'PUT',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify(action.payload.user)
+        
+    });
+    return response
+}

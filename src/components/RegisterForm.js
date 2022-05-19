@@ -52,7 +52,7 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
 
     const makeAPICall = async (user) => {
         try {
-          const response = await fetch("https://localhost:44304/api/Users",{
+          const response = await fetch("https://localhost:44304/api/Users/PostUser",{
             method: 'POST',
             mode: 'cors',
             headers:{

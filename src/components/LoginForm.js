@@ -54,7 +54,7 @@ const LoginForm = () => {
             setPassword_error('')
 
         var cred = {
-            "Name":Email,
+            "Email":Email,
             "Password":Password
         }
         
