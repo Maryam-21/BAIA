@@ -1,5 +1,5 @@
 export function requestGetProjectsTitles(userID) {
-    const response = fetch("https://localhost:44304/api/Users/GetProjectNames/" + userID, {
+    const response = fetch("https://localhost:44304/api/Users/GetProjectTitles/" + userID, {
         method: 'GET',
         mode: 'cors',
         headers:{
@@ -11,7 +11,7 @@ export function requestGetProjectsTitles(userID) {
 }
 
 export function requestGetFullProjects(projectTitle){
-    return fetch("https://localhost:44304/api/Projects/GetProject/" + projectTitle, {
+    return fetch("https://localhost:44304/api/Projects/GetProjectByTitle/" + projectTitle, {
           method: 'GET',
           mode: 'cors',
           headers:{
