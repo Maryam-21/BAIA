@@ -14,16 +14,13 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 
 
-const NavigationPanel = ({ handleMeetingClick,handleOpenProject, handleOpenUS}) => {
+const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile}) => {
   const [open, setOpen] = useState(false);
   const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
-
 
     const handleClick = () => {
         setOpen(!open);
     };
-   
-
 
   return (
       <Grid container spacing={1} style={{width:'100%', display:'block', padding: '1.7% 5%', minHeight:'100%'}}>
@@ -31,7 +28,7 @@ const NavigationPanel = ({ handleMeetingClick,handleOpenProject, handleOpenUS}) 
             <Logo/>
         </Grid>
         <Grid item xs={0} sm={12} style={{width:'100%', height:'15%'}}>
-            <InfoBox/>
+            <InfoBox handleProfile={handleProfile}/>
         </Grid>
         <hr style={{width:'100%', backgroundColor:'black', height:'1px', border:0}}/>
           
@@ -47,7 +44,7 @@ const NavigationPanel = ({ handleMeetingClick,handleOpenProject, handleOpenUS}) 
         <Collapse in={open} timeout="auto" unmountOnExit style={{padding: '0% 0% 0% 4%'}}>
           {projectsTitles? projectsTitles['$values'].map(project => (
               <NestedList project = {project?project:"loading"} meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"} handleMeetingClick={handleMeetingClick}
-              handleOpenProject={handleOpenProject} handleOpenUS={handleOpenUS}/>
+              handleOpenUS={handleOpenUS}/>
           )):'loading'}
 
          </Collapse>

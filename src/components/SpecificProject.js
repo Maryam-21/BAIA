@@ -9,12 +9,14 @@ import {
   InputLabel,
   FormControl,
   Button,
+  TextField,
+  Container,
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import  '../CSS/components.css';
 
-const SpecificProject = ({meetings,openMeeting,openProject, openUS}) => {
+const SpecificProject = ({meetings,openMeeting, openUS, openProfile}) => {
   const [test, setTest] = useState("loading");
   const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
   const {services} = useSelector((state)=>state.services)
@@ -27,17 +29,9 @@ const SpecificProject = ({meetings,openMeeting,openProject, openUS}) => {
       {openUS ? (
         <div>
           <Grid container style={{ width: "100%", display: "flex" }}>
-          <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
+            <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
               <Grid item style={{ marginTop: "5%" }}>
-                <p className="textTitle"> projectsTitles </p>
-              </Grid>
-              <br />
-            </Grid>
-          </Grid>
-          <Grid container style={{ width: "100%", display: "flex" }}>
-          <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
-              <Grid item style={{ marginTop: "5%" }}>
-                <p className="textTitle"> USER STORY </p>
+                <p className="textTitle"> User Storyyyyyyyy </p>
               </Grid>
               <br />
             </Grid>
@@ -46,7 +40,7 @@ const SpecificProject = ({meetings,openMeeting,openProject, openUS}) => {
       ) : (
         <div></div>
       )}
-
+{/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
       {openMeeting ? (
         <div>
           <Grid container style={{ width: "100%", display: "flex" }}>
