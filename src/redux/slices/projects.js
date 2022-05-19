@@ -9,9 +9,10 @@ export const projectsSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
-    getProjectsTitles: () => {},
-    getFullProjects: () => {},
+    getProjectsTitles: (user) => {},
+    getFullProjects: (projectTitle) => {},
     setProjectsTitles(state, action) {
+      console.log("set project titles")
         const projectsTitlesData = action.payload;
         return { ...state, 
           projectsTitles:{...projectsTitlesData} };

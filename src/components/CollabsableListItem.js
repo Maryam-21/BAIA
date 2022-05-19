@@ -9,20 +9,24 @@ import TaskIcon from "@mui/icons-material/Task";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
+import { getFullProjects } from '../redux/slices/projects'
+import { useDispatch } from 'react-redux';
 
 function CollabsableListItem({
   title, //project name
-  list,
+  list=["meeting 1"],
   handleMeetingClick,
   handleOpenUS,
-}) {
+}) 
+{
+  const dispatch = useDispatch()
   const [open, setOpen] = React.useState(false);
   const [openn, setOpenn] = React.useState(false);
   
   //drop down when project name is clicked
   const handleClick = () => {
-    //list.map(item => console.log(item))
-    ;
+    //getfullproject
+    dispatch(getFullProjects(title));
     setOpen(!open);
   };
   //drop down when meeting name is clicked
@@ -41,7 +45,7 @@ function CollabsableListItem({
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {list.map((item) => (
+          {
             <ListItemButton sx={{ pl: 4 }} onClick={handleClickk}>
               <ListItemIcon>
                 <MeetingRoomIcon />
@@ -49,7 +53,7 @@ function CollabsableListItem({
               <ListItemText primary={"First Meeting"} />
               {openn ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-          ))}
+          }
         </List>
         <Collapse in={openn} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
