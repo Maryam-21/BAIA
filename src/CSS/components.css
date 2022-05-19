@@ -91,7 +91,6 @@ h2 {
 .icons {
   display: inline-block;
   vertical-align: -135%;
-  padding: 0% 2.5% 0% 0%;
   width: 4%;
 }
 
@@ -100,4 +99,8 @@ h2 {
   background-color: #E9E9E9;
   margin: 2% 15%;
   padding: 7% 17%;
+}
+
+.labels{
+  
 }

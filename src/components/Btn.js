@@ -1,11 +1,11 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
 
-const Btn = ({color, text, size, variant, onclick, width, color2, fontColor}) => {
+const Btn = ({color, text, size, variant, onclick, width, color2, fontColor, margin}) => {
 
     return (
         <Button variant = {variant} color={color} size={size}
-         style={{width: width, textTransform: 'none', backgroundColor:color2, color:fontColor}}
+         style={{width: width, textTransform: 'none', backgroundColor:color2, color:fontColor, margin:margin}}
          onClick={onclick}>{text}
          </Button>
       )
