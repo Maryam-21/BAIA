@@ -19,7 +19,7 @@ export function* handleGetProjectsTitles(userID) {
 
 export function* handleGetFullProjects(projectTitle) {
     try {
-      const response = yield call(requestGetFullProjects, projectTitle);
+      const response = yield call(requestGetFullProjects, projectTitle.payload);
       const  data  = yield response.json();
       yield put(setFullProjects({ ...data }));
       console.log(data)

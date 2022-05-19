@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import Btn from './Btn'
 import './components.css'
 import SpecificProject from './SpecificProject'
+import { useSelector } from 'react-redux';
 
 const MyProjects = ({user}) => {
     let projects = []
