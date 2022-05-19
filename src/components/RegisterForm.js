@@ -12,6 +12,7 @@ import React, { Component }  from 'react';
 
 import { useState } from 'react';
 
+//400 --> already exist (email)
 export const RegisterForm = ({Transition, handleClose, open}) => {
     const [openSB, setOpenSB] = useState(false);
     const [name, setName] = useState('')

@@ -2,9 +2,10 @@ import { call, put } from "redux-saga/effects";
 import { setProjectsTitles, setFullProjects } from '../../slices/projects'
 import { requestGetProjectsTitles,requestGetFullProjects } from "../requests/projects";
 
-export function* handleGetProjectsTitles(action) {
+export function* handleGetProjectsTitles(userID) {
   try {
-    const response = yield call(requestGetProjectsTitles);
+    console.log("get project titles")
+    const response = yield call(requestGetProjectsTitles,userID.payload);
     if (response.ok){
       const data  = yield response.json();
       //const data = ['instagram']
@@ -16,9 +17,9 @@ export function* handleGetProjectsTitles(action) {
   }
 }
 
-export function* handleGetFullProjects(action) {
+export function* handleGetFullProjects(projectTitle) {
     try {
-      const response = yield call(requestGetFullProjects);
+      const response = yield call(requestGetFullProjects, projectTitle.payload);
       const  data  = yield response.json();
       yield put(setFullProjects({ ...data }));
       console.log(data)
