@@ -11,7 +11,8 @@ const { user } = useSelector((state)=>state.user)
 const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getProjectsTitles(user.userID));
+      if(user)  
+        dispatch(getProjectsTitles(user.userID))
       },[dispatch,user]);
 
     return (
