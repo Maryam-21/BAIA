@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import List from '@mui/material/List';
 import CollabsableListItem from './CollabsableListItem';
 
-export default function NestedList({project,meetings,handleMeetingClick,handleOpenUS}) {
+export default function NestedList({project,meetings,handleMeetingClick,handleOpenUS, handleProjectdetails}) {
 
   return (
     <List
@@ -12,7 +12,7 @@ export default function NestedList({project,meetings,handleMeetingClick,handleOp
       aria-labelledby="nested-list-subheader"
     >
       <CollabsableListItem title = {project} list = {meetings?meetings:'loading'}
-       handleMeetingClick={handleMeetingClick} handleOpenUS={handleOpenUS}>
+       handleMeetingClick={handleMeetingClick} handleOpenUS={handleOpenUS} handleProjectdetails={handleProjectdetails} >
 
          </CollabsableListItem>                     
      

@@ -14,7 +14,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 
 
-const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile}) => {
+const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handleProjectdetails}) => {
   const [open, setOpen] = useState(false);
   const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
 
@@ -44,11 +44,11 @@ const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile}) => 
         <Collapse in={open} timeout="auto" unmountOnExit style={{padding: '0% 0% 0% 4%'}}>
           {projectsTitles? projectsTitles['$values'].map(project => (
               <NestedList project = {project?project:"loading"} meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"} handleMeetingClick={handleMeetingClick}
-              handleOpenUS={handleOpenUS}/>
+              handleOpenUS={handleOpenUS} handleProjectdetails={handleProjectdetails}/>
           )):'loading'}
 
          </Collapse>
-         <ListItemButton >
+         <ListItemButton>
             <ListItemIcon>
             <AddIcon/>
             </ListItemIcon>

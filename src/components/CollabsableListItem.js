@@ -15,14 +15,14 @@ function CollabsableListItem({
   list,
   handleMeetingClick,
   handleOpenUS,
+  handleProjectdetails,
 }) {
   const [open, setOpen] = React.useState(false);
   const [openn, setOpenn] = React.useState(false);
-  
+
   //drop down when project name is clicked
   const handleClick = () => {
     //list.map(item => console.log(item))
-    ;
     setOpen(!open);
   };
   //drop down when meeting name is clicked
@@ -32,15 +32,26 @@ function CollabsableListItem({
   };
   return (
     <div>
-      <ListItemButton onClick={handleClick}>
+      <ListItemButton onClick={function(event){handleClick(); handleProjectdetails()}}>
         <ListItemIcon>
           <TaskIcon />
         </ListItemIcon>
         <ListItemText primary={title} /> {/* Project Name*/}
-        {open ? <ExpandLess /> : <ExpandMore />}  {/*up & down arrow*/}
+        {open ? <ExpandLess /> : <ExpandMore />} {/*up & down arrow*/}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+
+
+          <ListItemButton  sx={{ pl: 4 }} onClick={handleProjectdetails}>
+            <ListItemIcon>
+              <MeetingRoomIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Project Details"} />
+          </ListItemButton>
+
+
+
           {list.map((item) => (
             <ListItemButton sx={{ pl: 4 }} onClick={handleClickk}>
               <ListItemIcon>
@@ -52,21 +63,27 @@ function CollabsableListItem({
           ))}
         </List>
         <Collapse in={openn} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 6 }} onClick={handleMeetingClick}> {/* to show services on the right when services is clicked */}
+          <List component="div" disablePadding>
+            <ListItemButton sx={{ pl: 6 }} onClick={handleMeetingClick}>
+              {" "}
+              {/* to show services on the right when services is clicked */}
               <ListItemIcon>
                 <MeetingRoomIcon />
               </ListItemIcon>
-              <ListItemText primary={"Services"} /><br></br>
+              <ListItemText primary={"Services"} />
+              <br></br>
             </ListItemButton>
-            <ListItemButton sx={{ pl: 6 }} onClick={handleOpenUS}> {/* to show the project name when US is clicked */}
+            <ListItemButton sx={{ pl: 6 }} onClick={handleOpenUS}>
+              {" "}
+              {/* to show the project name when US is clicked */}
               <ListItemIcon>
                 <MeetingRoomIcon />
               </ListItemIcon>
-              <ListItemText primary={"User Stories"} /><br></br>
+              <ListItemText primary={"User Stories"} />
+              <br></br>
             </ListItemButton>
-        </List>
-      </Collapse>
+          </List>
+        </Collapse>
         <ListItemButton sx={{ pl: 4 }}>
           <ListItemIcon>
             <AddIcon />
@@ -74,7 +91,6 @@ function CollabsableListItem({
           <ListItemText primary="Add Meeting" />
         </ListItemButton>
       </Collapse>
-     
     </div>
   );
 }

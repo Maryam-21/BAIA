@@ -9,12 +9,7 @@ import Button from '@mui/material/Button';
 const InfoBox = ({handleProfile}) => {
   const { user } = useSelector((state)=>state.user)
   return (
-    <Box sx={{
-      bgcolor: "primary.main",
-      display: "flex",
-      p: "5px 5px 5px 5px",
-      borderRadius: 5,
-    }}>
+    <Box sx={{bgcolor: "primary.main", display: "flex", p: "5px 5px 5px 5px", borderRadius: 5}}>
         <div>
         <Button onClick={handleProfile}> <img class="i" src={image} alt="Avatar" /> </Button>
         <div class='content'>

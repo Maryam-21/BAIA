@@ -1,22 +1,9 @@
-import {
-  Box,
-  Grid,
-  Card,
-  CardContent,
-  Select,
-  MenuItem,
-  CardHeader,
-  InputLabel,
-  FormControl,
-  Button,
-  TextField,
-  Container,
-} from "@material-ui/core";
+import { Box,Grid,Card,CardContent,Select,MenuItem,CardHeader,InputLabel,FormControl,Button} from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import  '../CSS/components.css';
 
-const SpecificProject = ({meetings,openMeeting, openUS, openProfile}) => {
+const SpecificProject = ({meetings,openMeeting, openUS}) => {
   const [test, setTest] = useState("loading");
   const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
   const {services} = useSelector((state)=>state.services)

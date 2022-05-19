@@ -4,29 +4,42 @@ import SpecificProject from './SpecificProject'
 import { useSelector } from 'react-redux';
 import { Box, Grid} from "@material-ui/core";
 import MyProfile from './MyProfile';
+import ProjectDetails from './ProjectDetails';
+
 
 
 const HomePage = () => {
   const [openMeeting, setOpenMeeting] = useState(false);
   const [openUS, setOpenUS] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
-  const { fullProjects } = useSelector((state)=>state.projects)
+  const [openProjectDetails, setProjectDetails] = useState(false);
+  const { fullProjects } = useSelector((state)=>state.projects);
 
   //onClick functions for buttons in CollapsableListItem
 const handleMeetingClick = () => {
   setOpenMeeting(!openMeeting);
   setOpenUS(false);
   setOpenProfile(false);
+  setProjectDetails(false);
 };
 
 const handleOpenUS = () => {
-  setOpenMeeting(false);
   setOpenUS(!openUS);
+  setOpenMeeting(false);
   setOpenProfile(false);
+  setProjectDetails(false);
 };
 
 const handleProfile = () => {
   setOpenProfile(!openProfile);
+  setOpenMeeting(false);
+  setOpenUS(false);
+  setProjectDetails(false);
+};
+
+const handleProjectdetails = () => {
+  setProjectDetails(!openProjectDetails);
+  setOpenProfile(false);
   setOpenMeeting(false);
   setOpenUS(false);
 };
@@ -41,18 +54,25 @@ console.log(fullProjects)
             <NavigationPanel
               handleMeetingClick={handleMeetingClick}
               handleOpenUS={handleOpenUS}
-              handleProfile={handleProfile}/>
+              handleProfile={handleProfile}
+              handleProjectdetails={handleProjectdetails}
+              />
           </Grid>
 
           {/* el hetta el 3l ymeen */}
           {openProfile ? (   <MyProfile/>   ): (
-          <Grid item xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
-            <SpecificProject meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"}
-             openMeeting={openMeeting}
-             openUS={openUS}
-             openProfile={openProfile}/>
-             
-          </Grid>
+             openProjectDetails ? (   <ProjectDetails/>   ): (
+
+              <Grid item xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
+                <SpecificProject meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"}
+                openMeeting={openMeeting}
+                openUS={openUS}
+                openProfile={openProfile}
+                openProjectDetails={openProjectDetails}
+                />
+                
+              </Grid>
+            )
            ) }
       </Grid>      
     </Box>
