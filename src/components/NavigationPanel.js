@@ -12,14 +12,21 @@ import TaskIcon from '@mui/icons-material/Task';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
+import AddNewProjectPopUp from './AddNewProjectPopUp';
 
 
 const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handleProjectdetails}) => {
   const [open, setOpen] = useState(false);
+  const [openAddProj, setOpenAddProj] = useState(false);
   const {projectsTitles, fullProjects} = useSelector((state)=>state.projects)
 
     const handleClick = () => {
         setOpen(!open);
+    };
+
+    const handleClickOpen = () => {
+      console.log("opeennn")
+      setOpenAddProj(true);
     };
 
   return (
@@ -44,7 +51,7 @@ const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handl
         <Collapse in={open} timeout="auto" unmountOnExit style={{padding: '0% 0% 0% 4%'}}>
           {projectsTitles? projectsTitles['$values'].map(project => (
               <NestedList project = {project?project:"loading"} meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"} handleMeetingClick={handleMeetingClick}
-              handleOpenUS={handleOpenUS} handleProjectdetails={handleProjectdetails}/>
+              handleOpenUS={handleOpenUS} handleProjectdetails={handleProjectdetails} handleClickOpen={handleClickOpen}/>
           )):'loading'}
 
          </Collapse>
@@ -52,7 +59,8 @@ const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handl
             <ListItemIcon>
             <AddIcon/>
             </ListItemIcon>
-            <ListItemText primary = "Add Project" />
+            <ListItemText primary = "Add Project" onClick={handleClickOpen}/>
+              <AddNewProjectPopUp open = {openAddProj}/>
         </ListItemButton>
         </Grid>
        </Grid>
