@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { getUser } from '../redux/slices/user';
+import { getUser, setLogin } from '../redux/slices/user';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
@@ -8,31 +8,33 @@ import TextBox from './TextBox';
 import Btn from './Btn';
 import RegisterForm from './RegisterForm';
 
-///
-
 const LoginForm = () => {
     const [Email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
     const [email_error, setEmail_error] = useState('')
     const [password_error, setPassword_error] = useState('')
     const [openRegister, setOpenRegister] = useState(false);
-    const {user, success} = useSelector((state)=>state.user)
+    const {user, success, login} = useSelector((state)=>state.user)
     const navigate = useNavigate()
-
     const dispatch = useDispatch()
 
     useEffect(() => {
         if(success){
+            setEmail_error('')
+            setPassword_error('') 
             navigate("/HomePage/"+ user.name) 
         }
-        else if (success==0){
+        else if (success == 0 && login == 1){
             setEmail_error('Wrong Email or Password')
             setPassword_error('Wrong Email or Password') 
+            dispatch(setLogin(0))
         }
-      },[success]);
+      },[success, login]);
 
     const onLogin = () => {
-        validate()
+        validate();
+        dispatch(setLogin(1))
+
     }
 
     const handleClickOpen = () => {
@@ -58,8 +60,9 @@ const LoginForm = () => {
             "Email":Email,
             "Password":Password
         }
-        
         dispatch(getUser(cred))
+
+
     }
 
 
@@ -71,9 +74,9 @@ const LoginForm = () => {
                 <Grid container direction="column" item xs={12} spacing={2} style={{width:'100%'}} 
                 alignItems='center'>
                     <Grid item style={{width:'75%'}}>
-                        <TextBox text="Email" required="true" type="email" onchange={setEmail} 
+                        <TextBox text="Email" required={true} type="email" onchange={setEmail} 
                         errormsg={email_error}/>
-                        <TextBox text="Password" required="true" type="password" onchange={setPassword} 
+                        <TextBox text="Password" required={true} type="password" onchange={setPassword} 
                         errormsg={password_error}/>
                         <RegisterForm handleClose={handleClose} open={openRegister}></RegisterForm>
                     </Grid>

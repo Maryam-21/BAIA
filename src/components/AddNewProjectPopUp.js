@@ -11,7 +11,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-const AddNewProjectPopUp = (open) => {
+const AddNewProjectPopUp = (open =1 ) => {
 
     const [openAddProj, setOpenAddProj] = useState(false);
 

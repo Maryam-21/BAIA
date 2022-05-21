@@ -11,6 +11,8 @@ import BusinessIcon from '@mui/icons-material/Business';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import LockIcon from '@mui/icons-material/Lock';
 import Btn from './Btn';
+import { setSuccess, setUser, setLogin } from '../redux/slices/user'
+
 
 const MyProfile = () => {
   const { user } = useSelector((state)=>state.user)
@@ -24,11 +26,13 @@ const MyProfile = () => {
   const dispatch = useDispatch()
 
   const onLogOut = () =>{
-    navigate('/Login')
+    dispatch(setSuccess(0))
+    dispatch(setLogin(0))
+    dispatch(setUser(undefined))
+    navigate('/')
   }
 
   const onSaveChanges = () =>{
-    //console.log("save changes")
     const payload = {
       'userID': user.userID,
       'email': email,
@@ -42,29 +46,29 @@ const MyProfile = () => {
 
 
   return (
-    <Grid xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
+    <Grid item xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
             <Grid style={{ padding: "1% 3% 0% 0%",marginLeft: "15%" ,marginTop: "5%"  }}>
                 <p className="textTitle"> Edit My Profile </p> <hr style={{width:"126%" }}/>
             </Grid>
         <Card style ={{ width: "70%", backgroundColor:"#E9E9E9", margin:"2% 15%", padding: "7% 17%"}}>
 
-             <PersonIcon class="icons" style={{ padding: "1% 2.5% 0% 0%" }}/>
+             <PersonIcon className="icons" style={{ padding: "1% 2.5% 0% 0%" }}/>
              <TextField id="1" label="Name" defaultValue = {name} variant="standard" style ={{width: "93%"}}
               onChange={(e)=>{setName(e.target.value)}}/> <br/><br/>
 
-             <EmailIcon class="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
+             <EmailIcon className="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
              <TextField id="2" label="Email" defaultValue = {email} variant="standard" style ={{width: "93%"}}
              onChange={(e)=>{setEmail(e.target.value)}}/> <br/><br/>
 
-             <BusinessIcon class="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
+             <BusinessIcon className="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
              <TextField id="3" label="Company Name" defaultValue={companyName} variant="standard" style ={{width: "93%"}}
              onChange={(e)=>{setCompanyName(e.target.value)}} /> <br/><br/>
 
-             <LocalPhoneIcon class="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
+             <LocalPhoneIcon className="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
              <TextField id="4" label="Phone Number" defaultValue={phoneNumber} variant="standard" type="number" style ={{width: "93%"}}
              onChange={(e)=>{setPhoneNumber(e.target.value)}}/> <br/><br/>
 
-             <LockIcon class="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
+             <LockIcon className="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
              <TextField id="5" label="Password" defaultValue={password}variant="standard" type="password" style ={{width: "93%"}}
              onChange={(e)=>{setPassword(e.target.value)}}/> <br/><br/><br/>
 

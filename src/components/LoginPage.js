@@ -8,7 +8,7 @@ const LoginPage = () => {
   return (
     <Box position="absolute" sx={{top:0, bottom:0, left:0, right:0, alignItems:'center'}} >
       <Grid container spacing={1} style={{height:'100%'}} alignItems='center'>
-        <Grid item xs={0} sm={7}>
+        <Grid item xs={false} sm={7}>
             <Logo/>
         </Grid>
         

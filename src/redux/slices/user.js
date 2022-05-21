@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     user: undefined,
-    success: undefined
+    success: undefined,
+    login: undefined
 }
 
 export const userSlice = createSlice({
@@ -22,13 +23,20 @@ export const userSlice = createSlice({
         success:success };
     },
     getSuccess: (state)=>{
-      console.log(state.success)
-      return state.success
+        return state.success
+    },
+    setLogin: (state, action)=>{
+        const login = action.payload;
+        return { ...state, 
+        login:login };
+    },
+    getLogin: (state)=>{
+      return state.login
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { getUser, setUser, setSuccess, updateUser, getSuccess } = userSlice.actions
+export const { getUser, setUser, setSuccess, updateUser, getSuccess, setLogin, getLogin } = userSlice.actions
 
 export default userSlice.reducer

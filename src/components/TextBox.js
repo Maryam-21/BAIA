@@ -12,7 +12,7 @@ const TextBox = ({text, required, type, onchange, errormsg}) => {
       error = {errormsg.length === 0 ? false:true}
       helperText={errormsg}
       margin="normal" 
-      fullWidth 
+      fullWidth ={true}
       id="outlined-basic" 
       label={text} 
       variant="outlined"

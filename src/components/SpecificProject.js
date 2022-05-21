@@ -38,7 +38,7 @@ const SpecificProject = ({meetings,openMeeting, openUS}) => {
               <br />
             </Grid>
           </Grid>
-        <div class="center">
+        <div className="center">
           <Card style={{ backgroundColor: "#E9E9E9" }}>
             <CardHeader
               style={{ backgroundColor: "rgb(180, 180, 180)" }}

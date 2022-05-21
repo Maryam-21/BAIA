@@ -31,15 +31,15 @@ const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handl
 
   return (
       <Grid container spacing={1} style={{width:'100%', display:'block', padding: '1.7% 5%', minHeight:'100%'}}>
-        <Grid item xs={0} sm={12} style={{height:'15%'}}>
+        <Grid item xs={false} sm={12} style={{height:'15%'}}>
             <Logo/>
         </Grid>
-        <Grid item xs={0} sm={12} style={{width:'100%', height:'15%'}}>
+        <Grid item xs={false} sm={12} style={{width:'100%', height:'15%'}}>
             <InfoBox handleProfile={handleProfile}/>
         </Grid>
         <hr style={{width:'100%', backgroundColor:'black', height:'1px', border:0}}/>
           
-        <Grid item xs={0} sm={12} style={{width:'100%', alignItems:'left',
+        <Grid item xs={false} sm={12} style={{width:'100%', alignItems:'left',
          height: '100%', backgroundColor:'#B4B4B4', padding:'5px', borderRadius:5}}>
         <ListItemButton onClick={handleClick}>
             <ListItemIcon>

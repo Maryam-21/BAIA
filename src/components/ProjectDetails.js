@@ -4,7 +4,7 @@ import Btn from './Btn'
 
 const ProjectDetails = () => {
   return (
-    <Grid direction="column" xs={12} sm={7} style={{ alignContent: "center", height: "100%" }}>
+    <Grid item xs={12} sm={7} style={{ alignContent: "center", height: "100%" }}>
       <Grid
         style={{ padding: "1% 3% 0% 0%", marginLeft: "15%", marginTop: "5%" }}
       >
@@ -12,7 +12,7 @@ const ProjectDetails = () => {
         <hr style={{ width: "126%" }} />
       </Grid>
 
-      <Card class="card">
+      <Card className="card">
            <label> Title </label>
         <Btn variant="contained" color="primary" text="Delete" size="large" width="30%" />
       </Card>

@@ -11,10 +11,10 @@ const InfoBox = ({handleProfile}) => {
   return (
     <Box sx={{bgcolor: "primary.main", display: "flex", p: "5px 5px 5px 5px", borderRadius: 5}}>
         <div>
-        <Button onClick={handleProfile}> <img class="i" src={image} alt="Avatar" /> </Button>
-        <div class='content'>
-          <p class="user"> {user?user.name:"loading"} </p>
-          <p class="userCompany"> {user?user.companyName:'loading'} </p>
+        <Button onClick={handleProfile}> <img className="i" src={image} alt="Avatar" /> </Button>
+        <div className='content'>
+          <p className="user"> {user?user.name:"loading"} </p>
+          <p className="userCompany"> {user?user.companyName:'loading'} </p>
         </div>
       </div>
     </Box>

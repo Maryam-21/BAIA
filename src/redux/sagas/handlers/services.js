@@ -8,7 +8,6 @@ export function* handleGetServices(action) {
     if (response.ok){
       const data  = yield response.json();
       yield put(setServices({ ...data }));
-      console.log(data)
     }
   } catch (error) {
     console.log(error);

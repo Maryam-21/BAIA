@@ -50,7 +50,7 @@ const handleProjectdetails = () => {
         
           {/* Navigation Panel */}
      <Grid container spacing={1} style={{height:'100%'}}>
-          <Grid item xs={0} sm={3} class ="Grid1">
+          <Grid item xs={false} sm={3} className ="Grid1">
             <NavigationPanel
               handleMeetingClick={handleMeetingClick}
               handleOpenUS={handleOpenUS}

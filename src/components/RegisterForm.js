@@ -159,20 +159,20 @@ export const RegisterForm = ({Transition, handleClose, open}) => {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
-        fullWidth='sm'
+        fullWidth={true}
         maxWidth='sm'
     >
         <DialogTitle>{"Sign Up"}</DialogTitle>
         <DialogContent>
-            <TextBox text="Name" required="true" type="text" onchange={setName} 
+            <TextBox text="Name" required={true} type="text" onchange={setName} 
             errormsg={name_error}/>
-            <TextBox text="Email" required="true" type="email" onchange={setEmail} 
+            <TextBox text="Email" required={true} type="email" onchange={setEmail} 
             errormsg={email_error}/>
-            <TextBox text="Password" required="true" type="password" onchange={setPassword} 
+            <TextBox text="Password" required={true} type="password" onchange={setPassword} 
             errormsg={password_error}/>
-            <TextBox text="Company Name" required="true" type="text" onchange={setCompanyName} 
+            <TextBox text="Company Name" required={true} type="text" onchange={setCompanyName} 
             errormsg={companyName_error}/>
-            <TextBox text="Phone Number" required="true" type="number" onchange={setPhoneNumber} 
+            <TextBox text="Phone Number" required={true} type="number" onchange={setPhoneNumber} 
             errormsg={phoneNumber_error}/>
         </DialogContent>
         <DialogActions>
