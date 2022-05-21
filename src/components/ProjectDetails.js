@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button, Card } from "@material-ui/core";
+import { Grid, Card } from "@material-ui/core";
 import Btn from './Btn'
 
 const ProjectDetails = () => {
