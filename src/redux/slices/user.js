@@ -20,11 +20,15 @@ export const userSlice = createSlice({
         const success = action.payload;
         return { ...state, 
         success:success };
+    },
+    getSuccess: (state)=>{
+      console.log(state.success)
+      return state.success
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { getUser, setUser, setSuccess, updateUser } = userSlice.actions
+export const { getUser, setUser, setSuccess, updateUser, getSuccess } = userSlice.actions
 
 export default userSlice.reducer

@@ -12,6 +12,7 @@ function App() {
       <Route path="/">
         <Route index path='/' element={<LoginPage />} />
         <Route path="/HomePage/:name" element={<DataComponent />} />
+        <Route path="/Login" element={<LoginPage />} />
       </Route>
     </Routes>
   </BrowserRouter>

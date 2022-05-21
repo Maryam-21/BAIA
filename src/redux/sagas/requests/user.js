@@ -14,15 +14,18 @@ export function requestGetUser(action){
 }
 
 export function requestUpdateUser(action){
-    const id = action.payload.id
-    const response = fetch("https://localhost:44304/api/Users/"+id, {
+    console.log("update user")
+    console.log(action)
+    const id = action.payload.userID
+    console.log(id)
+    const response = fetch("https://localhost:44304/api/Users/UpdateUser/"+id, {
         method: 'PUT',
         mode: 'cors',
         headers:{
             'Accept': 'application/json',
             'Content-Type' : 'application/json; charset=UTF-8',
         },
-        body:JSON.stringify(action.payload.user)
+        body:JSON.stringify(action.payload)
         
     });
     return response

@@ -6,14 +6,14 @@ import { getServices } from '../redux/slices/services'
 
 import HomePage from './HomePage';
 export default function () {
-const { user } = useSelector((state)=>state.user)
+const { user, success } = useSelector((state)=>state.user)
     
 const dispatch = useDispatch()
 
     useEffect(() => {
       if(user)  
         dispatch(getProjectsTitles(user.userID))
-      },[dispatch,user]);
+      },[dispatch, success]);
 
     return (
     <HomePage />
