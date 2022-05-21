@@ -1,6 +1,4 @@
-import React, {useState} from 'react'
-//import { EditText, EditTextarea } from 'react-edit-text';
-
+import React from 'react'
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -11,14 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-const AddNewProjectPopUp = (open =1 ) => {
-
-    const [openAddProj, setOpenAddProj] = useState(false);
-
-      const handleClickClose = () => {
-        setOpenAddProj(false);
-      };
-
+const AddNewProjectPopUp = ({open, handleClickClose}) => {
       const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
           padding: theme.spacing(2),
@@ -61,9 +52,9 @@ const AddNewProjectPopUp = (open =1 ) => {
   return (
     <div>
             <BootstrapDialog
+            open={open}
         onClose={handleClickClose}
         aria-labelledby="customized-dialog-title"
-        openAddProj={openAddProj}
       >
         <BootstrapDialogTitle onClose={handleClickClose}>
           Add New Project

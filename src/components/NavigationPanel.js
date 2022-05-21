@@ -25,10 +25,12 @@ const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handl
     };
 
     const handleClickOpen = () => {
-      console.log("opeennn")
       setOpenAddProj(true);
     };
-
+    const handleClickClose = () => {
+      setOpenAddProj(false);
+    };
+    
   return (
       <Grid container spacing={1} style={{width:'100%', display:'block', padding: '1.7% 5%', minHeight:'100%'}}>
         <Grid item xs={false} sm={12} style={{height:'15%'}}>
@@ -51,17 +53,17 @@ const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handl
         <Collapse in={open} timeout="auto" unmountOnExit style={{padding: '0% 0% 0% 4%'}}>
           {projectsTitles? projectsTitles['$values'].map(project => (
               <NestedList project = {project?project:"loading"} meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"} handleMeetingClick={handleMeetingClick}
-              handleOpenUS={handleOpenUS} handleProjectdetails={handleProjectdetails} handleClickOpen={handleClickOpen}/>
+              handleOpenUS={handleOpenUS} handleProjectdetails={handleProjectdetails} handleClickOpen={handleClick}/>
           )):'loading'}
 
          </Collapse>
-         <ListItemButton>
+         <ListItemButton onClick={handleClickOpen}>
             <ListItemIcon>
             <AddIcon/>
             </ListItemIcon>
-            <ListItemText primary = "Add Project" onClick={handleClickOpen}/>
-              <AddNewProjectPopUp open = {openAddProj}/>
+            <ListItemText primary = "Add Project" />
         </ListItemButton>
+        <AddNewProjectPopUp open = {openAddProj} handleClickClose={handleClickClose}/>
         </Grid>
        </Grid>
      )
