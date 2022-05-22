@@ -8,6 +8,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import {TextField} from "@material-ui/core";
+import { height } from '@mui/system';
 
 const AddNewProjectPopUp = ({open, handleClickClose}) => {
       const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -53,15 +55,23 @@ const AddNewProjectPopUp = ({open, handleClickClose}) => {
     <div>
             <BootstrapDialog
             open={open}
-        onClose={handleClickClose}
-        aria-labelledby="customized-dialog-title"
+            onClose={handleClickClose}
+            aria-labelledby="customized-dialog-title"
       >
-        <BootstrapDialogTitle onClose={handleClickClose}>
+        <BootstrapDialogTitle onClose={handleClickClose} class='label'>
           Add New Project
+          <hr/>
         </BootstrapDialogTitle>
         <DialogContent>
-
-          
+        <div style={{display:'inline-block'}}>
+        <TextField label="Title" variant="filled" style={{margin:'0% 5% 5% 2%'}}/><br/>
+        <TextField label="Company" variant="filled" style={{margin:'0% 5% 5% 2%'}}/><br/>
+        <TextField label="Domain" variant="filled" style={{margin:'0% 5% 5% 2%'}}/><br/>
+        <TextField label="Actors" variant="filled" style={{margin:'0% 5% 5% 2%'}}/>
+        </div>
+        <div style={{display:'inline-block'}}>
+        <TextField multiline rows={4} label="Description" variant="filled" style={{margin:'0% 5% 5% 2%'}}/>
+        </div>
 
         </DialogContent>
         <DialogActions>
