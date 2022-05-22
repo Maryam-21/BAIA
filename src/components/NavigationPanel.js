@@ -1,9 +1,6 @@
-import { Grid } from '@material-ui/core'
+  import { Grid } from '@material-ui/core'
 import React , {useState} from 'react'
 import { useSelector } from 'react-redux';
-import InfoBox from './InfoBox'
-import Logo from './Logo'
-import NestedList from './NestedList'
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -13,6 +10,9 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import AddNewProjectPopUp from './AddNewProjectPopUp';
+import InfoBox from './InfoBox'
+import Logo from './Logo'
+import NestedList from './NestedList'
 
 
 const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handleProjectdetails}) => {
@@ -43,6 +43,7 @@ const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handl
           
         <Grid item xs={false} sm={12} style={{width:'100%', alignItems:'left',
          height: '100%', backgroundColor:'#B4B4B4', padding:'5px', borderRadius:5}}>
+
         <ListItemButton onClick={handleClick}>
             <ListItemIcon>
             <TaskIcon />
@@ -50,13 +51,14 @@ const NavigationPanel = ({ handleMeetingClick, handleOpenUS, handleProfile,handl
             <ListItemText primary = "Projects" />
                 {open? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
+
         <Collapse in={open} timeout="auto" unmountOnExit style={{padding: '0% 0% 0% 4%'}}>
           {projectsTitles? projectsTitles['$values'].map(project => (
               <NestedList project = {project?project:"loading"} meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"} handleMeetingClick={handleMeetingClick}
               handleOpenUS={handleOpenUS} handleProjectdetails={handleProjectdetails} handleClickOpen={handleClick}/>
           )):'loading'}
-
          </Collapse>
+
          <ListItemButton onClick={handleClickOpen}>
             <ListItemIcon>
             <AddIcon/>

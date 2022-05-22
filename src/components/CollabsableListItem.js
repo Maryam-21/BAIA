@@ -11,30 +11,38 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import { getFullProjects } from '../redux/slices/projects'
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import ProjectDetails from "./ProjectDetails";
+import { ListItem } from "@material-ui/core";
 
 function CollabsableListItem({
   title, //project name
-  list=["meeting 1"],
   handleMeetingClick,
   handleOpenUS,
   handleProjectdetails,
 }) 
 {
   const dispatch = useDispatch()
-  const [open, setOpen] = React.useState(false);
-  const [openn, setOpenn] = React.useState(false);
+  const [openProject, setOpenProject] = React.useState(false);
+  const [openMeeting, setOpenMeeting] = React.useState(false);
+  const {fullProjects} = useSelector((state)=>state.projects)
+
 
   //drop down when project name is clicked
   const handleClick = () => {
     //getfullproject
     dispatch(getFullProjects(title));
-    setOpen(!open);
+    setOpenProject(!openProject);
   };
   //drop down when meeting name is clicked
   const handleClickk = () => {
-    //list.map(item => console.log(item))
-    setOpenn(!openn);
+    setOpenMeeting(!openMeeting);
   };
+  const reverseArray = (array) =>{
+    let arr = [...array]
+    return arr.reverse()
+  };
+
   return (
     <div>
       <ListItemButton onClick={function(event){handleClick(); handleProjectdetails()}}>
@@ -42,30 +50,32 @@ function CollabsableListItem({
           <TaskIcon />
         </ListItemIcon>
         <ListItemText primary={title} /> {/* Project Name*/}
-        {open ? <ExpandLess /> : <ExpandMore />} {/*up & down arrow*/}
+        {openProject ? <ExpandLess /> : <ExpandMore />} {/*up & down arrow*/}
       </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+
+      <Collapse in={openProject} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-
-
-
           <ListItemButton  sx={{ pl: 4 }} onClick={handleProjectdetails}>
             <ListItemIcon>
               <MeetingRoomIcon />
             </ListItemIcon>
             <ListItemText primary={"Project Details"} />
           </ListItemButton>
-          
+         
+          {
+            fullProjects?reverseArray(fullProjects['meetings']['$values']).map(meeting=>(
             <ListItemButton sx={{ pl: 4 }} onClick={handleClickk}>
-              <ListItemIcon>
-                <MeetingRoomIcon />
-              </ListItemIcon>
-              <ListItemText primary={"First Meeting"} />
-              {openn ? <ExpandLess /> : <ExpandMore />}
+            <ListItemIcon>
+              <MeetingRoomIcon />
+            </ListItemIcon>
+            <ListItemText primary={meeting['meetingTitle']} />
+              {openMeeting ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-          
+            )):"loading"
+          }
+
         </List>
-        <Collapse in={openn} timeout="auto" unmountOnExit>
+        <Collapse in={openMeeting} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 6 }} onClick={handleMeetingClick}>
               {" "}
