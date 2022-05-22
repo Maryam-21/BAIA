@@ -6,8 +6,6 @@ import { Box, Grid} from "@material-ui/core";
 import MyProfile from './MyProfile';
 import ProjectDetails from './ProjectDetails';
 
-
-
 const HomePage = () => {
   const [openMeeting, setOpenMeeting] = useState(false);
   const [openUS, setOpenUS] = useState(false);
