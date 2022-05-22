@@ -13,7 +13,6 @@ export default function NestedList({project,meetings,handleMeetingClick,handleOp
     >
       <CollabsableListItem id ={project} title = {project} list = {meetings?meetings:'loading'}
        handleMeetingClick={handleMeetingClick} handleOpenUS={handleOpenUS} handleProjectdetails={handleProjectdetails} >
-
          </CollabsableListItem>                     
      
     </List>
