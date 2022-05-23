@@ -12,8 +12,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { getFullProjects } from '../redux/slices/projects'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import ProjectDetails from "./ProjectDetails";
-import { ListItem } from "@material-ui/core";
+import AddNewMeetingPopUp from './AddNewMeetingPopUp';
 
 function CollabsableListItem({
   title, //project name
@@ -25,6 +24,7 @@ function CollabsableListItem({
   const dispatch = useDispatch()
   const [openProject, setOpenProject] = React.useState(false);
   const [openMeeting, setOpenMeeting] = React.useState(false);
+  const [openAddMeeting, setOpenAddMeeting] = React.useState(false);
   const {fullProjects} = useSelector((state)=>state.projects)
 
 
@@ -37,6 +37,13 @@ function CollabsableListItem({
   //drop down when meeting name is clicked
   const handleClickk = () => {
     setOpenMeeting(!openMeeting);
+  };
+  
+  const handleClickOpen = () => {
+    setOpenAddMeeting(true);
+  };
+  const handleClickClose = () => {
+    setOpenAddMeeting(false);
   };
   const reverseArray = (array) =>{
     let arr = [...array]
@@ -97,12 +104,13 @@ function CollabsableListItem({
             </ListItemButton>
           </List>
         </Collapse>
-        <ListItemButton sx={{ pl: 4 }}>
+        <ListItemButton sx={{ pl: 4 }} onClick={handleClickOpen}>
           <ListItemIcon>
             <AddIcon />
           </ListItemIcon>
           <ListItemText primary="Add Meeting" />
         </ListItemButton>
+        <AddNewMeetingPopUp open = {openAddMeeting} handleClickClose={handleClickClose} />
       </Collapse>
     </div>
   );

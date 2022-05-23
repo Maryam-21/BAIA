@@ -44,7 +44,7 @@ const handleProjectdetails = () => {
   
 
   return (
-    <Box position="absolute" sx={{top:0, bottom:0, left:0, right:0, alignItems:'center'}}>
+    <Box position="absolute" sx={{top:1, bottom:145, left:0, right:180, alignItems:'center'}}>
         
           {/* Navigation Panel */}
      <Grid container spacing={1} style={{height:'100%'}}>

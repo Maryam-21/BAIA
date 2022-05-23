@@ -11,7 +11,7 @@ import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 
-const AddNewProjectPopUp = ({ open, handleClickClose }) => {
+const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
   const ListItem = styled("li")(({ theme }) => ({
     margin: theme.spacing(0.5),
   }));
@@ -24,11 +24,6 @@ const AddNewProjectPopUp = ({ open, handleClickClose }) => {
     setChipData((chips) =>
       chips.filter((chip) => chip.key !== chipToDelete.key)
     );
-  };
-  
-  const handleAddActor = () => {
-    chipData.push( { key: 3, label: "Angular" })
-
   };
 
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -73,7 +68,7 @@ const AddNewProjectPopUp = ({ open, handleClickClose }) => {
     <div>
       <BootstrapDialog open={open} onClose={handleClickClose}>
         <BootstrapDialogTitle onClose={handleClickClose} class="label">
-          Add New Project
+          Add New Meeting
           <hr style={{ width: "96%" }} />
         </BootstrapDialogTitle>
         <DialogContent>
@@ -88,26 +83,28 @@ const AddNewProjectPopUp = ({ open, handleClickClose }) => {
               </Grid>
               <Grid item xs={false} sm={12}>
                 <TextField
-                  label="Company"
+                  label="Date"
                   variant="filled"
                   style={{ width: "96%" }}
                 />
               </Grid>
               <Grid item xs={false} sm={12}>
                 <TextField
-                  label="Domain"
+                  label="Recording"
                   variant="filled"
                   style={{ width: "96%" }}
                 />
               </Grid>
-              <Grid item xs={false} sm={12}>
+            </Grid>
+            <Grid container xs={false} sm={6}>
+            <Grid item xs={false} sm={12}>
                 <FormGroup row>
                   <TextField
                     label="Actors"
                     variant="filled"
                     style={{ width: "85%"}}
                   />
-                <button type="button" class="buttonAdd" onClick={handleAddActor}> + </button>
+                <button type="button" class="buttonAdd"> + </button>
                 </FormGroup>
                 <Paper
                   sx={{
@@ -139,17 +136,6 @@ const AddNewProjectPopUp = ({ open, handleClickClose }) => {
                 </Paper>
               </Grid>
             </Grid>
-            <Grid container xs={false} sm={6}>
-              <Grid item xs={false} sm={12}>
-                <TextField
-                  multiline
-                  rows={11}
-                  label="Description"
-                  variant="filled"
-                  style={{ width: "101%" }}
-                />
-              </Grid>
-            </Grid>
           </Grid>
         </DialogContent>
         <DialogActions>
@@ -166,4 +152,4 @@ const AddNewProjectPopUp = ({ open, handleClickClose }) => {
   );
 };
 
-export default AddNewProjectPopUp;
+export default AddNewMeetingPopUp;
