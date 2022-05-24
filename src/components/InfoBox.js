@@ -1,5 +1,4 @@
-import { Box, Typography } from '@material-ui/core'
-import { padding, spacing } from '@mui/system'
+import { Box } from '@material-ui/core'
 import image from "../../src/img_avatar.png";
 import React from 'react'
 import { useSelector } from 'react-redux';

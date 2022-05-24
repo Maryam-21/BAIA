@@ -69,7 +69,7 @@ const MyProfile = () => {
              onChange={(e)=>{setPhoneNumber(e.target.value)}}/> <br/><br/>
 
              <LockIcon className="icons" style={{ padding: "0% 2.5% 1.2% 0%" }}/>
-             <TextField id="5" label="Password" defaultValue={password}variant="standard" type="password" style ={{width: "93%"}}
+             <TextField id="5" label="Password" defaultValue={password} variant="standard" type="password" style ={{width: "93%"}}
              onChange={(e)=>{setPassword(e.target.value)}}/> <br/><br/><br/>
 
              <Btn text="Save Changes" variant="contained" color2="#00A800" size="large" width="30%"
