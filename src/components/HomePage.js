@@ -7,15 +7,15 @@ import MyProfile from './MyProfile';
 import ProjectDetails from './ProjectDetails';
 
 const HomePage = () => {
-  const [openMeeting, setOpenMeeting] = useState(false);
+  const [openServices, setOpenServices] = useState(false);
   const [openUS, setOpenUS] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [openProjectDetails, setProjectDetails] = useState(false);
   const { fullProjects } = useSelector((state)=>state.projects);
 
   //onClick functions for buttons in CollapsableListItem
-const handleMeetingClick = () => {
-  setOpenMeeting(!openMeeting);
+const handleServicesClick = () => {
+  setOpenServices(!openServices);
   setOpenUS(false);
   setOpenProfile(false);
   setProjectDetails(false);
@@ -23,22 +23,22 @@ const handleMeetingClick = () => {
 
 const handleOpenUS = () => {
   setOpenUS(!openUS);
-  setOpenMeeting(false);
+  setOpenServices(false);
   setOpenProfile(false);
   setProjectDetails(false);
 };
 
 const handleProfile = () => {
   setOpenProfile(!openProfile);
-  setOpenMeeting(false);
+  setOpenServices(false);
   setOpenUS(false);
   setProjectDetails(false);
 };
 
-const handleProjectdetails = () => {
-  setProjectDetails(!openProjectDetails);
+const handleProjectdetails = (value = !openProjectDetails ) => {
+  setProjectDetails(value);
   setOpenProfile(false);
-  setOpenMeeting(false);
+  setOpenServices(false);
   setOpenUS(false);
 };
   
@@ -50,7 +50,7 @@ const handleProjectdetails = () => {
      <Grid container spacing={1} style={{height:'100%'}}>
           <Grid item xs={false} sm={3} className ="Grid1">
             <NavigationPanel
-              handleMeetingClick={handleMeetingClick}
+              handleServicesClick={handleServicesClick}
               handleOpenUS={handleOpenUS}
               handleProfile={handleProfile}
               handleProjectdetails={handleProjectdetails}
@@ -63,7 +63,7 @@ const handleProjectdetails = () => {
 
               <Grid item xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
                 <SpecificProject meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"}
-                openMeeting={openMeeting}
+                openMeeting={openServices}
                 openUS={openUS}
                 openProfile={openProfile}
                 openProjectDetails={openProjectDetails}
