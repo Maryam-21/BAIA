@@ -20,4 +20,21 @@ export function requestGetFullProjects(projectTitle){
             },
         })
 }
+
+export function requestUpdateProject(action){
+    const id = action.payload.projectID
+    console.log(id)
+
+    const response = fetch("https://localhost:44304/api/Projects/UpdateProject/"+id, {
+        method: 'PUT',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify(action.payload)
+        
+    });
+    return response
+}
    

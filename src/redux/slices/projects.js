@@ -11,6 +11,7 @@ export const projectsSlice = createSlice({
   reducers: {
     getProjectsTitles: (user) => {},
     getFullProjects: (projectTitle) => {},
+    updateProject: (action)=>{},
     setProjectsTitles(state, action) {
         const projectsTitlesData = action.payload;
         return { ...state, 
@@ -19,11 +20,21 @@ export const projectsSlice = createSlice({
     setFullProjects(state,action){
         const fullProjectsData = action.payload;
         return { ...state, fullProjects:{...fullProjectsData} };
-    }
+    },
+    setUpdatedProject(state,action){
+      const fullProjectData = {...state.fullProjects, 
+        projectTitle:action.payload.projectTitle,
+        projectDescription:action.payload.projectDescription,
+        domain:action.payload.domain,
+        organizationName:action.payload.organizationName,
+        systemActors:action.payload.systemActors
+      }
+      return { ...state, fullProjects:{...fullProjectData} };
+  }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { getProjectsTitles, setProjectsTitles, getFullProjects, setFullProjects } = projectsSlice.actions
+export const { getProjectsTitles, setProjectsTitles, getFullProjects, setFullProjects, updateProject,setUpdatedProject } = projectsSlice.actions
 
 export default projectsSlice.reducer
