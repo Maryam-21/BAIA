@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -11,13 +13,52 @@ import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
 import Snackbar from "@mui/material/Snackbar";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
+import { addProject, getProjectsTitles } from '../redux/slices/projects';
+
 
 export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
+  const { user } = useSelector((state) => state.user)
+
   const [openSB, setOpenSB] = useState(false);
-  const [actor, setActor] = useState('');
+  const [title, setTitle] = useState("")
+  const [company, setCompany] = useState("")
+  const [domain, setDomain] = useState("")
+  const [projectDescription, setProjectDescription] = useState("")
+  const [actor, setActor] = useState("");
   const [chipData, setChipData] = useState([]);
 
-  const handleClickSnackbar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+
+  const onSave = () => {
+    let actrs = ""
+    chipData.map(actr => (
+      actrs = actrs + actr['label'] + ', '
+    ));
+    const payload = {
+      'project': {
+        'projectTitle': title,
+        'projectDescription': projectDescription,
+        'domain': domain,
+        'organizationName': company,
+        'systemActors': actrs
+      },
+      'userID': user.userID
+    }
+    dispatch(addProject(payload))
+    dispatch(getProjectsTitles(user.userID))
+    handleClickClose();
+    handlepenSnackbar();
+  }
+
+  const handlepenSnackbar = () => {
+    setTitle((""));
+    setActor((""));
+    setCompany((""));
+    setDomain((""));
+    setProjectDescription((""));
+    setChipData(([]));
     setOpenSB(true);
   };
 
@@ -34,10 +75,10 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
       chips.filter((chip) => chip.key !== chipToDelete.key)
     );
   };
-  
+
   const handleAddActor = () => {
     let arr = [...chipData];
-    arr.push( { key: chipData.length+1, label: actor })
+    arr.push({ key: chipData.length + 1, label: actor })
     setChipData(arr);
   };
 
@@ -45,10 +86,10 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
   const handleActorChange = (val) => {
     setActor(val);
   };
-  
+
   const ListItem = styled("li")(({ theme }) => ({ margin: theme.spacing(0.5) }));
 
- const action = (
+  const action = (
     <Fragment>
       <IconButton
         size="small"
@@ -77,21 +118,27 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
                 <TextField
                   label="Title"
                   variant="filled"
+                  value={title}
                   style={{ width: "96%" }}
+                  onChange={(e) => { setTitle(e.target.value) }}
                 />
               </Grid>
               <Grid item xs={false} sm={12}>
                 <TextField
                   label="Company"
                   variant="filled"
+                  value={company}
                   style={{ width: "96%" }}
+                  onChange={(e) => { setCompany(e.target.value) }}
                 />
               </Grid>
               <Grid item xs={false} sm={12}>
                 <TextField
                   label="Domain"
                   variant="filled"
+                  value={domain}
                   style={{ width: "96%" }}
+                  onChange={(e) => { setDomain(e.target.value) }}
                 />
               </Grid>
               <Grid item xs={false} sm={12}>
@@ -100,9 +147,11 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
                     id="1"
                     label="Actors"
                     variant="filled"
-                    onChange={(e)=>{handleActorChange(e.target.value)}}
-                    style={{ width: "85%"}} />
-                <button type="button" className="buttonAdd" onClick={handleAddActor}> + </button>
+                    value={actor}
+                    onChange={(e) => { handleActorChange(e.target.value) }}
+                    style={{ width: "85%" }}
+                  />
+                  <button type="button" className="buttonAdd" onClick={handleAddActor}> + </button>
                 </FormGroup>
                 <Paper
                   sx={{
@@ -117,19 +166,19 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
                   component="ul"
                 >
                   {
-                  chipData.map((data) => {                   
-                    let icon;
+                    chipData.map((data) => {
+                      let icon;
 
-                    return (
-                      <ListItem key={data.key}>
-                        <Chip
-                          icon={icon}
-                          label={data.label}
-                          onDelete={handleDelete(data)}
-                        />
-                      </ListItem>
-                    );
-                  })}
+                      return (
+                        <ListItem key={data.key}>
+                          <Chip
+                            icon={icon}
+                            label={data.label}
+                            onDelete={handleDelete(data)}
+                          />
+                        </ListItem>
+                      );
+                    })}
                 </Paper>
               </Grid>
             </Grid>
@@ -140,7 +189,9 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
                   rows={11}
                   label="Description"
                   variant="filled"
+                  value={projectDescription}
                   style={{ width: "101%" }}
+                  onChange={(e) => { setProjectDescription(e.target.value) }}
                 />
               </Grid>
             </Grid>
@@ -150,9 +201,8 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
         <DialogActions>
           <Button
             autoFocus
-            onClick={handleClickClose}
+            onClick={onSave}
             style={{ color: "#3f51b5" }} >
-
             Save
           </Button>
         </DialogActions>
@@ -162,7 +212,7 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
         open={openSB}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
-        message="Successfully Registered!"
+        message="Project Added Successfully!"
         action={action}
       />
     </div>

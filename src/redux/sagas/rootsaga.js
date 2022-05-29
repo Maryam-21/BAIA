@@ -1,8 +1,8 @@
 import { takeLatest } from "redux-saga/effects";
-import { handleGetProjectsTitles, handleGetFullProjects, handleUpdateProject } from "./handlers/projects";
+import { handleGetProjectsTitles, handleGetFullProjects, handleUpdateProject, handleAddProject } from "./handlers/projects";
 import { handleGetServices } from "./handlers/services";
 import { handleGetUser, handleUpdateUser } from "./handlers/user";
-import { getProjectsTitles, getFullProjects, updateProject } from "../slices/projects";
+import { getProjectsTitles, getFullProjects, updateProject, addProject } from "../slices/projects";
 import { getServices } from "../slices/services";
 import { getUser,updateUser } from "../slices/user";
 
@@ -14,5 +14,6 @@ export function* watcherSaga() {
   yield takeLatest(getUser.type, handleGetUser);
   yield takeLatest(updateProject.type,handleUpdateProject);
   yield takeLatest(updateUser.type, handleUpdateUser);
+  yield takeLatest(addProject.type, handleAddProject);
 
 }
