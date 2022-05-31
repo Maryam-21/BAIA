@@ -61,11 +61,7 @@ const LoginForm = () => {
             "Password":Password
         }
         dispatch(getUser(cred))
-
-
     }
-
-
 
   return (
         <Box sx={{bgcolor:'text.disabled', display:"flex", width:"70%",height:'100%',p:'20px', borderRadius:5,

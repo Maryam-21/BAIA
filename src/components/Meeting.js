@@ -4,7 +4,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import GroupsIcon from '@mui/icons-material/Groups';
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
@@ -18,7 +20,7 @@ export const Meeting = ({ meeting, handleServicesClick }) => {
     <div>
       <ListItemButton sx={{ pl: 4 }} onClick={handleClickMeeting}>
         <ListItemIcon>
-          <MeetingRoomIcon />
+          <FolderOutlinedIcon />
         </ListItemIcon>
         <ListItemText primary={meeting['meetingTitle']} />
         {openMeeting ? <ExpandLess /> : <ExpandMore />}
@@ -29,7 +31,7 @@ export const Meeting = ({ meeting, handleServicesClick }) => {
           <ListItemButton sx={{ pl: 6 }} onClick={handleServicesClick}>
             {/* to show services on the right when services is clicked */}
             <ListItemIcon>
-              <MeetingRoomIcon />
+              <InsertDriveFileOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary={"Services"} onClick={handleServicesClick}/>
             <br></br>

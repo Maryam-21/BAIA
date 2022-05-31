@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
-import TaskIcon from '@mui/icons-material/Task';
+import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
+import Collapse from '@mui/material/Collapse';
+import ListItemText from '@mui/material/ListItemText';
 import AddNewProjectPopUp from './AddNewProjectPopUp';
 import InfoBox from './InfoBox'
 import Logo from './Logo'
@@ -49,7 +49,7 @@ const NavigationPanel = ({ handleServicesClick, handleOpenUS, handleProfile, han
 
         <ListItemButton onClick={handleClickProject}>
           <ListItemIcon>
-            <TaskIcon />
+            <FolderOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Projects" />
           {openProject ? <ExpandLess /> : <ExpandMore />}

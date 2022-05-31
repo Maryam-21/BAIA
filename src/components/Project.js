@@ -3,16 +3,16 @@ import { getFullProjects } from '../redux/slices/projects'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import List from "@mui/material/List";
-import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import TaskIcon from '@mui/icons-material/Task';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
-import { Meeting } from './Meeting';
+import {Meeting} from './Meeting';
 import AddNewMeetingPopup from './AddNewMeetingPopUp'
 
 export const Project = ({ title, handleProjectdetails, handleServicesClick, handleOpenUS }) => {
@@ -48,7 +48,7 @@ export const Project = ({ title, handleProjectdetails, handleServicesClick, hand
     <div>
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
-          <TaskIcon />
+          <FolderOutlinedIcon />
         </ListItemIcon>
         <ListItemText primary={title} />
         {openProject ? <ExpandLess /> : <ExpandMore />}
@@ -58,14 +58,14 @@ export const Project = ({ title, handleProjectdetails, handleServicesClick, hand
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 4 }} onClick={handleProjectdetails}>
             <ListItemIcon>
-              <MeetingRoomIcon />
+              <InsertDriveFileOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary={"Project Details"} />
           </ListItemButton>
           {/*Meetings should be rendered here*/}
           <ListItemButton sx={{ pl: 4 }} onClick={handleOpenMeetings}>
             <ListItemIcon>
-              <TaskIcon />
+              <FolderOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Meetings" />
             {openMeetings ? <ExpandLess /> : <ExpandMore />}
@@ -81,14 +81,14 @@ export const Project = ({ title, handleProjectdetails, handleServicesClick, hand
 
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
-              <TaskIcon />
+              <InsertDriveFileOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="As - Is Document" />
           </ListItemButton>
 
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
-              <TaskIcon />
+              <InsertDriveFileOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="User Stories" onClick={handleOpenUS}/>
           </ListItemButton>
