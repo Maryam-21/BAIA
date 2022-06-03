@@ -1,3 +1,17 @@
+export function requestAddMeeting(action){
+    const response = fetch("https://localhost:44304/api/Meetings/PostMeeting", {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify(action)
+        
+    });
+    return response
+}
+
 export function requestAddProject(action){
     const response = fetch("https://localhost:44304/api/Projects/PostProject", {
         method: 'POST',

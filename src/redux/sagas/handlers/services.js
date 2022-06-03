@@ -4,9 +4,10 @@ import { requestGetServices } from "../requests/services";
 
 export function* handleGetServices(action) {
   try {
-    const response = yield call(requestGetServices);
+    const response = yield call(requestGetServices, action.payload);
     if (response.ok){
       const data  = yield response.json();
+      console.log(data);
       yield put(setServices({ ...data }));
     }
   } catch (error) {

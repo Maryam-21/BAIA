@@ -13,7 +13,7 @@ const HomePage = () => {
   const [openProjectDetails, setProjectDetails] = useState(false);
   const { fullProjects } = useSelector((state)=>state.projects);
 
-  //onClick functions for buttons in CollapsableListItem
+  //onClick functions  for buttons in CollapsableListItem
 const handleServicesClick = () => {
   setOpenServices(!openServices);
   setOpenUS(false);

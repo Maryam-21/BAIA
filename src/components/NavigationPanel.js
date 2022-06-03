@@ -13,7 +13,7 @@ import AddNewProjectPopUp from './AddNewProjectPopUp';
 import InfoBox from './InfoBox'
 import Logo from './Logo'
 import { Project } from './Project';
-
+ 
 
 const NavigationPanel = ({ handleServicesClick, handleOpenUS, handleProfile, handleProjectdetails }) => {
   const [openProject, setOpenProject] = useState(false);

@@ -14,7 +14,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import {Meeting} from './Meeting';
 import AddNewMeetingPopup from './AddNewMeetingPopUp'
-
+ 
 export const Project = ({ title, handleProjectdetails, handleServicesClick, handleOpenUS }) => {
   const [openProject, setOpenProject] = useState(false);
   const [openMeetings, setOpenMeetings] = useState(false);

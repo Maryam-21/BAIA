@@ -1,5 +1,5 @@
-export function requestGetServices(){
-    const response = fetch("http://127.0.0.1:5000/services", {
+export function requestGetServices(id){
+    const response = fetch("https://localhost:44304/api/Services/GetAllServices/"+ id, {
         method: 'Get',
         mode: 'cors',
         headers:{

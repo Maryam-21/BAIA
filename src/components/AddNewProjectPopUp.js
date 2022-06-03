@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -13,7 +12,7 @@ import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
 import Snackbar from "@mui/material/Snackbar";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
-import { addProject, getProjectsTitles } from '../redux/slices/projects';
+import { addProject } from '../redux/slices/projects';
 
 
 export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
@@ -28,7 +27,6 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
   const [chipData, setChipData] = useState([]);
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
 
   const onSave = () => {
@@ -47,7 +45,6 @@ export const AddNewProjectPopUp = ({ open, handleClickClose }) => {
       'userID': user.userID
     }
     dispatch(addProject(payload))
-    dispatch(getProjectsTitles(user.userID))
     handleClickClose();
     handlepenSnackbar();
   }

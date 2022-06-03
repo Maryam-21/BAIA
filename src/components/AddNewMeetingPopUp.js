@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -12,18 +13,26 @@ import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
 import Snackbar from "@mui/material/Snackbar";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
+import { addMeeting } from '../redux/slices/projects';
+
 
 export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
   const [openSB, setOpenSB] = useState(false);
-  const [actor, setActor] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [participant, setParticipant] = useState('');
   const [chipData, setChipData] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedAudio, setUploadedAudio] = useState("Nothing selected yet...");
 
+  const { fullProjects } = useSelector((state) => state.projects)
+  const dispatch = useDispatch()
 
   const addFile = (e) => {
-    const s = URL.createObjectURL(e.target.files[0])
-    setSelectedFile(s)
+    //const s = URL.createObjectURL(e.target.files[0])
+    //setSelectedFile(s)
+    const path = "C://Audios//"+ e.target.files[0].name;
+    setSelectedFile(path);
     setUploadedAudio(e.target.files[0].name)
     /*if (selectedFile) {
       var a = new Audio(selectedFile);
@@ -31,12 +40,37 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
     }*/
   }
 
-  // On file upload (click the upload button) 
-  const onFileUpload = () => {
-    // Details of the uploaded file 
-    //console.log(selectedFile); 
-  };
+  const onSave = ()=> {
+    //payload
+    let participants = ""
+    chipData.map(part => (
+      participants = participant + part['label'] + ', '
+    ));
+    const payload = {
+      "addMeeting": {
+        "Meeting": {
+          "meetingTitle": title,
+          "meetingDescription": description,
+          "AudioReference": selectedFile,
+          "MeetingPersonnel": participants
+        },
+        "ProjectID": fullProjects["projectID"]
+      },
+      "projectTitle": fullProjects["projectTitle"]
+    };
+    console.log(payload)
+    dispatch(addMeeting(payload))
+    handleClickSnackbar();
+    handleClickClose(); 
+  }
+
   const handleClickSnackbar = () => {
+    setTitle((""));
+    setParticipant((""));
+    setDescription((""));
+    setUploadedAudio(("Nothing selected yet..."));
+    setSelectedFile((""));
+    setChipData(([]));
     setOpenSB(true);
   };
 
@@ -54,15 +88,17 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
     );
   };
 
-  const handleAddActor = () => {
+  const handleAddParticipant = () => {
     let arr = [...chipData];
-    arr.push({ key: chipData.length + 1, label: actor })
+    arr.push({ key: chipData.length + 1, label: participant })
     setChipData(arr);
+    setParticipant("");
   };
 
   //takes value of TextField and puts it in actor state
-  const handleActorChange = (val) => {
-    setActor(val);
+  const handleParticipantChange = (val) => {
+    setParticipant(val);
+    
   };
 
   const ListItem = styled("li")(({ theme }) => ({ margin: theme.spacing(0.5) }));
@@ -99,6 +135,8 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
                   label="Title"
                   variant="filled"
                   style={{ width: "96%" }}
+                  value={title}
+                  onChange={(e) => { setTitle(e.target.value) }}
                 />
               </Grid>
               <Grid item xs={false} sm={12}>
@@ -107,9 +145,10 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
                     id="1"
                     label="Participants"
                     variant="filled"
-                    onChange={(e) => { handleActorChange(e.target.value) }}
+                    value={participant}
+                    onChange={(e) => { handleParticipantChange(e.target.value) }}
                     style={{ width: "85%" }} />
-                  <button type="button" className="buttonAdd" onClick={handleAddActor}> + </button>
+                  <button type="button" className="buttonAdd" onClick={handleAddParticipant}> + </button>
                 </FormGroup>
                 <Paper
                   sx={{
@@ -149,8 +188,8 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
                   <br/><br/>
                 <label htmlFor="contained-button-file">
                   <Input accept="audio/*" id="contained-button-file" multiple type="file" onChange={addFile} />
-                  <Button variant="contained" color="primary" component="span" style={{marginLeft: "43%"}}>
-                    Upload Audio
+                  <Button variant="contained" color="primary" component="span" style={{marginLeft: "60%"}}>
+                    Browse
                   </Button>
                 </label>
               </Grid>
@@ -162,6 +201,8 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
                   rows={8}
                   label="Description"
                   variant="filled"
+                  value={description}
+                  onChange={(e) => { setDescription(e.target.value) }}
                   style={{ width: "96%", marginBottom: "4%" }}
                 />
               </Grid>
@@ -173,10 +214,10 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
         <DialogActions>
           <Button
             autoFocus
-            onClick={handleClickClose}
-            style={{ color: "#3f51b5" }} >
-
-            Save
+            onClick={onSave}
+            style={{ color: "#3f51b5" }} 
+            >
+            Upload Meeting
           </Button>
         </DialogActions>
 

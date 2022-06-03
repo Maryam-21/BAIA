@@ -11,6 +11,7 @@ export const projectsSlice = createSlice({
   reducers: {
     getProjectsTitles: (user) => { },
     addProject: (payload) => { },
+    addMeeting: (payload) => { },
     getFullProjects: (projectTitle) => { },
     updateProject: (action) => { },
     setProjectsTitles(state, action) {
@@ -40,6 +41,6 @@ export const projectsSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { getProjectsTitles, setProjectsTitles, getFullProjects,
-  setFullProjects, updateProject, setUpdatedProject, addProject, updateProjectTitles } = projectsSlice.actions
+  setFullProjects, updateProject, setUpdatedProject, addProject, updateProjectTitles, addMeeting } = projectsSlice.actions
 
 export default projectsSlice.reducer
