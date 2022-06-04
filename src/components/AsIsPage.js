@@ -11,7 +11,7 @@ import  '../CSS/components.css';
 const AsIsPage = () => {
   const { meetingID, services } = useSelector((state) => state.services)
   const generatePDF = () => {
-    const report = new JsPDF('portrait', "pt", 'a2');
+    const report = new JsPDF('portrait', "pt", [1600, 1800]);
     report.html(document.querySelector('#report')).then(() => {
         report.save('report.pdf');
     });
@@ -57,17 +57,19 @@ const AsIsPage = () => {
         </CardContent>
       </Card>
     </div>
+    <div className='center'>
     <Button
         color="primary"
         variant="text"
         style={{
             textTransform: "none",
-            width: "30%",
+            width: "10%",
         }}
         onClick={generatePDF}
     >
         Export PDF
     </Button>
+    </div>
     </div>
   );
 };
