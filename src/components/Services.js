@@ -12,6 +12,7 @@ import MeetingDetailsPopUp from './MeetingDetailsPopUp';
 
 
 
+
 function Services() {
     const { meetingID, services } = useSelector((state) => state.services)
     const [openAddService, setOpenAddService] = useState(false);
@@ -25,6 +26,8 @@ function Services() {
         setOpenAddService(false);
     }
 
+    
+
     const handleClickOpenMeetingDetails = () => {
         setOpenMeetingDetails(true);
     }
@@ -35,10 +38,11 @@ function Services() {
 
     return (
         <div>
-            <AddNewServicePopUp open={openAddService} handleClickClose={handleClickCloseAddService} ></AddNewServicePopUp>
+            <AddNewServicePopUp open={openAddService} handleClickClose={handleClickCloseAddService} />
             <MeetingDetailsPopUp open={openMeetingDetails} handleClickClose={handleClickCloseMeetingDetails}
             participants = {services? services["meetingPersonnel"] : "loading"} 
-            description = {services? services["meetingDescription"] : "loading"} ></MeetingDetailsPopUp>
+            description = {services? services["meetingDescription"] : "loading"} />
+            
             <Grid container style={{ width: "100%", display: "flex" }}>
                 <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
                     <Grid item style={{ marginTop: "5%" }}>
@@ -74,6 +78,7 @@ function Services() {
                                             marginTop: "20%",
                                             width: "105%",
                                         }}
+                                        
                                     >
                                         Detect Conflicts
                                     </Button>

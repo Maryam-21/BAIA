@@ -17,9 +17,11 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import Snackbar from "@mui/material/Snackbar";
 import { Fragment } from "react";
 import { Close } from "@material-ui/icons";
+import GenerateUserStoryPopUp from './GenerateUserStoryPopUp';
 
 function Service({ service }) {
     const [openSB, setOpenSB] = useState(false);
+    const [openGenerateUS, setOpenGenerateUS] = useState(false);
     const [vColor, setVcolor] = useState("");
     const [openD, setOpenD] = useState(false);
     const [validated, setValidated] = useState(false);
@@ -38,7 +40,14 @@ function Service({ service }) {
             setVcolor("");
     }, [service]);
     
-    
+    const handleClickOpenGenerateUS = () => {
+        setOpenGenerateUS(true);
+    }
+
+    const handleClickCloseGenerateUS = () => {
+        setOpenGenerateUS(false);
+    }
+
     const handleOpenSnackbar = () => {
         setOpenSB(true);
     };
@@ -116,6 +125,7 @@ function Service({ service }) {
     }
     return (
         <div>
+            <GenerateUserStoryPopUp id={service["serviceID"]} open={openGenerateUS} handleClickClose={handleClickCloseGenerateUS}/>
             <DeletePopUp open={openD} handleClose={handleClickCloseD} onDelete={onDelete} delObj={"this service"}></DeletePopUp>
             <Grid container>
                 <Grid item xs={false} sm={9} >
@@ -132,7 +142,7 @@ function Service({ service }) {
                                 onChange={(e) => { setTitle(e.target.value) }}
                                 style={{ width: "98%", paddingRight: "5%" }}
                             />
-                            <IconButton aria-label="delete" style={{ float: "right" }} onClick={onSaveTitle}>
+                            <IconButton aria-label="save" style={{ float: "right" }} onClick={onSaveTitle}>
                                 <SaveOutlinedIcon />
                             </IconButton>
                         </AccordionSummary>
@@ -171,6 +181,7 @@ function Service({ service }) {
                                 textTransform: "none",
                                 width: "100%",
                             }}
+                            onClick = {handleClickOpenGenerateUS}
                         >
                             Generate User Story
                         </Button>

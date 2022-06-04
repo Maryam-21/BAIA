@@ -1,10 +1,11 @@
 import React from 'react'
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+
 
 function DeletePopUp({open, handleClose, delObj, onDelete}) {
     const handleDelete = ()  =>{
@@ -15,21 +16,24 @@ function DeletePopUp({open, handleClose, delObj, onDelete}) {
         <div>
             <Dialog
                 open={open}
+                keepMounted
                 onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
+                fullWidth={false}
+                maxWidth={"sm"}
             >
-                <DialogTitle id="alert-dialog-title" style={{color: "red"}}>
+                <DialogTitle style={{color: "red"}} >
                     {"Warning"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
+                    <DialogContentText >
                         {"Are you sure you want to delete " + delObj + "?"}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleDelete} autoFocus>
+                    <Button onClick={handleClose} autoFocus style={{ color: "#3f51b5" }}>
+                        Cancel
+                    </Button>
+                    <Button onClick={handleDelete} autoFocus style={{ color: "#3f51b5" }}>
                         Yes
                     </Button>
                 </DialogActions>

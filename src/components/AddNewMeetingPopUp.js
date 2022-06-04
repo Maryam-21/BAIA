@@ -31,7 +31,7 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
   const addFile = (e) => {
     //const s = URL.createObjectURL(e.target.files[0])
     //setSelectedFile(s)
-    const path = "C://Audios//"+ e.target.files[0].name;
+    const path = "C://Audios//" + e.target.files[0].name;
     setSelectedFile(path);
     setUploadedAudio(e.target.files[0].name)
     /*if (selectedFile) {
@@ -40,7 +40,7 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
     }*/
   }
 
-  const onSave = ()=> {
+  const onSave = () => {
     //payload
     let participants = ""
     chipData.map(part => (
@@ -61,7 +61,7 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
     console.log(payload)
     dispatch(addMeeting(payload))
     handleClickSnackbar();
-    handleClickClose(); 
+    handleClickClose();
   }
 
   const handleClickSnackbar = () => {
@@ -98,13 +98,15 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
   //takes value of TextField and puts it in actor state
   const handleParticipantChange = (val) => {
     setParticipant(val);
-    
+
   };
 
   const ListItem = styled("li")(({ theme }) => ({ margin: theme.spacing(0.5) }));
+  
   const Input = styled('input')({
     display: 'none',
   });
+
   const action = (
     <Fragment>
       <IconButton
@@ -184,11 +186,11 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
                   label="Audio"
                   variant="filled"
                   value={uploadedAudio}
-                  style={{ width: "96%" }}/>
-                  <br/><br/>
+                  style={{ width: "96%" }} />
+                <br /><br />
                 <label htmlFor="contained-button-file">
                   <Input accept="audio/*" id="contained-button-file" multiple type="file" onChange={addFile} />
-                  <Button variant="contained" color="primary" component="span" style={{marginLeft: "60%"}}>
+                  <Button variant="contained" color="primary" component="span" style={{ marginLeft: "60%" }}>
                     Browse
                   </Button>
                 </label>
@@ -215,8 +217,8 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
           <Button
             autoFocus
             onClick={onSave}
-            style={{ color: "#3f51b5" }} 
-            >
+            style={{ color: "#3f51b5" }}
+          >
             Upload Meeting
           </Button>
         </DialogActions>
