@@ -6,8 +6,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-function DeletePopUp({open, handleClose, delObj}) {
-
+function DeletePopUp({open, handleClose, delObj, onDelete}) {
+    const handleDelete = ()  =>{
+        onDelete();
+        handleClose();
+    }
     return (
         <div>
             <Dialog
@@ -26,7 +29,7 @@ function DeletePopUp({open, handleClose, delObj}) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose} autoFocus>
+                    <Button onClick={handleDelete} autoFocus>
                         Yes
                     </Button>
                 </DialogActions>

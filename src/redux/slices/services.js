@@ -12,7 +12,7 @@ export const servicesSlice = createSlice({
     setMeetingID: (state, action) => {
       const id = action.payload;
       return {...state,
-              meetingID: {...id}};
+              meetingID: id};
     },
     getMeetingID: () => {},
     getServices: () => {},
@@ -20,11 +20,16 @@ export const servicesSlice = createSlice({
       const svs = action.payload;
       return { ...state, 
         services:{...svs} };
-    }
+    },
+    updateService: (action) => {},
+    deleteService: (action) => {},
+    addService: (action) => {},
+    updateServiceDetail: (action) => {}
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { getServices, setServices, getMeetingID, setMeetingID } = servicesSlice.actions
+export const { getServices, setServices, getMeetingID, setMeetingID, updateService, deleteService,
+               addService, updateServiceDetail } = servicesSlice.actions
 
 export default servicesSlice.reducer

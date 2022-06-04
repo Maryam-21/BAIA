@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Box, Grid} from "@material-ui/core";
 import NavigationPanel from './NavigationPanel'
 import SpecificProject from './SpecificProject'
-import { useSelector } from 'react-redux';
-import { Box, Grid} from "@material-ui/core";
 import MyProfile from './MyProfile';
 import ProjectDetails from './ProjectDetails';
+import { getServices } from '../redux/slices/services'
 
 const HomePage = () => {
   const [openServices, setOpenServices] = useState(false);
@@ -12,13 +14,17 @@ const HomePage = () => {
   const [openProfile, setOpenProfile] = useState(false);
   const [openProjectDetails, setProjectDetails] = useState(false);
   const { fullProjects } = useSelector((state)=>state.projects);
-
+  const { meetingID } = useSelector((state)=>state.services);
+  const dispatch = useDispatch()
+  
   //onClick functions  for buttons in CollapsableListItem
 const handleServicesClick = () => {
   setOpenServices(!openServices);
   setOpenUS(false);
   setOpenProfile(false);
   setProjectDetails(false);
+  if (meetingID)
+    dispatch(getServices(meetingID));
 };
 
 const handleOpenUS = () => {

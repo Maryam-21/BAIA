@@ -31,7 +31,6 @@ export const Project = ({ title, handleProjectdetails, handleServicesClick, hand
     setOpenAddMeeting(false);
   };
   const handleClick = () => {
-    //getfullproject
     dispatch(getFullProjects(title));
     setOpenProject(!openProject);
     handleProjectdetails();

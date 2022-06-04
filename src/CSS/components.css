@@ -63,8 +63,10 @@ h2 {
 
 .center {
   margin: auto;
-  width: 118%;
-  padding: 13px 42px;
+  width: 130%;
+  padding-top: 2%;
+  padding-right: 0%;
+  padding-left: 9%;
 }
 
 .LogoutBtn {

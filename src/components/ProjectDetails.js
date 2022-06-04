@@ -15,7 +15,7 @@ const ProjectDetails = () => {
   const [title, setTitle] = useState(fullProjects?fullProjects['projectTitle']:"")
   const [company, setCompany] = useState(fullProjects?fullProjects['organizationName']:"")
   const [domain, setDomain] = useState(fullProjects?fullProjects['domain']:"")
-  const [actors, setActors] = useState(fullProjects?fullProjects['systemActors']:"")
+  const [actors, setActors] = useState(fullProjects?fullProjects['systemActors'].slice(0,-2):"")
   const [projectDescription, setProjectDescription] = useState(fullProjects?fullProjects['projectDescription']:"")
 
   const dispatch = useDispatch()

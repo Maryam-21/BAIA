@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useDispatch } from 'react-redux';
+import { setMeetingID } from '../redux/slices/services'
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -17,7 +18,8 @@ export const Meeting = ({ meeting, handleServicesClick }) => {
   //drop down when meeting name is clicked
   const handleClickMeeting = () => {
     setOpenMeeting(!openMeeting);
-    
+    setMeetingID(undefined)
+    setMeetingID(meeting["meetingID"])
   };
   return (
     <div>
