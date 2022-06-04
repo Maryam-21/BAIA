@@ -7,6 +7,7 @@ import SpecificProject from './SpecificProject'
 import MyProfile from './MyProfile';
 import ProjectDetails from './ProjectDetails';
 import { getServices } from '../redux/slices/services'
+import AsIsPage from './AsIsPage';
 
 const HomePage = () => {
   const [openServices, setOpenServices] = useState(false);
@@ -68,7 +69,7 @@ const handleProjectdetails = (value = !openProjectDetails ) => {
           {/* el hetta el 3l ymeen */}
           {openProfile ? (   <MyProfile/>   ): (
              openProjectDetails ? (   <ProjectDetails/>   ): (
-
+              
               <Grid item xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
                 <SpecificProject meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"}
                 openMeeting={openServices}
@@ -76,7 +77,12 @@ const handleProjectdetails = (value = !openProjectDetails ) => {
                 openProfile={openProfile}
                 openProjectDetails={openProjectDetails}
                 />
-                
+                <AsIsPage meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"}
+                openMeeting={openServices}
+                openUS={openUS}
+                openProfile={openProfile}
+                openProjectDetails={openProjectDetails}
+                />
               </Grid>
             )
            ) }
