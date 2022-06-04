@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { getFullProjects } from '../redux/slices/projects'
+import { getFullProjects, setFullProjects } from '../redux/slices/projects'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import List from "@mui/material/List";
@@ -31,8 +31,8 @@ export const Project = ({ title, handleProjectdetails, handleServicesClick, hand
     setOpenAddMeeting(false);
   };
   const handleClick = () => {
-    dispatch(getFullProjects(title));
     setOpenProject(!openProject);
+    dispatch(getFullProjects(title));
     handleProjectdetails();
   };
   const handleOpenMeetings = () => {

@@ -23,8 +23,10 @@ const handleServicesClick = () => {
   setOpenUS(false);
   setOpenProfile(false);
   setProjectDetails(false);
-  if (meetingID)
+  if (meetingID){
     dispatch(getServices(meetingID));
+    console.log("meetingID")
+  }
 };
 
 const handleOpenUS = () => {

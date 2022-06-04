@@ -12,8 +12,14 @@ import { Close } from "@material-ui/icons";
 
 function ServiceDetail({ detail }) {
     const [openSB, setOpenSB] = useState(false);
-    const [serviceDetail, setServiceDetail] = useState(detail ? detail["serviceDetailString"] : "loading");
+    const [serviceDetail, setServiceDetail] = useState("loading");
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if(detail){
+            setServiceDetail(detail["serviceDetailString"] )
+        }
+    }, [detail]);
 
     const handleOpenSnackbar = () => {
         setOpenSB(true);

@@ -14,7 +14,7 @@ const SpecificProject = ({meetings,openMeeting, openUS}) => {
     setTest(await meetings)
   });
   return (
-    <Box>
+    <div>
       {openUS ? (
         <UserStories/>
       ) : (
@@ -26,7 +26,7 @@ const SpecificProject = ({meetings,openMeeting, openUS}) => {
       ) : (
         <div></div>
       )}
-    </Box>
+    </div>
   );
 };
 

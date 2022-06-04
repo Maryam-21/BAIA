@@ -18,8 +18,7 @@ export const Meeting = ({ meeting, handleServicesClick }) => {
   //drop down when meeting name is clicked
   const handleClickMeeting = () => {
     setOpenMeeting(!openMeeting);
-    setMeetingID(undefined)
-    setMeetingID(meeting["meetingID"])
+    dispatch(setMeetingID(meeting["meetingID"]))
   };
   return (
     <div>

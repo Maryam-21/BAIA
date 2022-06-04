@@ -21,19 +21,22 @@ import { Close } from "@material-ui/icons";
 function Service({ service }) {
     const [openSB, setOpenSB] = useState(false);
     const [vColor, setVcolor] = useState("");
-    const [openD, setOpenD] = React.useState(false);
-    const [validated, setValidated] = React.useState(false);
-    const [title, setTitle] = React.useState(service ? service["serviceTitle"] : "loading");
+    const [openD, setOpenD] = useState(false);
+    const [validated, setValidated] = useState(false);
+    const [title, setTitle] = useState("loading");
     const { meetingID } = useSelector((state) => state.services)
     const dispatch = useDispatch()
 
     useEffect(() => {
+        if(service){
+            setTitle(service["serviceTitle"])
+        }
         setValidated(service ? service["serviceVerified"] : false)
         if (service["serviceVerified"])
             setVcolor("green");
         else
             setVcolor("");
-    }, []);
+    }, [service]);
     
     
     const handleOpenSnackbar = () => {

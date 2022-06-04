@@ -12,8 +12,11 @@ import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
 import Snackbar from "@mui/material/Snackbar";
 import { addService } from '../redux/slices/services'
 
-function MeetingDetailsPopUp({ open, handleClickClose, participants, description }) {
-    participants = participants.slice(0,-2);
+function UserStoryDetails({ open, handleClickClose }) {
+    const defaultValue = {
+        "userStory": "As a [description of user],\nI want [functionality],\nso that [benefit].",
+        "acceptanceCriteria": "Given [how things begin],\nwhen [action taken],\nthen [outcome of taking action]."
+    }
     return (
         <div>
             <Dialog
@@ -21,16 +24,17 @@ function MeetingDetailsPopUp({ open, handleClickClose, participants, description
                 keepMounted
                 onClose={handleClickClose}
             >
-                <DialogTitle onClose={handleClickClose} class="label"> Meeting Details </DialogTitle>
+                <DialogTitle onClose={handleClickClose} class="label"> User Story </DialogTitle>
                 <hr style={{ width: "96%" }} />
+
                 <DialogContent>
                     <Grid container style={{ height: "100%" }}>
                         <Grid container xs={false} sm={12} spacing={1}>
                             <Grid item xs={false} sm={12}>
                                 <TextField
-                                    label="Participants"
+                                    label="Title"
                                     variant="filled"
-                                    value = {participants}
+                                    value={"Login"}
                                     style={{ width: "100%" }}
                                 />
                             </Grid>
@@ -38,9 +42,19 @@ function MeetingDetailsPopUp({ open, handleClickClose, participants, description
                                 <TextField
                                     multiline
                                     rows={5}
-                                    label="Meeting Description"
+                                    label="User Story Body"
                                     variant="filled"
-                                    value= {description}
+                                    value={defaultValue["userStory"]}
+                                    style={{ width: "100%" }}
+                                />
+                            </Grid>
+                            <Grid item xs={false} sm={12}>
+                                <TextField
+                                    multiline
+                                    rows={5}
+                                    label="Acceptance Criteria"
+                                    variant="filled"
+                                    value={defaultValue["acceptanceCriteria"]}
                                     style={{ width: "100%" }}
                                 />
                             </Grid>
@@ -62,4 +76,4 @@ function MeetingDetailsPopUp({ open, handleClickClose, participants, description
     )
 }
 
-export default MeetingDetailsPopUp
+export default UserStoryDetails
