@@ -33,7 +33,6 @@ export const Project = ({ title, handleProjectdetails, handleServicesClick, hand
   const handleClick = () => {
     setOpenProject(!openProject);
     dispatch(getFullProjects(title));
-    handleProjectdetails();
   };
   const handleOpenMeetings = () => {
     setOpenMeetings(!openMeetings);

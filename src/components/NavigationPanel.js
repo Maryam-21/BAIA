@@ -16,14 +16,8 @@ import { Project } from './Project';
  
 
 const NavigationPanel = ({ handleServicesClick, handleOpenUS, handleProfile, handleProjectdetails }) => {
-  const [openProject, setOpenProject] = useState(false);
   const [openAddProj, setOpenAddProj] = useState(false);
   const { projectsTitles, fullProjects } = useSelector((state) => state.projects)
-
-  const handleClickProject = () => {
-    setOpenProject(!openProject);
-    handleProjectdetails(false)
-  };
 
   const handleClickOpenAddProject = () => {
     setOpenAddProj(true);
@@ -47,15 +41,14 @@ const NavigationPanel = ({ handleServicesClick, handleOpenUS, handleProfile, han
         height: '100%', backgroundColor: '#B4B4B4', padding: '5px', borderRadius: 5
       }}>
 
-        <ListItemButton onClick={handleClickProject}>
-          <ListItemIcon>
+        <ListItemButton>
+          <ListItemIcon> 
             <FolderOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Projects" />
-          {openProject ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
 
-        <Collapse in={openProject} timeout="auto" unmountOnExit style={{ padding: '0% 0% 0% 4%' }}>
+        <Collapse in={true} timeout="auto" unmountOnExit style={{ padding: '0% 0% 0% 4%' }}>
           {projectsTitles ? projectsTitles['$values'].map(project => (
             <Project title={project} handleProjectdetails={handleProjectdetails} 
             handleServicesClick={handleServicesClick}

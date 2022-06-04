@@ -19,7 +19,7 @@ const HomePage = () => {
   
   //onClick functions  for buttons in CollapsableListItem
 const handleServicesClick = () => {
-  setOpenServices(!openServices);
+  setOpenServices(true);
   setOpenUS(false);
   setOpenProfile(false);
   setProjectDetails(false);
@@ -30,21 +30,21 @@ const handleServicesClick = () => {
 };
 
 const handleOpenUS = () => {
-  setOpenUS(!openUS);
+  setOpenUS(true);
   setOpenServices(false);
   setOpenProfile(false);
   setProjectDetails(false);
 };
 
 const handleProfile = () => {
-  setOpenProfile(!openProfile);
+  setOpenProfile(true);
   setOpenServices(false);
   setOpenUS(false);
   setProjectDetails(false);
 };
 
-const handleProjectdetails = (value = !openProjectDetails ) => {
-  setProjectDetails(value);
+const handleProjectdetails = () => {
+  setProjectDetails(true);
   setOpenProfile(false);
   setOpenServices(false);
   setOpenUS(false);
