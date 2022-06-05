@@ -1,75 +1,70 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { Box, Button } from "@material-ui/core";
 import { Grid, CardHeader } from "@material-ui/core";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { Fragment } from "react";
 import JsPDF from 'jspdf';
 import Service from './Service';
-import  '../CSS/components.css';
+import '../CSS/components.css';
+import AsIsRow from './AsIsRow';
 
 const AsIsPage = () => {
-  const { meetingID, services } = useSelector((state) => state.services)
+  const { validatedServices, services } = useSelector((state) => state.services)
   const generatePDF = () => {
     const report = new JsPDF('portrait', "pt", [1600, 1800]);
     report.html(document.querySelector('#report')).then(() => {
-        report.save('report.pdf');
+      report.save('report.pdf');
     });
   }
 
+
+
   return (
-    <div>
-    <div id="report" className="center" padding='10%'>
-      <Card style={{ backgroundColor: "#E9E9E9" }} >
+    <div className="center" >
+      <div padding='10%' >
+        <Card id="report" style={{ backgroundColor: "#E9E9E9" }} >
 
-        <CardHeader
-          style={{ backgroundColor: "rgb(180, 180, 180)", padding: "3%" }}
-          title="As-Is Document"
-          subheader="Snapchat"
-        ></CardHeader>
+          <CardHeader
+            style={{ backgroundColor: "rgb(180, 180, 180)", padding: "3%" }}
+            title="As-Is Document"
+            subheader="Snapchat"
+          ></CardHeader>
 
-        <CardContent>
-          <table>
-            <tr>
-              <th>
+          <CardContent>
+            <table>
+              <tr>
+                <th>
                   Service Title
-              </th>
-              <th>
+                </th>
+                <th>
                   Service Details
-              </th>
-            </tr>
+                </th>
+              </tr>
 
-            <tr>
-              <td>
               {
-                  services ? services["services"]["$values"].map(service => (
-                      <Service service={service}></Service>
-                  )) : "loading"
-              }
-              </td>
-              <td>
-                <tr>
+                validatedServices ? validatedServices["$values"].map(service => (
+                  <AsIsRow title={service["serviceTitle"]} details={service["serviceDetails"]} />
+                )) : "loading"
 
-                </tr>
-              </td>
-            </tr>
-          </table>
-        </CardContent>
-      </Card>
-    </div>
-    <div className='center'>
-    <Button
-        color="primary"
-        variant="text"
-        style={{
+              }
+
+            </table>
+          </CardContent>
+        </Card>
+        <Button
+          color="primary"
+          variant="text"
+          style={{
             textTransform: "none",
             width: "10%",
-        }}
-        onClick={generatePDF}
-    >
-        Export PDF
-    </Button>
-    </div>
+          }}
+          onClick={generatePDF}
+        >
+          Export PDF
+        </Button>
+      </div>
     </div>
   );
 };

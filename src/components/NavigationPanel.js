@@ -15,7 +15,8 @@ import Logo from './Logo'
 import { Project } from './Project';
  
 
-const NavigationPanel = ({ handleServicesClick, handleOpenUS, handleProfile, handleProjectdetails }) => {
+const NavigationPanel = ({ handleServicesClick, handleOpenUS, handleProfile,
+                          handleProjectdetails, handleOpenAsIs }) => {
   const [openAddProj, setOpenAddProj] = useState(false);
   const { projectsTitles, fullProjects } = useSelector((state) => state.projects)
 
@@ -52,7 +53,8 @@ const NavigationPanel = ({ handleServicesClick, handleOpenUS, handleProfile, han
           {projectsTitles ? projectsTitles['$values'].map(project => (
             <Project title={project} handleProjectdetails={handleProjectdetails} 
             handleServicesClick={handleServicesClick}
-            handleOpenUS={handleOpenUS} ></Project>
+            handleOpenUS={handleOpenUS}
+            handleOpenAsIs= {handleOpenAsIs} ></Project>
           )) : 'loading'}
         </Collapse>
 

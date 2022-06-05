@@ -41,6 +41,7 @@ export const projectsSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { getProjectsTitles, setProjectsTitles, getFullProjects,
-  setFullProjects, updateProject, setUpdatedProject, addProject, updateProjectTitles, addMeeting } = projectsSlice.actions
+  setFullProjects, updateProject, setUpdatedProject, addProject, updateProjectTitles, 
+  addMeeting } = projectsSlice.actions
 
 export default projectsSlice.reducer

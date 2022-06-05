@@ -5,28 +5,55 @@ import { Box, Grid} from "@material-ui/core";
 import NavigationPanel from './NavigationPanel'
 import SpecificProject from './SpecificProject'
 import MyProfile from './MyProfile';
+import { getServices, getValidatedServices } from '../redux/slices/services'
+import Welcome from './Welcome';
 import ProjectDetails from './ProjectDetails';
-import { getServices } from '../redux/slices/services'
-import AsIsPage from './AsIsPage';
 
 const HomePage = () => {
   const [openServices, setOpenServices] = useState(false);
   const [openUS, setOpenUS] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [openProjectDetails, setProjectDetails] = useState(false);
-  const { fullProjects } = useSelector((state)=>state.projects);
+  const [openAsIs, setOpenAsIs] = useState(false);
+  const [openWelcome, setOpenWelcome] = useState(false);
+
   const { meetingID } = useSelector((state)=>state.services);
+  const { fullProjects } = useSelector((state)=>state.projects);
+
   const dispatch = useDispatch()
   
   //onClick functions  for buttons in CollapsableListItem
+
+const handleOpenAsIs = () =>{
+  setOpenAsIs(true);
+  setOpenServices(false);
+  setOpenUS(false);
+  setOpenProfile(false);
+  setProjectDetails(false);
+  setOpenWelcome(false);
+  if (fullProjects){
+    dispatch(getValidatedServices(fullProjects["projectID"]));
+  }
+}
+
+const handleOpenWelcome = () =>{
+  setOpenWelcome(true);
+  setOpenAsIs(false);
+  setOpenServices(true);
+  setOpenUS(false);
+  setOpenProfile(false);
+  setProjectDetails(false);
+}
+
 const handleServicesClick = () => {
   setOpenServices(true);
   setOpenUS(false);
   setOpenProfile(false);
   setProjectDetails(false);
+  setOpenAsIs(false);
+  setOpenWelcome(false);
   if (meetingID){
     dispatch(getServices(meetingID));
-    console.log("meetingID")
   }
 };
 
@@ -35,6 +62,8 @@ const handleOpenUS = () => {
   setOpenServices(false);
   setOpenProfile(false);
   setProjectDetails(false);
+  setOpenAsIs(false);
+  setOpenWelcome(false);
 };
 
 const handleProfile = () => {
@@ -42,6 +71,8 @@ const handleProfile = () => {
   setOpenServices(false);
   setOpenUS(false);
   setProjectDetails(false);
+  setOpenAsIs(false);
+  setOpenWelcome(false);
 };
 
 const handleProjectdetails = () => {
@@ -49,6 +80,8 @@ const handleProjectdetails = () => {
   setOpenProfile(false);
   setOpenServices(false);
   setOpenUS(false);
+  setOpenAsIs(false);
+  setOpenWelcome(false);
 };
   
 
@@ -63,29 +96,30 @@ const handleProjectdetails = () => {
               handleOpenUS={handleOpenUS}
               handleProfile={handleProfile}
               handleProjectdetails={handleProjectdetails}
+              handleOpenAsIs = {handleOpenAsIs}
               />
           </Grid>
 
-          {/* el hetta el 3l ymeen */}
-          {openProfile ? (   <MyProfile/>   ): (
-             openProjectDetails ? (   <ProjectDetails/>   ): (
-              
-              <Grid item xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
-                <SpecificProject meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"}
+
+
+
+          {
+            openWelcome? <Welcome/>: 
+            openProfile? <MyProfile/>:
+            openProjectDetails? <ProjectDetails/>:
+            <Grid item xs={12} sm={7} style={{alignContent:'center', height:'100%'}}>
+                <SpecificProject
+                openAsIs={openAsIs}
                 openMeeting={openServices}
                 openUS={openUS}
                 openProfile={openProfile}
                 openProjectDetails={openProjectDetails}
                 />
-                <AsIsPage meetings = {fullProjects?fullProjects["meetings"]["$values"]:"loading"}
-                openMeeting={openServices}
-                openUS={openUS}
-                openProfile={openProfile}
-                openProjectDetails={openProjectDetails}
-                />
-              </Grid>
-            )
-           ) }
+               
+            </Grid>
+             
+          }
+
       </Grid>      
     </Box>
   );

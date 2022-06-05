@@ -72,3 +72,15 @@ export function requestUpdateServiceDetail(action){
     });
     return response
 }
+
+export function requestGetValidatedServices(projectID){
+    const response = fetch("https://localhost:44304/api/Projects/GenerateAsIs/"+ projectID, {
+        method: 'Get',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+    })
+    return response
+}

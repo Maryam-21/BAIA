@@ -1,7 +1,7 @@
 import { call, put } from "redux-saga/effects";
-import {  setServices, getServices } from '../../slices/services'
+import {  setServices, getServices, getValidatedServices, setValidatedServices } from '../../slices/services'
 import { requestGetServices, requestUpdateService, requestDeleteService, 
-          requestAddService, requestUpdateServiceDetail } from "../requests/services";
+          requestAddService, requestUpdateServiceDetail, requestGetValidatedServices } from "../requests/services";
 
 export function* handleGetServices(action) {
   try {
@@ -78,6 +78,19 @@ export function* handleUpdateServiceDetail(payload) {
         console.log("failed") 
     }
     
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* handleGetValidatedServices(action) {
+  try {
+    const response = yield call(requestGetValidatedServices, action.payload);
+    if (response.ok){
+      const data  = yield response.json();
+      console.log(data);
+      yield put(setValidatedServices({ ...data }));
+    }
   } catch (error) {
     console.log(error);
   }

@@ -15,7 +15,8 @@ import AddIcon from '@mui/icons-material/Add';
 import {Meeting} from './Meeting';
 import AddNewMeetingPopup from './AddNewMeetingPopUp'
  
-export const Project = ({ title, handleProjectdetails, handleServicesClick, handleOpenUS }) => {
+export const Project = ({ title, handleProjectdetails, 
+                          handleServicesClick, handleOpenUS, handleOpenAsIs }) => {
   const [openProject, setOpenProject] = useState(false);
   const [openMeetings, setOpenMeetings] = useState(false);
   const [openAddMeeting, setOpenAddMeeting] = useState(false);
@@ -77,7 +78,7 @@ export const Project = ({ title, handleProjectdetails, handleServicesClick, hand
             }
           </Collapse>
 
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton sx={{ pl: 4 }} onClick={handleOpenAsIs}>
             <ListItemIcon>
               <InsertDriveFileOutlinedIcon />
             </ListItemIcon>
