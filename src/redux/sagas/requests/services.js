@@ -84,3 +84,19 @@ export function requestGetValidatedServices(projectID){
     })
     return response
 }
+
+export function requestDetectConflicts(payload){
+
+    const response = fetch("https://localhost:44304/api/Projects/DetectConflicts", {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify(payload)
+        
+    });
+    return response
+}
+

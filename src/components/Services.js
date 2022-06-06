@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
     Grid, Card, CardContent, Select, MenuItem, CardHeader, InputLabel,
     FormControl, Button
@@ -9,14 +9,29 @@ import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import Service from './Service';
 import AddNewServicePopUp from './AddNewServicePopUp';
 import MeetingDetailsPopUp from './MeetingDetailsPopUp';
+import { detectConflicts } from '../redux/slices/services'
 
 
 
 
 function Services() {
     const { meetingID, services } = useSelector((state) => state.services)
+    const { fullProjects } = useSelector((state) => state.projects)
     const [openAddService, setOpenAddService] = useState(false);
     const [openMeetingDetails, setOpenMeetingDetails] = useState(false);
+
+    const dispatch = useDispatch()
+
+    const onDetectConflicts = () => {
+        const payload = {
+            "meetingID": meetingID,
+            "body":{
+                "ProjectID":fullProjects["projectID"],
+                "MeetingID": meetingID
+            }
+        }
+        dispatch(detectConflicts(payload));
+    }
 
     const handleClickOpenAddService = () => {
         setOpenAddService(true);
@@ -25,8 +40,6 @@ function Services() {
     const handleClickCloseAddService = () => {
         setOpenAddService(false);
     }
-
-    
 
     const handleClickOpenMeetingDetails = () => {
         setOpenMeetingDetails(true);
@@ -78,7 +91,7 @@ function Services() {
                                             marginTop: "20%",
                                             width: "105%",
                                         }}
-                                        
+                                        onClick={onDetectConflicts}
                                     >
                                         Detect Conflicts
                                     </Button>

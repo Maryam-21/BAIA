@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { updateService, deleteService } from '../redux/slices/services'
+import { updateService, deleteService, getConflictMeeting } from '../redux/slices/services'
 import { Grid, Button } from "@material-ui/core";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -18,19 +18,23 @@ import Snackbar from "@mui/material/Snackbar";
 import { Fragment } from "react";
 import { Close } from "@material-ui/icons";
 import GenerateUserStoryPopUp from './GenerateUserStoryPopUp';
+import ConflictsPopOver from "./ConflictsPopOver";
 
 function Service({ service }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const openPopOver = Boolean(anchorEl);
     const [openSB, setOpenSB] = useState(false);
     const [openGenerateUS, setOpenGenerateUS] = useState(false);
     const [vColor, setVcolor] = useState("");
+    const [conflictColor, setConflictColor] = useState("");
     const [openD, setOpenD] = useState(false);
     const [validated, setValidated] = useState(false);
     const [title, setTitle] = useState("loading");
-    const { meetingID } = useSelector((state) => state.services)
+    const { meetingID, conflictMeeting } = useSelector((state) => state.services)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(service){
+        if (service) {
             setTitle(service["serviceTitle"])
         }
         setValidated(service ? service["serviceVerified"] : false)
@@ -38,8 +42,29 @@ function Service({ service }) {
             setVcolor("green");
         else
             setVcolor("");
+        if (service["conflictServiceID"]) {
+            setConflictColor("#D0342C")
+            dispatch(getConflictMeeting(service["conflictMeetingID"]))
+        }
+        else {
+            setConflictColor("")
+        }
+        
     }, [service]);
-    
+
+    const handlePopoverOpen = (event) => {
+        if(conflictColor)
+            setAnchorEl(event.currentTarget);
+        else
+            setAnchorEl(null);
+    };
+
+    const handlePopoverClose = () => {
+        setAnchorEl(null);
+    };
+
+
+
     const handleClickOpenGenerateUS = () => {
         setOpenGenerateUS(true);
     }
@@ -58,26 +83,20 @@ function Service({ service }) {
         }
         setOpenSB(false);
     };
-    
+
     const action = (
         <Fragment>
-          <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={handleCloseSnackbar}
-          >
-            <Close fontSize="small" />
-          </IconButton>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleCloseSnackbar}
+            >
+                <Close fontSize="small" />
+            </IconButton>
         </Fragment>
-      );
+    );
 
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            console.log(title)
-        }
-    }
     const handleClickOpenD = () => {
         setOpenD(true);
     };
@@ -87,7 +106,7 @@ function Service({ service }) {
 
     const onDelete = () => {
         const payload = {
-            "serviceID":  service["serviceID"],
+            "serviceID": service["serviceID"],
             "meetingID": meetingID
         };
         dispatch(deleteService(payload))
@@ -101,7 +120,7 @@ function Service({ service }) {
             },
             "serviceID": service["serviceID"]
         }
-        if(dispatch(updateService(payload)))
+        if (dispatch(updateService(payload)))
             handleOpenSnackbar()
     }
     const onValidate = () => {
@@ -125,7 +144,7 @@ function Service({ service }) {
     }
     return (
         <div>
-            <GenerateUserStoryPopUp id={service["serviceID"]} open={openGenerateUS} handleClickClose={handleClickCloseGenerateUS}/>
+            <GenerateUserStoryPopUp id={service["serviceID"]} open={openGenerateUS} handleClickClose={handleClickCloseGenerateUS} />
             <DeletePopUp open={openD} handleClose={handleClickCloseD} onDelete={onDelete} delObj={"this service"}></DeletePopUp>
             <Grid container>
                 <Grid item xs={false} sm={9} >
@@ -135,6 +154,11 @@ function Service({ service }) {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
+                            style={{ backgroundColor: conflictColor }}
+                            aria-owns={openPopOver ? 'mouse-over-popover' : undefined}
+                            aria-haspopup="true"
+                            onMouseEnter={handlePopoverOpen}
+                            onMouseLeave={handlePopoverClose}
                         >
                             <TextField
                                 variant="standard"
@@ -142,9 +166,12 @@ function Service({ service }) {
                                 onChange={(e) => { setTitle(e.target.value) }}
                                 style={{ width: "98%", paddingRight: "5%" }}
                             />
-                            <IconButton aria-label="save" style={{ float: "right" }} onClick={onSaveTitle}>
+                            <IconButton aria-label="save" style={{ float: "right" }} 
+                            onClick={onSaveTitle}>
                                 <SaveOutlinedIcon />
                             </IconButton>
+                            <ConflictsPopOver open={openPopOver} handlePopoverClose={handlePopoverClose}
+                             anchorEl={anchorEl} conMeetTitle={conflictMeeting}/>
                         </AccordionSummary>
 
                         <AccordionDetails >
@@ -166,7 +193,7 @@ function Service({ service }) {
                             <CheckCircleOutlineIcon style={{ color: vColor }} />
                         </IconButton>
                     </Grid>
-                    <Grid item sm={1}  style={{ marginLeft: "2%" }}>
+                    <Grid item sm={1} style={{ marginLeft: "2%" }}>
                         <IconButton aria-label="delete" onClick={handleClickOpenD} >
                             <DeleteOutlineIcon />
                         </IconButton>
@@ -181,7 +208,7 @@ function Service({ service }) {
                                 textTransform: "none",
                                 width: "100%",
                             }}
-                            onClick = {handleClickOpenGenerateUS}
+                            onClick={handleClickOpenGenerateUS}
                         >
                             Generate User Story
                         </Button>

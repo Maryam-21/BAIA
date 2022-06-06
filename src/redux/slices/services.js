@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   meetingID: undefined,
   services: undefined,
-  validatedServices: undefined
+  validatedServices: undefined,
+  conflictMeeting: undefined
 }
 
 export const servicesSlice = createSlice({
@@ -31,12 +32,20 @@ export const servicesSlice = createSlice({
       const Vsvs = action.payload;
       return { ...state, 
         validatedServices:{...Vsvs} };
+    },
+    detectConflicts: (action) => {},
+    getConflictMeeting: (action) => {},
+    setConflictMeeting: (state, action) => {
+      const conMeetTitle = action.payload;
+      return { ...state, 
+        conflictMeeting: conMeetTitle };
     }
   },
 })
 
 // Action creators are generated for each case reducer function
 export const { getServices, setServices, getMeetingID, setMeetingID, updateService, deleteService,
-               addService, updateServiceDetail, getValidatedServices, setValidatedServices } = servicesSlice.actions
+               addService, updateServiceDetail, getValidatedServices, setValidatedServices,
+               detectConflicts, getConflictMeeting, setConflictMeeting } = servicesSlice.actions
 
 export default servicesSlice.reducer

@@ -21,7 +21,7 @@ function DeletePopUp({open, handleClose, delObj, onDelete}) {
                 fullWidth={false}
                 maxWidth={"sm"}
             >
-                <DialogTitle style={{color: "red"}} >
+                <DialogTitle style={{color: "#D0342C"}} >
                     {"Warning"}
                 </DialogTitle>
                 <DialogContent>
