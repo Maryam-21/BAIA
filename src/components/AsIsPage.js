@@ -4,14 +4,15 @@ import { Box, Button } from "@material-ui/core";
 import { Grid, CardHeader } from "@material-ui/core";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Fragment } from "react";
+import CircularProgress from '@mui/material/CircularProgress'
 import JsPDF from 'jspdf';
 import Service from './Service';
 import '../CSS/components.css';
 import AsIsRow from './AsIsRow';
 
-const AsIsPage = () => {
-  const { validatedServices, services } = useSelector((state) => state.services)
+const AsIsPage = ({projectName}) => {
+  const { validatedServices } = useSelector((state) => state.services)
+  const { fullProjects } = useSelector((state) => state.projects)
   const generatePDF = () => {
     const report = new JsPDF('portrait', "pt", [1000, 1500]);
     report.html(document.querySelector('#report')).then(() => {
@@ -24,12 +25,12 @@ const AsIsPage = () => {
   return (
     <div className="center" >
       <div padding='10%' >
-        <Card id="report" style={{ backgroundColor: "#E9E9E9" , margin: '3%'}} >
+        <Card id="report" style={{ backgroundColor: "#E9E9E9", margin: '3%' }} >
 
           <CardHeader
             style={{ backgroundColor: "rgb(180, 180, 180)", padding: "3%" }}
             title="As-Is Document"
-            subheader="Snapchat"
+            subheader={projectName? projectName:""}
           ></CardHeader>
 
           <CardContent>
@@ -46,7 +47,7 @@ const AsIsPage = () => {
               {
                 validatedServices ? validatedServices["$values"].map(service => (
                   <AsIsRow title={service["serviceTitle"]} details={service["serviceDetails"]} />
-                )) : "loading"
+                )) : <CircularProgress />
 
               }
 

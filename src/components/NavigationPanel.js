@@ -9,6 +9,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import Collapse from '@mui/material/Collapse';
 import ListItemText from '@mui/material/ListItemText';
+import CircularProgress from '@mui/material/CircularProgress'
 import AddNewProjectPopUp from './AddNewProjectPopUp';
 import InfoBox from './InfoBox'
 import Logo from './Logo'
@@ -55,7 +56,7 @@ const NavigationPanel = ({ handleServicesClick, handleOpenUS, handleProfile,
             handleServicesClick={handleServicesClick}
             handleOpenUS={handleOpenUS}
             handleOpenAsIs= {handleOpenAsIs} ></Project>
-          )) : 'loading'}
+          )) : <CircularProgress/>}
         </Collapse>
 
         <ListItemButton onClick={handleClickOpenAddProject}>

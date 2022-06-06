@@ -8,15 +8,15 @@ import Services from "./Services";
 import UserStories from "./UserStories";
 import Welcome from "./Welcome";
 
-const SpecificProject = ({openMeeting, openUS, openAsIs, openProjectDetails}) => {
-  
+const SpecificProject = ({ openMeeting, openUS, openAsIs }) => {
+  const { fullProjects } = useSelector((state) => state.projects)
   return (
     <div>
 
       {
         openMeeting? <Services/>:
         openUS? <UserStories/>:
-        openAsIs? <AsIsPage/>: <Welcome/>
+        openAsIs? <AsIsPage projectName={fullProjects["projectTitle"]} />: <Welcome/>
       }
 
     </div>

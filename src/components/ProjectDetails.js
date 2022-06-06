@@ -21,11 +21,11 @@ const ProjectDetails = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setTitle("loading..")
-    setCompany("loading..")
-    setDomain("loading..")
-    setActors("loading..")
-    setProjectDescription("")
+    setTitle("retrieving data..")
+    setCompany("retrieving data..")
+    setDomain("retrieving data..")
+    setActors("retrieving data..")
+    setProjectDescription("retrieving data..")
     if (fullProjects){
       setTitle(fullProjects['projectTitle']);
       setCompany(fullProjects['organizationName']);

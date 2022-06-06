@@ -1,9 +1,9 @@
 import { call, put } from "redux-saga/effects";
 import {  setServices, getServices, getValidatedServices, setValidatedServices,
-        getConflictMeeting, setConflictMeeting } from '../../slices/services'
+          setConflictMeeting } from '../../slices/services'
 import { requestGetServices, requestUpdateService, requestDeleteService, 
         requestAddService, requestUpdateServiceDetail, requestGetValidatedServices,
-        requestDetectConflicts} from "../requests/services";
+        requestDetectConflicts, requestAddServiceDetail, requestDeleteServiceDetail} from "../requests/services";
 
 export function* handleGetServices(action) {
   try {
@@ -70,11 +70,47 @@ export function* handleAddService(payload) {
   }
 }
 
+export function* handleAddServiceDetail(payload) {
+  const meetingID = payload.payload.MeetingID
+  try {
+    const response = yield call(requestAddServiceDetail,payload.payload.body);
+    if (response.ok){
+      const data  = yield response.json();
+      console.log(data);
+      yield put(getServices(meetingID));
+    }
+    else{
+        console.log("failed") 
+    }
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function* handleUpdateServiceDetail(payload) {
   try {
     const response = yield call(requestUpdateServiceDetail,payload);
     if (response.ok){
       const data  = yield response.json();
+    }
+    else{
+        console.log("failed") 
+    }
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* handleDeleteServiceDetail(payload) {
+  const serviceDetailID = payload.payload.serviceDetailID;
+  const meetingID = payload.payload.meetingID;
+
+  try {
+    const response = yield call(requestDeleteServiceDetail,serviceDetailID);
+    if (response.ok){
+      yield put(getServices(meetingID));
     }
     else{
         console.log("failed") 

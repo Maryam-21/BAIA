@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
@@ -6,18 +6,19 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from '@mui/material/IconButton';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Fragment } from "react";
 import { Close } from "@material-ui/icons";
 import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
 import Snackbar from "@mui/material/Snackbar";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
-import { addMeeting } from '../redux/slices/projects';
+import { LoadingButton } from '@mui/lab';
+import { addMeeting, setLoading } from '../redux/slices/projects';
 
 
 export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
   const [openSB, setOpenSB] = useState(false);
+  const [loadingB, setLoadingB] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [participant, setParticipant] = useState('');
@@ -25,8 +26,25 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedAudio, setUploadedAudio] = useState("Nothing selected yet...");
 
-  const { fullProjects } = useSelector((state) => state.projects)
+  const { fullProjects, loading } = useSelector((state) => state.projects)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log(loading)
+    if (loading == 1) {
+      console.log('loading')
+      setLoadingB(true)
+    }
+    else if (loading == 0) {
+      setLoadingB(false)
+      handleClickSnackbar();
+      handleClickClose();
+    }
+    else {
+      console.log("failed")
+      setLoading(0)
+    }
+  }, [loading]);
 
   const addFile = (e) => {
     //const s = URL.createObjectURL(e.target.files[0])
@@ -60,8 +78,7 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
     };
     console.log(payload)
     dispatch(addMeeting(payload))
-    handleClickSnackbar();
-    handleClickClose();
+
   }
 
   const handleClickSnackbar = () => {
@@ -102,7 +119,7 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
   };
 
   const ListItem = styled("li")(({ theme }) => ({ margin: theme.spacing(0.5) }));
-  
+
   const Input = styled('input')({
     display: 'none',
   });
@@ -214,13 +231,15 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
         </DialogContent>
 
         <DialogActions>
-          <Button
+          <LoadingButton
+            loading={loadingB}
+            loadingPosition="end"
             autoFocus
             onClick={onSave}
-            style={{ color: "#3f51b5" }}
+            style={{ color: "#3f51b5", paddingRight: "5%" }}
           >
             Upload Meeting
-          </Button>
+          </LoadingButton>
         </DialogActions>
 
       </Dialog>

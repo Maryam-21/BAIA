@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   projectsTitles: undefined,
-  fullProjects: undefined
+  fullProjects: undefined,
+  loading: 0
 }
 
 export const projectsSlice = createSlice({
@@ -35,6 +36,10 @@ export const projectsSlice = createSlice({
         systemActors: action.payload.systemActors
       }
       return { ...state, fullProjects: { ...fullProjectData } };
+    },
+    setLoading: (state, action) => {
+      const stats = action.payload;
+      return { ...state, loading: stats };
     }
   },
 })
@@ -42,6 +47,6 @@ export const projectsSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { getProjectsTitles, setProjectsTitles, getFullProjects,
   setFullProjects, updateProject, setUpdatedProject, addProject, updateProjectTitles, 
-  addMeeting } = projectsSlice.actions
+  addMeeting, setLoading } = projectsSlice.actions
 
 export default projectsSlice.reducer

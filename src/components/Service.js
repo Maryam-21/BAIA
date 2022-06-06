@@ -17,19 +17,22 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import Snackbar from "@mui/material/Snackbar";
 import { Fragment } from "react";
 import { Close } from "@material-ui/icons";
+import CircularProgress from '@mui/material/CircularProgress'
 import GenerateUserStoryPopUp from './GenerateUserStoryPopUp';
 import ConflictsPopOver from "./ConflictsPopOver";
+import AddNewDetailPopUp from "./AddNewDetailPopUp";
 
 function Service({ service }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const openPopOver = Boolean(anchorEl);
     const [openSB, setOpenSB] = useState(false);
     const [openGenerateUS, setOpenGenerateUS] = useState(false);
+    const [openD, setOpenD] = useState(false);
+    const [openAddDetail, setOpenAddDetail] = useState(false);
     const [vColor, setVcolor] = useState("");
     const [conflictColor, setConflictColor] = useState("");
-    const [openD, setOpenD] = useState(false);
     const [validated, setValidated] = useState(false);
-    const [title, setTitle] = useState("loading");
+    const [title, setTitle] = useState("retrieving data...");
     const { meetingID, conflictMeeting } = useSelector((state) => state.services)
     const dispatch = useDispatch()
 
@@ -49,11 +52,11 @@ function Service({ service }) {
         else {
             setConflictColor("")
         }
-        
+
     }, [service]);
 
     const handlePopoverOpen = (event) => {
-        if(conflictColor)
+        if (conflictColor)
             setAnchorEl(event.currentTarget);
         else
             setAnchorEl(null);
@@ -63,8 +66,6 @@ function Service({ service }) {
         setAnchorEl(null);
     };
 
-
-
     const handleClickOpenGenerateUS = () => {
         setOpenGenerateUS(true);
     }
@@ -73,8 +74,24 @@ function Service({ service }) {
         setOpenGenerateUS(false);
     }
 
+    const handleClickOpenAddDetail = () => {
+        setOpenAddDetail(true);
+    }
+
+    const handleClickCloseAddDetail = () => {
+        setOpenAddDetail(false);
+    }
+
     const handleOpenSnackbar = () => {
         setOpenSB(true);
+    };
+
+    const handleClickOpenD = () => {
+        setOpenD(true);
+    };
+
+    const handleClickCloseD = () => {
+        setOpenD(false);
     };
 
     const handleCloseSnackbar = (event, reason) => {
@@ -82,26 +99,6 @@ function Service({ service }) {
             return;
         }
         setOpenSB(false);
-    };
-
-    const action = (
-        <Fragment>
-            <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleCloseSnackbar}
-            >
-                <Close fontSize="small" />
-            </IconButton>
-        </Fragment>
-    );
-
-    const handleClickOpenD = () => {
-        setOpenD(true);
-    };
-    const handleClickCloseD = () => {
-        setOpenD(false);
     };
 
     const onDelete = () => {
@@ -139,13 +136,29 @@ function Service({ service }) {
         }
         else
             setVcolor("");
-
-
     }
+
+    const action = (
+        <Fragment>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleCloseSnackbar}
+            >
+                <Close fontSize="small" />
+            </IconButton>
+        </Fragment>
+    );
+
     return (
         <div>
-            <GenerateUserStoryPopUp id={service["serviceID"]} open={openGenerateUS} handleClickClose={handleClickCloseGenerateUS} />
-            <DeletePopUp open={openD} handleClose={handleClickCloseD} onDelete={onDelete} delObj={"this service"}></DeletePopUp>
+            <GenerateUserStoryPopUp id={service["serviceID"]} open={openGenerateUS}
+                handleClickClose={handleClickCloseGenerateUS} />
+            <DeletePopUp open={openD} handleClose={handleClickCloseD} onDelete={onDelete}
+                delObj={"this service"} />
+            <AddNewDetailPopUp open={openAddDetail} handleClickClose={handleClickCloseAddDetail}
+                serviceID={service["serviceID"]}/>
             <Grid container>
                 <Grid item xs={false} sm={9} >
                     {/*style={{backgroundColor: "red"}}*/}
@@ -166,19 +179,19 @@ function Service({ service }) {
                                 onChange={(e) => { setTitle(e.target.value) }}
                                 style={{ width: "98%", paddingRight: "5%" }}
                             />
-                            <IconButton aria-label="save" style={{ float: "right" }} 
-                            onClick={onSaveTitle}>
+                            <IconButton aria-label="save" style={{ float: "right" }}
+                                onClick={onSaveTitle}>
                                 <SaveOutlinedIcon />
                             </IconButton>
                             <ConflictsPopOver open={openPopOver} handlePopoverClose={handlePopoverClose}
-                             anchorEl={anchorEl} conMeetTitle={conflictMeeting}/>
+                                anchorEl={anchorEl} conMeetTitle={conflictMeeting} />
                         </AccordionSummary>
 
                         <AccordionDetails >
                             {
                                 service ? service["serviceDetails"]["$values"].map(detail => (
                                     <ServiceDetail detail={detail}></ServiceDetail>
-                                )) : "loading"
+                                )) : <CircularProgress/>
                             }
 
                         </AccordionDetails>
@@ -199,8 +212,20 @@ function Service({ service }) {
                         </IconButton>
 
                     </Grid>
-
-                    <Grid item sm={9} style={{ marginLeft: "1%" }} >
+                    <Grid item sm={4} style={{ marginLeft: "1%" }} >
+                        <Button
+                            color="primary"
+                            variant="text"
+                            style={{
+                                textTransform: "none",
+                                width: "100%",
+                            }}
+                            onClick={handleClickOpenAddDetail}
+                        >
+                            Add Detail
+                        </Button>
+                    </Grid>
+                    <Grid item sm={5} style={{ marginLeft: "0%" }} >
                         <Button
                             color="primary"
                             variant="text"

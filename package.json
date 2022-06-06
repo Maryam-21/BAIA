@@ -9,6 +9,7 @@
     "@material-ui/icons": "^4.11.3",
     "@material-ui/styles": "^4.11.4",
     "@mui/icons-material": "^5.8.0",
+    "@mui/lab": "^5.0.0-alpha.84",
     "@mui/material": "^5.5.0",
     "@mui/x-date-pickers": "^5.0.0-alpha.4",
     "@reduxjs/toolkit": "^1.8.1",

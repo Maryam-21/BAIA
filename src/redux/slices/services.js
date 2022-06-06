@@ -39,13 +39,16 @@ export const servicesSlice = createSlice({
       const conMeetTitle = action.payload;
       return { ...state, 
         conflictMeeting: conMeetTitle };
-    }
+    },
+    addServiceDetail: (action) => {},
+    deleteServiceDetail: (action) => {}
   },
 })
 
 // Action creators are generated for each case reducer function
 export const { getServices, setServices, getMeetingID, setMeetingID, updateService, deleteService,
                addService, updateServiceDetail, getValidatedServices, setValidatedServices,
-               detectConflicts, getConflictMeeting, setConflictMeeting } = servicesSlice.actions
+               detectConflicts, getConflictMeeting, setConflictMeeting, addServiceDetail,
+               deleteServiceDetail } = servicesSlice.actions
 
 export default servicesSlice.reducer

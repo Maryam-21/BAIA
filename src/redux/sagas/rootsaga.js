@@ -3,11 +3,13 @@ import { handleGetProjectsTitles, handleGetFullProjects, handleUpdateProject, ha
          handleAddMeeting } from "./handlers/projects";
 import { handleGetServices, handleUpdateService, handleDeleteService, 
         handleAddService, handleUpdateServiceDetail, handleGetValidatedServices,
-        handleDetectConflicts, handleGetConflictMeeting } from "./handlers/services";
+        handleDetectConflicts, handleGetConflictMeeting, handleAddServiceDetail,
+        handleDeleteServiceDetail } from "./handlers/services";
 import { handleGetUser, handleUpdateUser } from "./handlers/user";
 import { getProjectsTitles, getFullProjects, updateProject, addProject, addMeeting } from "../slices/projects";
 import { getServices, updateService, deleteService, addService, updateServiceDetail,
-        getValidatedServices, detectConflicts, getConflictMeeting } from "../slices/services";
+        getValidatedServices, detectConflicts, getConflictMeeting, addServiceDetail,
+        deleteServiceDetail } from "../slices/services";
 import { getUser,updateUser } from "../slices/user";
 
 
@@ -27,6 +29,9 @@ export function* watcherSaga() {
   yield takeLatest(getValidatedServices.type, handleGetValidatedServices);
   yield takeLatest(detectConflicts.type, handleDetectConflicts);
   yield takeLatest(getConflictMeeting.type, handleGetConflictMeeting);
+  yield takeLatest(addServiceDetail.type, handleAddServiceDetail);
+  yield takeLatest(deleteServiceDetail.type, handleDeleteServiceDetail);
+
   
 
 }

@@ -12,6 +12,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
+import CircularProgress from '@mui/material/CircularProgress'
 import {Meeting} from './Meeting';
 import AddNewMeetingPopup from './AddNewMeetingPopUp'
  
@@ -74,7 +75,7 @@ export const Project = ({ title, handleProjectdetails,
             {
               fullProjects ? reverseArray(fullProjects['meetings']['$values']).map(meeting => (
                 <Meeting meeting={meeting} handleServicesClick={handleServicesClick}></Meeting>
-              )) : "loading"
+              )) : <CircularProgress/>
             }
           </Collapse>
 

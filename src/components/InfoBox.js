@@ -12,8 +12,8 @@ const InfoBox = ({handleProfile}) => {
         <div>
         <Button onClick={handleProfile}> <img className="i" src={image} alt="Avatar" /> </Button>
         <div className='content'>
-          <p className="user"> {user?user.name:"loading"} </p>
-          <p className="userCompany"> {user?user.companyName:'loading'} </p>
+          <p className="user"> {user?user.name:"retrieving data..."} </p>
+          <p className="userCompany"> {user?user.companyName:'retrieving data...'} </p>
         </div>
       </div>
     </Box>

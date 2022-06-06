@@ -56,6 +56,21 @@ export function requestAddService(payload){
     return response
 }
 
+export function requestAddServiceDetail(payload){
+
+    const response = fetch("https://localhost:44304/api/ServiceDetails/PostServiceDetail", {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify(payload)
+        
+    });
+    return response
+}
+
 export function requestUpdateServiceDetail(action){
     const id = action.payload.ServiceDetailID
     const serviceDetail = action.payload
@@ -68,6 +83,20 @@ export function requestUpdateServiceDetail(action){
             'Content-Type' : 'application/json; charset=UTF-8',
         },
         body:JSON.stringify(serviceDetail)
+        
+    });
+    return response
+}
+
+export function requestDeleteServiceDetail(id){
+
+    const response = fetch("https://localhost:44304/api/ServiceDetails/DeleteServiceDetail/"+id, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
         
     });
     return response

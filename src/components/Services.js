@@ -6,6 +6,7 @@ import {
 } from "@material-ui/core";
 import IconButton from '@mui/material/IconButton';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+import CircularProgress from '@mui/material/CircularProgress'
 import Service from './Service';
 import AddNewServicePopUp from './AddNewServicePopUp';
 import MeetingDetailsPopUp from './MeetingDetailsPopUp';
@@ -53,8 +54,8 @@ function Services() {
         <div>
             <AddNewServicePopUp open={openAddService} handleClickClose={handleClickCloseAddService} />
             <MeetingDetailsPopUp open={openMeetingDetails} handleClickClose={handleClickCloseMeetingDetails}
-            participants = {services? services["meetingPersonnel"] : "loading"} 
-            description = {services? services["meetingDescription"] : "loading"} />
+            participants = {services? services["meetingPersonnel"] : "retrieving data..."} 
+            description = {services? services["meetingDescription"] : "retrieving data..."} />
             
             <Grid container style={{ width: "100%", display: "flex" }}>
                 <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
@@ -98,14 +99,14 @@ function Services() {
                                 </Grid>
                             </Grid>
                         }
-                        title={services ? services["meetingTitle"] : "loading"}
+                        title={services ? services["meetingTitle"] : "retrieving data..."}
                         subheader="September 14, 2016"
                     ></CardHeader>
                     <CardContent>
                         {
                             services ? services["services"]["$values"].map(service => (
                                 <Service service={service}></Service>
-                            )) : "loading"
+                            )) : <CircularProgress/>
                         }
                     </CardContent>
 
