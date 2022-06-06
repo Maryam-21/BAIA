@@ -13,7 +13,7 @@ import AsIsRow from './AsIsRow';
 const AsIsPage = () => {
   const { validatedServices, services } = useSelector((state) => state.services)
   const generatePDF = () => {
-    const report = new JsPDF('portrait', "pt", [1600, 1800]);
+    const report = new JsPDF('portrait', "pt", [1000, 1500]);
     report.html(document.querySelector('#report')).then(() => {
       report.save('report.pdf');
     });
@@ -24,7 +24,7 @@ const AsIsPage = () => {
   return (
     <div className="center" >
       <div padding='10%' >
-        <Card id="report" style={{ backgroundColor: "#E9E9E9" }} >
+        <Card id="report" style={{ backgroundColor: "#E9E9E9" , margin: '3%'}} >
 
           <CardHeader
             style={{ backgroundColor: "rgb(180, 180, 180)", padding: "3%" }}
