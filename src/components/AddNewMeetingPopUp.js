@@ -30,19 +30,19 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(loading)
     if (loading == 1) {
-      console.log('loading')
       setLoadingB(true)
     }
     else if (loading == 0) {
       setLoadingB(false)
       handleClickSnackbar();
       handleClickClose();
+      dispatch(setLoading(undefined));
     }
-    else {
+    else if (loading == -1){
       console.log("failed")
-      setLoading(0)
+      setLoadingB(false)
+      dispatch(setLoading(undefined));
     }
   }, [loading]);
 
@@ -76,9 +76,7 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
       },
       "projectTitle": fullProjects["projectTitle"]
     };
-    console.log(payload)
     dispatch(addMeeting(payload))
-
   }
 
   const handleClickSnackbar = () => {
@@ -251,7 +249,7 @@ export const AddNewMeetingPopUp = ({ open, handleClickClose }) => {
         open={openSB}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
-        message="Successfully Registered!"
+        message="Successfully added new meeting!"
         action={action}
       />
     </div>

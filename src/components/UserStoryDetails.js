@@ -12,10 +12,11 @@ import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
 import Snackbar from "@mui/material/Snackbar";
 import { addService } from '../redux/slices/services'
 
-function UserStoryDetails({ open, handleClickClose }) {
+function UserStoryDetails({ open, handleClickClose, story }) {
     const defaultValue = {
         "userStory": "As a [description of user],\nI want [functionality],\nso that [benefit].",
-        "acceptanceCriteria": "Given [how things begin],\nwhen [action taken],\nthen [outcome of taking action]."
+        "acceptanceCriteria": "Given [how things begin],\nwhen [action taken],\nthen [outcome of taking action].",
+        "preconditions": "Conditions that must be met so that the needed functionality could function properly."
     }
     return (
         <div>
@@ -34,7 +35,7 @@ function UserStoryDetails({ open, handleClickClose }) {
                                 <TextField
                                     label="Title"
                                     variant="filled"
-                                    value={"Login"}
+                                    value={story["userStoryTitle"]}
                                     style={{ width: "100%" }}
                                 />
                             </Grid>
@@ -44,7 +45,17 @@ function UserStoryDetails({ open, handleClickClose }) {
                                     rows={5}
                                     label="User Story Body"
                                     variant="filled"
-                                    value={defaultValue["userStory"]}
+                                    value={story["userStoryDescription"]? story["userStoryDescription"] : defaultValue["userStory"]}
+                                    style={{ width: "100%" }}
+                                />
+                            </Grid>
+                            <Grid item xs={false} sm={12}>
+                                <TextField
+                                    multiline
+                                    rows={5}
+                                    label="Preconditions"
+                                    variant="filled"
+                                    value={defaultValue["preconditions"]}
                                     style={{ width: "100%" }}
                                 />
                             </Grid>

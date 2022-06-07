@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   projectsTitles: undefined,
   fullProjects: undefined,
-  loading: 0
+  loading: undefined
 }
 
 export const projectsSlice = createSlice({
@@ -37,6 +37,7 @@ export const projectsSlice = createSlice({
       }
       return { ...state, fullProjects: { ...fullProjectData } };
     },
+    deleteProject: (action) => {},
     setLoading: (state, action) => {
       const stats = action.payload;
       return { ...state, loading: stats };
@@ -47,6 +48,6 @@ export const projectsSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { getProjectsTitles, setProjectsTitles, getFullProjects,
   setFullProjects, updateProject, setUpdatedProject, addProject, updateProjectTitles, 
-  addMeeting, setLoading } = projectsSlice.actions
+  addMeeting, setLoading, deleteProject } = projectsSlice.actions
 
 export default projectsSlice.reducer

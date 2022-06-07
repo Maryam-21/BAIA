@@ -65,4 +65,17 @@ export function requestUpdateProject(action){
     });
     return response
 }
-   
+
+export function requestDeleteProject(id){
+
+    const response = fetch("https://localhost:44304/api/Projects/DeleteProject/"+id, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+        
+    });
+    return response
+}

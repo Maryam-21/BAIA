@@ -153,7 +153,7 @@ function Service({ service }) {
 
     return (
         <div>
-            <GenerateUserStoryPopUp id={service["serviceID"]} open={openGenerateUS}
+            <GenerateUserStoryPopUp serviceID={service["serviceID"]} open={openGenerateUS}
                 handleClickClose={handleClickCloseGenerateUS} />
             <DeletePopUp open={openD} handleClose={handleClickCloseD} onDelete={onDelete}
                 delObj={"this service"} />

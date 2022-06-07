@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   projectID: undefined,
   userStories: undefined,
+  loading: undefined
 }
 
 export const userStoriesSlice = createSlice({
@@ -11,21 +12,34 @@ export const userStoriesSlice = createSlice({
   reducers: {
     setProjectID: (state, action) => {
       const id = action.payload;
-      return {...state,
-              projectID: id};
+      return {
+        ...state,
+        projectID: id
+      };
     },
+    getUserStories: (action) => { },
     setUserStories: (state, action) => {
-        const usrstrs = action.payload;
-        return { ...state, 
-            userStories:{...usrstrs} };
+      const usrstrs = action.payload;
+      return {
+        ...state,
+        userStories: { ...usrstrs }
+      };
     },
-    getUserStories: (action) => {},
-    updateUserStory: (action) => {}
-   
+    generateUserStories: (action) => { },
+    updateUserStory: (action) => { },
+    setLoading: (state, action) => {
+      const stat = action.payload;
+      return {
+        ...state,
+        loading: stat
+      };
+    },
+    deleteUserStory: (action) => {}
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setProjectID, setUserStories, getUserStories, updateUserStory } = userStoriesSlice.actions
+export const { setProjectID, getUserStories, setUserStories, generateUserStories, updateUserStory,
+  setLoading, deleteUserStory } = userStoriesSlice.actions
 
 export default userStoriesSlice.reducer
