@@ -1,6 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { setLoading, setUserStories, getUserStories } from "../../slices/userStories"
-import { requestGenerateUserStories, requestGetUserStories, requestDeleteUserStory } from "../requests/userStories";
+import { requestGenerateUserStories, requestGetUserStories, requestDeleteUserStory,
+        requestAddUserStory } from "../requests/userStories";
 
 export function* handleGenerateUserStories(action) {
   yield put(setLoading(1))
@@ -26,7 +27,6 @@ export function* handleGetUserStories(action) {
     if (response.ok){
       console.log("ok")
       const data = yield response.json();
-      console.log(data)
       yield put(setUserStories({...data}))
       yield put(setLoading(0))
     }
@@ -51,6 +51,25 @@ export function* handleDeleteUserStory(payload) {
       console.log("failed")
     }
 
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* handleAddUserStory(payload) {
+  const projectID = payload.payload.projectID
+  const body = payload.payload.body
+  try {
+    const response = yield call(requestAddUserStory,body);
+    if (response.ok){
+      const data  = yield response.json();
+      console.log(data);
+      yield put(getUserStories(projectID));
+    }
+    else{
+        console.log("failed") 
+    }
+    
   } catch (error) {
     console.log(error);
   }

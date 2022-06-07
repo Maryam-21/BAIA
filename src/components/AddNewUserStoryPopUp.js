@@ -5,12 +5,71 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
+import IconButton from "@mui/material/IconButton";
+import { Fragment } from "react";
+import { Close } from "@material-ui/icons";
+import Snackbar from "@mui/material/Snackbar";
+import { addUserStory } from '../redux/slices/userStories'
 
-function AddNewUserStoryPopUp({ open, handleClickClose }) {
+function AddNewUserStoryPopUp({ open, handleClickClose, projectID }) {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [preconditions, setPreconditions] = useState("");
+    const [acceptanceCriteria, setAcceptanceCriteria] = useState("");
+    const { meetingID } = useSelector((state) => state.services)
+
+    const [openSB, setOpenSB] = useState(false);
+
     const defaultValue = {
         "userStory": "As a [description of user],\nI want [functionality],\nso that [benefit].",
-        "acceptanceCriteria": "Given [how things begin],\nwhen [action taken],\nthen [outcome of taking action]."
+        "acceptanceCriteria": "Given [how things begin],\nwhen [action taken],\nthen [outcome of taking action].",
+        "preconditions": "Conditions that must be met so that the needed functionality could function properly."
+    };
+    const dispatch = useDispatch()
+    const onSave = () => {
+        const payload = {
+            "projectID": projectID,
+            "body": {
+                "UserStoryTitle": title,
+                "UserStoryDescription": description,
+                "Preconditions": preconditions,
+                "AcceptanceCriteria": acceptanceCriteria,
+                "meetingID":meetingID
+            }
+        };
+        dispatch(addUserStory(payload));
+        handleClickClose();
+        handleOpenSnackbar();
     }
+
+    const handleOpenSnackbar = () => {
+        setTitle("");
+        setDescription("");
+        setPreconditions("");
+        setAcceptanceCriteria("");
+        setOpenSB(true);
+    };
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpenSB(false);
+    };
+
+    const action = (
+        <Fragment>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleCloseSnackbar}
+            >
+                <Close fontSize="small" />
+            </IconButton>
+        </Fragment>
+    );
+
     return (
         <div>
             <Dialog
@@ -28,6 +87,8 @@ function AddNewUserStoryPopUp({ open, handleClickClose }) {
                                 <TextField
                                     label="Title"
                                     variant="filled"
+                                    value={title}
+                                    onChange={(e) => { setTitle(e.target.value) }}
                                     style={{ width: "100%" }}
                                 />
                             </Grid>
@@ -37,7 +98,19 @@ function AddNewUserStoryPopUp({ open, handleClickClose }) {
                                     rows={5}
                                     label="User Story Body"
                                     variant="filled"
-                                    value={defaultValue["userStory"]}
+                                    defaultValue={defaultValue["userStory"]}
+                                    onChange={(e) => { setDescription(e.target.value) }}
+                                    style={{ width: "100%" }}
+                                />
+                            </Grid>
+                            <Grid item xs={false} sm={12}>
+                                <TextField
+                                    multiline
+                                    rows={5}
+                                    label="Preconditions"
+                                    variant="filled"
+                                    defaultValue={defaultValue["preconditions"]}
+                                    onChange={(e) => { setPreconditions(e.target.value) }}
                                     style={{ width: "100%" }}
                                 />
                             </Grid>
@@ -47,7 +120,8 @@ function AddNewUserStoryPopUp({ open, handleClickClose }) {
                                     rows={5}
                                     label="Acceptance Criteria"
                                     variant="filled"
-                                    value={defaultValue["acceptanceCriteria"]}
+                                    defaultValue={defaultValue["acceptanceCriteria"]}
+                                    onChange={(e) => { setAcceptanceCriteria(e.target.value) }}
                                     style={{ width: "100%" }}
                                 />
                             </Grid>
@@ -58,13 +132,19 @@ function AddNewUserStoryPopUp({ open, handleClickClose }) {
                 <DialogActions>
                     <Button
                         autoFocus
-                        onClick={handleClickClose}
+                        onClick={onSave}
                         style={{ color: "#3f51b5" }} >
                         Save
                     </Button>
                 </DialogActions>
             </Dialog>
-
+            <Snackbar
+                open={openSB}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+                message="User Story Added Successfully!"
+                action={action}
+            />
         </div>
     )
 }

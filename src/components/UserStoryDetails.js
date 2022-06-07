@@ -57,7 +57,7 @@ function UserStoryDetails({ open, handleClickClose, story }) {
                                     variant="filled"
                                     value={defaultValue["preconditions"]}
                                     style={{ width: "100%" }}
-                                />
+                                /> 
                             </Grid>
                             <Grid item xs={false} sm={12}>
                                 <TextField

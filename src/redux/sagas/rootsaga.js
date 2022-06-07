@@ -12,8 +12,9 @@ import { getServices, updateService, deleteService, addService, updateServiceDet
         getValidatedServices, detectConflicts, getConflictMeeting, addServiceDetail,
         deleteServiceDetail } from "../slices/services";
 import { getUser,updateUser } from "../slices/user";
-import { generateUserStories, getUserStories, deleteUserStory } from '../slices/userStories'
-import { handleGenerateUserStories, handleGetUserStories, handleDeleteUserStory } from './handlers/userStories'
+import { generateUserStories, getUserStories, deleteUserStory, addUserStory } from '../slices/userStories'
+import { handleGenerateUserStories, handleGetUserStories, handleDeleteUserStory,
+        handleAddUserStory } from './handlers/userStories'
 
 
 export function* watcherSaga() {
@@ -53,6 +54,7 @@ export function* watcherSaga() {
   yield takeLatest(generateUserStories.type, handleGenerateUserStories);
   yield takeLatest(getUserStories.type, handleGetUserStories);
   yield takeLatest(deleteUserStory.type, handleDeleteUserStory);
+  yield takeLatest(addUserStory.type, handleAddUserStory);
 
   
 

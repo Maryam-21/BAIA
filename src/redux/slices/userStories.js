@@ -34,12 +34,13 @@ export const userStoriesSlice = createSlice({
         loading: stat
       };
     },
-    deleteUserStory: (action) => {}
+    deleteUserStory: (action) => {},
+    addUserStory: (action) => {}
   },
 })
 
 // Action creators are generated for each case reducer function
 export const { setProjectID, getUserStories, setUserStories, generateUserStories, updateUserStory,
-  setLoading, deleteUserStory } = userStoriesSlice.actions
+  setLoading, deleteUserStory, addUserStory } = userStoriesSlice.actions
 
 export default userStoriesSlice.reducer

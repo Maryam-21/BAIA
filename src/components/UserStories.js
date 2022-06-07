@@ -69,7 +69,8 @@ function UserStories() {
           <AddCircleOutlinedIcon />
           Add New User Story
         </IconButton>
-        <AddNewUserStoryPopUp open={openAddUSDetail} handleClickClose={handleCloseAddUserStoryDetails}></AddNewUserStoryPopUp>
+        <AddNewUserStoryPopUp open={openAddUSDetail} handleClickClose={handleCloseAddUserStoryDetails}
+        projectID = {fullProjects["projectID"]}></AddNewUserStoryPopUp>
       </Card>
     </div>
   )

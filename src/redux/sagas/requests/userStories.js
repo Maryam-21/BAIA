@@ -40,3 +40,17 @@ export function requestDeleteUserStory(id){
     return response
 }
 
+export function requestAddUserStory(payload){
+
+    const response = fetch("https://localhost:44304/api/UserStories/PostUserStory", {
+        method: 'POST',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify(payload)
+        
+    });
+    return response
+}
