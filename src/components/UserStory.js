@@ -78,7 +78,7 @@ function UserStory({ story, projectName, projectID }) {
 
             </Paper>
             <UserStoryDetails open={openUSDetail} handleClickClose={handleCloseUserStoryDetails}
-            story={story}></UserStoryDetails>
+            story={story} projectID={projectID}></UserStoryDetails>
         </div>
     )
 }

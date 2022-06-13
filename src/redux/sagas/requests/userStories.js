@@ -54,3 +54,20 @@ export function requestAddUserStory(payload){
     });
     return response
 }
+
+export function requestUpdateUserStory(action){
+    const id = action.payload.body.UserStoryID
+    const body = action.payload.body
+
+    const response = fetch("https://localhost:44304/api/UserStories/UpdateUserStory/"+id, {
+        method: 'PUT',
+        mode: 'cors',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type' : 'application/json; charset=UTF-8',
+        },
+        body:JSON.stringify(body)
+        
+    });
+    return response
+}

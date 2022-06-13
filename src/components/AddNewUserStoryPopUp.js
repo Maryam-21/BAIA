@@ -30,13 +30,16 @@ function AddNewUserStoryPopUp({ open, handleClickClose, projectID }) {
         const payload = {
             "projectID": projectID,
             "body": {
-                "UserStoryTitle": title,
-                "UserStoryDescription": description,
-                "Preconditions": preconditions,
-                "AcceptanceCriteria": acceptanceCriteria,
-                "meetingID":meetingID
+                "userStory": {
+                    "UserStoryTitle": title,
+                    "UserStoryDescription": description,
+                    "Preconditions": preconditions,
+                    "AcceptanceCriteria": acceptanceCriteria
+                },
+                "projectID": projectID
             }
         };
+        console.log(payload)
         dispatch(addUserStory(payload));
         handleClickClose();
         handleOpenSnackbar();
@@ -44,9 +47,9 @@ function AddNewUserStoryPopUp({ open, handleClickClose, projectID }) {
 
     const handleOpenSnackbar = () => {
         setTitle("");
-        setDescription("");
-        setPreconditions("");
-        setAcceptanceCriteria("");
+        setDescription(defaultValue["userStory"]);
+        setPreconditions(defaultValue["preconditions"]);
+        setAcceptanceCriteria(defaultValue["acceptanceCriteria"]);
         setOpenSB(true);
     };
 
