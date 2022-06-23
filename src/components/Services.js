@@ -58,7 +58,7 @@ function Services() {
             description = {services? services["meetingDescription"] : "retrieving data..."} />
             
             <Grid container style={{ width: "100%", display: "flex" }}>
-                <Grid container direction="column" xs={6} sm={6} spacing={2} style={{ padding: "2% 3% 2% 5%" }}>
+                <Grid container direction="column" xs={6} sm={6} spacing={2} >
                     <Grid item style={{ marginTop: "5%" }}>
                         <p className="textTitle"> </p>
                     </Grid>

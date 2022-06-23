@@ -25,8 +25,8 @@ const LoginForm = () => {
             navigate("/HomePage/"+ user.name) 
         }
         else if (success == 0 && login == 1){
-            setEmail_error('Wrong Email or Password')
-            setPassword_error('Wrong Email or Password') 
+            //setEmail_error('Wrong Email or Password')
+            //setPassword_error('Wrong Email or Password') 
             dispatch(setLogin(0))
         }
       },[success, login]);

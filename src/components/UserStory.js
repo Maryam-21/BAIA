@@ -11,7 +11,7 @@ import UserStoryDetails from './UserStoryDetails';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import IconButton from '@mui/material/IconButton';
 import DeletePopUp from './DeletePopUp';
-import { deleteUserStory, setTempAcceptanceCriteria, setTempPreconditions } from '../redux/slices/userStories'
+import { deleteUserStory } from '../redux/slices/userStories'
 
 function UserStory({ story, projectName, projectID }) {
     const [openUSDetail, setOpenUSDetail] = useState(false);
@@ -25,7 +25,6 @@ function UserStory({ story, projectName, projectID }) {
     }
     const handleCloseUserStoryDetails = () => {
         setOpenUSDetail(false);
-
     }
 
     const handleOpenDeleteWarning = () => {

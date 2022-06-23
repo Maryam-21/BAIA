@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid, CardHeader } from "@material-ui/core";
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
 import UserStory from './UserStory';
 import IconButton from '@mui/material/IconButton';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
@@ -32,8 +27,8 @@ function UserStories() {
     setOpenAddUSDetail(false);
   }
   return (
-    <div className="center">
-      <Card style={{ backgroundColor: "#E9E9E9" }} >
+    <div className="center" style={{paddingTop: "7%"}} >
+      <Card style={{ backgroundColor: "#E9E9E9" }}  >
 
         <CardHeader
           style={{ backgroundColor: "rgb(180, 180, 180)", padding: "3%" }}

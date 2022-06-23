@@ -5,7 +5,7 @@ import { Box, Grid} from "@material-ui/core";
 import NavigationPanel from './NavigationPanel'
 import SpecificProject from './SpecificProject'
 import MyProfile from './MyProfile';
-import { getServices, getValidatedServices } from '../redux/slices/services'
+import { getServices, getValidatedServices, setValidatedServices } from '../redux/slices/services'
 import Welcome from './Welcome';
 import ProjectDetails from './ProjectDetails';
 
@@ -31,6 +31,7 @@ const handleOpenAsIs = () =>{
   setOpenProfile(false);
   setProjectDetails(false);
   setOpenWelcome(false);
+
   if (fullProjects){
     dispatch(getValidatedServices(fullProjects["projectID"]));
   }

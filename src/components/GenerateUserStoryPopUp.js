@@ -32,8 +32,7 @@ function GenerateUserStoryPopUp({ open, handleClickClose, serviceID }) {
         }
         else if (loading == 0) {
             setLoadingG(false)
-            handleClickSnackbar();
-            handleClickClose();
+            onClose()
             dispatch(setLoading(undefined))
         }
         else if (loading == -1){
@@ -42,6 +41,10 @@ function GenerateUserStoryPopUp({ open, handleClickClose, serviceID }) {
         }
     }, [loading]);
 
+    const onClose = () =>{
+        handleClickSnackbar();
+        handleClickClose();
+    }
     const onSave = () => {
         //payload
         const payload = {

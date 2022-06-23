@@ -59,7 +59,8 @@ const AsIsPage = ({projectName}) => {
           variant="text"
           style={{
             textTransform: "none",
-            width: "10%",
+            width: "15%",
+            textAlign: "left"
           }}
           onClick={generatePDF}
         >
