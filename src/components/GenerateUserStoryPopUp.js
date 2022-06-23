@@ -50,7 +50,6 @@ function GenerateUserStoryPopUp({ open, handleClickClose, serviceID }) {
             "filepath": selectedFile,
             "MeetingID": meetingID
         };
-
         dispatch(generateUserStories(payload))
     }
     const addFile = (e) => {

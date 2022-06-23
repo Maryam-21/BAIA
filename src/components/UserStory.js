@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from "@material-ui/core";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,12 +11,13 @@ import UserStoryDetails from './UserStoryDetails';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import IconButton from '@mui/material/IconButton';
 import DeletePopUp from './DeletePopUp';
-import { deleteUserStory } from '../redux/slices/userStories'
+import { deleteUserStory, setTempAcceptanceCriteria, setTempPreconditions } from '../redux/slices/userStories'
 
 function UserStory({ story, projectName, projectID }) {
     const [openUSDetail, setOpenUSDetail] = useState(false);
     const [openDeleteWarning, setOpenDeleteWarning] = useState(false);
     const storyID = projectName + " - "+ story["userStoryID"]
+
     const dispatch = useDispatch()
 
     const handleOpenUserStoryDetails = () => {
@@ -24,6 +25,7 @@ function UserStory({ story, projectName, projectID }) {
     }
     const handleCloseUserStoryDetails = () => {
         setOpenUSDetail(false);
+
     }
 
     const handleOpenDeleteWarning = () => {

@@ -17,8 +17,8 @@ import { Fragment } from "react";
 import { Close } from "@material-ui/icons";
 import { TextField, Grid, FormGroup, Button } from "@material-ui/core";
 import Snackbar from "@mui/material/Snackbar";
-import { addService } from '../redux/slices/services'
-import { updateUserStory } from '../redux/slices/userStories'
+import { updateUserStory, setTempAcceptanceCriteria, setTempPreconditions } from '../redux/slices/userStories'
+import MultiSelectPopUp from "./MultiSelectPopUp";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -59,55 +59,52 @@ function UserStoryDetails({ open, handleClickClose, story, projectID }) {
         "acceptanceCriteria": "Given [how things begin],\nwhen [action taken],\nthen [outcome of taking action].",
         "preconditions": "Conditions that must be met so that the needed functionality could function properly."
     };
-    const [preconds, setPreconds] = useState("");
-    const [acceptanceCrits, setAcceptanceCrits] = useState("")
+    const [openMultiselect, setOpenMultiselect] = useState(false);
     const [value, setValue] = useState(0);
-    const [title,setTitle] = useState(story["userStoryTitle"])
-    const [description,setDescription] = useState(story["userStoryDescription"])
-    const [preconditions,setPreconditions] = useState(story["preconditions"])
-    const [acceptanceCriteria,setAcceptanceCriteria] = useState(story["acceptanceCriteria"])
+    const [title, setTitle] = useState(story["userStoryTitle"])
+    const [description, setDescription] = useState(story["userStoryDescription"])
+    const [preconditions, setPreconditions] = useState(null)
+    const [acceptanceCriteria, setAcceptanceCriteria] = useState(null)
+    const [multiSelectTitle, setMultiSelectTitle] = useState("")
+    const { userStories, tempPreconditions, tempAcceptanceCriteria } = useSelector((state) => state.userStories)
+
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        setAcceptanceCriteria(tempAcceptanceCriteria ? tempAcceptanceCriteria : story['acceptanceCriteria'])
+        setPreconditions(tempPreconditions ? tempPreconditions : story['preconditions'])
+    }, [tempAcceptanceCriteria, tempPreconditions])
+
+    const handleOpenMultiselect = (title) => {
+        setMultiSelectTitle(title);
+        setOpenMultiselect(true);
+
+    }
+    const handleCloseMultiselect = () => {
+        setOpenMultiselect(false);
+    }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const onUpdate = () =>{
+    const onUpdate = () => {
         const payload = {
             "projectID": projectID,
             "body": {
                 "UserStoryID": story["userStoryID"],
                 "UserStoryTitle": title,
-                "UserStoryDescription":description,
-                "Preconditions":preconditions,
-                "AcceptanceCriteria":acceptanceCriteria
+                "UserStoryDescription": description,
+                "Preconditions": preconditions,
+                "AcceptanceCriteria": acceptanceCriteria,
+                "BusinessLogicFlow": story["businessLogicFlow"]
             }
         }
         console.log(payload)
         dispatch(updateUserStory(payload));
         handleClickClose();
     }
-
-    useEffect(() => {
-        /*if (story["preconditions"]) {
-            let precondsList = story["preconditions"].split('#');
-            let temp = ""
-            precondsList.forEach(cond => {
-                temp += cond + "\n";
-            });
-            setPreconds(temp)
-        }
-        if (story["acceptanceCriteria"]) {
-            let accCriteriaList = story["acceptanceCriteria"].split('#');
-            let temp = ""
-            accCriteriaList.forEach(crit => {
-                temp += crit + "\n";
-            });
-            setAcceptanceCrits(temp)
-        }*/
-        
-    }, [story]);
 
     return (
         <div>
@@ -164,15 +161,19 @@ function UserStoryDetails({ open, handleClickClose, story, projectID }) {
                                             rows={12}
                                             label="Preconditions"
                                             variant="filled"
-                                            defaultValue={story["preconditions"] ? story["preconditions"] : defaultValue["preconditions"]}
+                                            value={preconditions ? preconditions.includes("#")? defaultValue["preconditions"] : preconditions : defaultValue["preconditions"]}
                                             onChange={(e) => { setPreconditions(e.target.value) }}
                                             style={{ width: "100%" }}
                                         />
-                                        <Box style={{ paddingLeft: "90%", paddingTop: "5%" }}>
-                                            <Fab color="primary" aria-label="add" size="small">
-                                                <AddIcon />
-                                            </Fab>
-                                        </Box>
+                                        {
+                                            true ? <Box style={{ paddingLeft: "90%", paddingTop: "5%" }}
+                                                onClick={() => { handleOpenMultiselect("Select Preconditions") }}>
+                                                <Fab color="primary" aria-label="add" size="small">
+                                                    <AddIcon />
+                                                </Fab>
+                                            </Box> : <></>
+                                        }
+
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -186,15 +187,20 @@ function UserStoryDetails({ open, handleClickClose, story, projectID }) {
                                             rows={12}
                                             label="Acceptance Criteria"
                                             variant="filled"
-                                            defaultValue={story["acceptanceCriteria"] ? story["acceptanceCriteria"] : defaultValue["acceptanceCriteria"]}
+                                            
+                                            value={acceptanceCriteria ? acceptanceCriteria.includes("#")? defaultValue["acceptanceCriteria"]: acceptanceCriteria : defaultValue["acceptanceCriteria"]}
                                             onChange={(e) => { setAcceptanceCriteria(e.target.value) }}
                                             style={{ width: "100%" }}
                                         />
-                                        <Box style={{ paddingLeft: "90%", paddingTop: "5%" }}>
-                                            <Fab color="primary" aria-label="add" size="small">
-                                                <AddIcon />
-                                            </Fab>
-                                        </Box>
+                                        {
+                                            true ? <Box style={{ paddingLeft: "90%", paddingTop: "5%" }}
+                                                onClick={() => { handleOpenMultiselect("Select Acceptance Criteria") }}>
+                                                <Fab color="primary" aria-label="add" size="small" >
+                                                    <AddIcon />
+                                                </Fab>
+                                            </Box> : <></>
+                                        }
+
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -205,13 +211,22 @@ function UserStoryDetails({ open, handleClickClose, story, projectID }) {
                 <DialogActions>
                     <Button
                         autoFocus
+                        onClick={handleClickClose}
+                        style={{ color: "#3f51b5" }} >
+                        Cancel
+                    </Button>
+                    <Button
+                        autoFocus
                         onClick={onUpdate}
                         style={{ color: "#3f51b5" }} >
-                        Ok
+                        Save
                     </Button>
                 </DialogActions>
             </Dialog>
+            <MultiSelectPopUp open={openMultiselect} handleClickClose={handleCloseMultiselect}
+                title={multiSelectTitle} story={story} projectID={projectID}>
 
+            </MultiSelectPopUp>
         </div>
     )
 }

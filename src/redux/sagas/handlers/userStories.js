@@ -1,5 +1,5 @@
 import { call, put } from "redux-saga/effects";
-import { setLoading, setUserStories, getUserStories } from "../../slices/userStories"
+import { setLoading, setUserStories, getUserStories, setTempAcceptanceCriteria, setTempPreconditions } from "../../slices/userStories"
 import { requestGenerateUserStories, requestGetUserStories, requestDeleteUserStory,
         requestAddUserStory, requestUpdateUserStory } from "../requests/userStories";
 
@@ -29,6 +29,8 @@ export function* handleGetUserStories(action) {
       const data = yield response.json();
       yield put(setUserStories({...data}))
       yield put(setLoading(0))
+      yield put(setTempAcceptanceCriteria(undefined))
+      yield put(setTempPreconditions(undefined))
     }
     else{
       yield put(setLoading(-1))
