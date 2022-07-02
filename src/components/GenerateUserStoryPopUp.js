@@ -42,7 +42,7 @@ function GenerateUserStoryPopUp({ open, handleClickClose, serviceID }) {
     }, [loading]);
 
     const onClose = () =>{
-        handleClickSnackbar();
+        //handleClickSnackbar();
         handleClickClose();
     }
     const onSave = () => {

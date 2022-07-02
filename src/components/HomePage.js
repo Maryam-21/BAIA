@@ -90,7 +90,7 @@ const handleProjectdetails = () => {
     <Box position="absolute" sx={{top:1, bottom:145, left:0, right:180, alignItems:'center'}}>
         
           {/* Navigation Panel */}
-     <Grid container spacing={1} style={{height:'100%'}}>
+     <Grid container spacing={1} style={{height:'200%'}}>
           <Grid item xs={false} sm={3} className ="Grid1">
             <NavigationPanel
               handleServicesClick={handleServicesClick}
